@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:oklch(0.145 0 0);
+  --bg-2:oklch(0.178 0.002 285);
+  --card:oklch(0.193 0.003 285);
+  --border:oklch(0.27 0.004 285);
+  --fg:oklch(0.985 0 0);
+  --muted:oklch(0.708 0.006 285);
+  --a1:#06fcee;
+  --a2:#d1ff6f;
+  --accent:var(--a1);
+  --accent-dim:color-mix(in srgb, var(--accent) 14%, transparent);
+}
+html{scroll-behavior:smooth;background:var(--bg);}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Geist',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+*{box-sizing:border-box;}
+a{color:var(--fg);text-decoration:none;transition:color .18s ease;}
+a:hover{color:var(--accent);}
+input,textarea,button{font:inherit;color:inherit;}
+::selection{background:var(--accent-dim);}
+@keyframes riseIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+</style>
+</helmet>
+
+<div style="background:var(--bg);color:var(--fg);min-height:100vh;overflow-x:hidden">
+
+<header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:oklch(0.145 0 0 / 0.72);border-bottom:1px solid var(--border)">
+  <nav style="max-width:1360px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between">
+    <a href="#home" style="font-size:15px;font-weight:500;letter-spacing:-0.01em;display:flex;align-items:center;gap:8px">
+      <span style="width:6px;height:6px;border-radius:2px;background:var(--accent);display:block"></span>
+      Gonzalo Quiroga
+    </a>
+    <div style="display:flex;align-items:center;gap:4px">
+      <a href="#sobre-mi" style="font-size:13.5px;color:var(--muted);padding:8px 12px;border-radius:6px" style-hover="color:var(--fg);background:oklch(1 0 0 / 0.04)">Sobre mí</a>
+      <a href="#habilidades" style="font-size:13.5px;color:var(--muted);padding:8px 12px;border-radius:6px" style-hover="color:var(--fg);background:oklch(1 0 0 / 0.04)">Habilidades</a>
+      <a href="#proyectos" style="font-size:13.5px;color:var(--muted);padding:8px 12px;border-radius:6px" style-hover="color:var(--fg);background:oklch(1 0 0 / 0.04)">Proyectos</a>
+      <a href="#contacto" style="font-size:13.5px;color:var(--muted);padding:8px 12px;border-radius:6px" style-hover="color:var(--fg);background:oklch(1 0 0 / 0.04)">Contacto</a>
+      <a href="#contacto" style="margin-left:12px;font-size:13.5px;font-weight:500;padding:7px 14px;border-radius:6px;border:1px solid var(--border);background:oklch(1 0 0 / 0.03)" style-hover="border-color:oklch(0.4 0.005 285);background:oklch(1 0 0 / 0.07);color:var(--fg)">Hablemos</a>
+    </div>
+  </nav>
+</header>
+
+<section id="home" data-screen-label="Hero" style="position:relative;max-width:1360px;margin:0 auto;padding:180px 32px 150px">
+  <div style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(900px 420px at 15% -5%, color-mix(in srgb, var(--a1) 7%, transparent), transparent 70%)"></div>
+  <div style="position:relative;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:96px;align-items:end">
+    <div style="display:flex;flex-direction:column;gap:32px;max-width:780px">
+    <sc-if value="{{ showAvailability }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;align-items:center;gap:7px;padding:5px 12px 5px 10px;border-radius:999px;background:var(--accent);width:fit-content;animation:fadeIn .6s ease both">
+        <span style="width:5px;height:5px;border-radius:999px;background:var(--bg);display:block"></span>
+        <span style="font-family:'Geist Mono',ui-monospace,monospace;font-size:11.5px;font-weight:500;letter-spacing:0.04em;color:var(--bg);text-transform:uppercase">Disponible para proyectos freelance</span>
+      </div>
+    </sc-if>
+    <div style="display:flex;flex-direction:column;gap:22px;animation:riseIn .7s cubic-bezier(.16,1,.3,1) both .06s">
+      <h1 style="margin:0;font-size:76px;line-height:1.02;letter-spacing:-0.035em;font-weight:500;text-wrap:balance">
+        Desarrollador<br />Full Stack
+      </h1>
+      <p style="margin:0;max-width:640px;font-size:19px;line-height:1.6;color:var(--muted);font-weight:300;text-wrap:pretty">
+        Lidero técnicamente el frontend en <span style="color:var(--fg);font-weight:400">Cloudnet Solutions</span> y desarrollo proyectos freelance de punta a punta, con React, Node.js y TypeScript en producción.
+      </p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;animation:riseIn .7s cubic-bezier(.16,1,.3,1) both .14s">
+      <a href="#" style="display:flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:6px;background:var(--fg);color:var(--bg);font-size:14px;font-weight:500" style-hover="background:oklch(0.88 0 0);color:var(--bg)">
+        Descargar CV
+        <span style="font-family:'Geist Mono',monospace;font-size:11px;opacity:.55">PDF</span>
+      </a>
+      <a href="#proyectos" style="display:flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:6px;border:1px solid var(--border);background:oklch(1 0 0 / 0.03);font-size:14px;font-weight:500;color:var(--fg)" style-hover="border-color:oklch(0.4 0.005 285);background:oklch(1 0 0 / 0.07);color:var(--fg)">
+        Ver proyectos
+        <span style="color:var(--accent)">→</span>
+      </a>
+    </div>
+    </div>
+    <div style="display:flex;flex-direction:column;border-top:1px solid var(--border);animation:riseIn .7s cubic-bezier(.16,1,.3,1) both .22s">
+      <div style="display:flex;flex-direction:column;gap:5px;padding:20px 0;border-bottom:1px solid var(--border)">
+        <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)">Rol</span>
+        <span style="font-size:21px;font-weight:400;letter-spacing:-0.02em">Tech Lead</span>
+        <span style="font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--muted);letter-spacing:0.02em">Frontend · Cloudnet Solutions</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;padding:20px 0;border-bottom:1px solid var(--border)">
+        <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)">Producción</span>
+        <span style="font-size:21px;font-weight:400;letter-spacing:-0.02em">Cloud & CI/CD</span>
+        <span style="font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--muted);letter-spacing:0.02em">Azure · GitHub Actions</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:5px;padding:20px 0">
+        <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)">Freelance</span>
+        <span style="font-size:21px;font-weight:400;letter-spacing:-0.02em">Punta a punta</span>
+        <span style="font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--muted);letter-spacing:0.02em">Web & apps</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre-mi" data-screen-label="Sobre mí" style="--accent:var(--a1);border-top:1px solid var(--border);background:var(--bg)">
+  <div style="max-width:1360px;margin:0 auto;padding:120px 32px">
+    <div data-reveal="" style="display:flex;align-items:center;gap:12px;margin-bottom:56px">
+      <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)">01</span>
+      <h2 style="margin:0;font-size:14px;font-weight:500;letter-spacing:0.02em;color:var(--muted);text-transform:uppercase">Sobre mí</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:120px;align-items:start">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:24px;max-width:680px">
+        <p style="margin:0;font-size:26px;line-height:1.45;letter-spacing:-0.02em;font-weight:400;text-wrap:pretty">
+          Empecé estudiando Ing. Electrónica y en 2020 di el salto a la programación. Hoy soy Desarrollador Full Stack con foco en React, Node.js y TypeScript.
+        </p>
+        <p style="margin:0;font-size:16px;line-height:1.72;color:var(--muted);font-weight:300;text-wrap:pretty">
+          Lidero técnicamente al equipo frontend en Cloudnet Solutions, donde desarrollo y mantengo aplicaciones para múltiples clientes: APIs REST con Express y Sequelize sobre PostgreSQL y SQL Server, autenticación con JWT y Auth0, testing con Jest y despliegue continuo en Microsoft Azure con GitHub Actions.
+        </p>
+        <p style="margin:0;font-size:16px;line-height:1.72;color:var(--muted);font-weight:300;text-wrap:pretty">
+          También desarrollo proyectos freelance de punta a punta para emprendedores y pequeñas empresas, y complemento mi perfil técnico con diseño de interfaces, lo que me da una mirada integral: funcionalidad, experiencia de usuario y resolución práctica de problemas.
+        </p>
+        <p style="margin:0;font-size:16px;line-height:1.72;color:var(--muted);font-weight:300;text-wrap:pretty">
+          Incorporo asistentes de IA en mi flujo de trabajo para acelerar el desarrollo sin resignar calidad, y sigo formándome en la Tecnicatura Superior en Desarrollo Web y Aplicaciones Digitales del ISPC.
+        </p>
+        <a href="#contacto" style="margin-top:8px;display:flex;align-items:center;gap:8px;height:40px;padding:0 18px;border-radius:6px;border:1px solid var(--border);background:oklch(1 0 0 / 0.03);font-size:14px;font-weight:500;width:fit-content" style-hover="border-color:oklch(0.4 0.005 285);background:oklch(1 0 0 / 0.07);color:var(--fg)">
+          Si tenés un proyecto en mente, escribime
+          <span style="color:var(--accent)">→</span>
+        </a>
+      </div>
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:12px">
+        <sc-if value="{{ showPhoto }}" hint-placeholder-val="{{ true }}">
+          <div style="aspect-ratio:4/5;border:1px solid var(--border);border-radius:8px;background-color:var(--bg-2);background-image:repeating-linear-gradient(135deg, oklch(1 0 0 / 0.025) 0 10px, transparent 10px 20px);display:flex;align-items:flex-end;padding:16px">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.03em">foto de perfil — 4:5</span>
+          </div>
+        </sc-if>
+        <div style="border:1px solid var(--border);border-radius:8px;background:var(--card);padding:22px;display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)">Rol actual</span>
+            <span style="font-size:15px">Tech Lead Frontend</span>
+            <span style="font-size:13.5px;color:var(--muted)">Cloudnet Solutions</span>
+          </div>
+          <div style="height:1px;background:var(--border)"></div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)">Formación</span>
+            <span style="font-size:15px">Tec. Sup. en Desarrollo Web</span>
+            <span style="font-size:13.5px;color:var(--muted)">ISPC · en curso</span>
+          </div>
+          <div style="height:1px;background:var(--border)"></div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <span style="font-family:'Geist Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)">Ubicación</span>
+            <span style="font-size:15px">Córdoba, Argentina</span>
+            <span style="font-size:13.5px;color:var(--muted)">Remoto · GMT-3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="habilidades" data-screen-label="Habilidades" style="--accent:var(--a2);border-top:1px solid var(--border);background:var(--bg-2)">
+  <div style="max-width:1360px;margin:0 auto;padding:120px 32px">
+    <div data-reveal="" style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+      <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)">02</span>
+      <h2 style="margin:0;font-size:14px;font-weight:500;letter-spacing:0.02em;color:var(--muted);text-transform:uppercase">Habilidades</h2>
+    </div>
+    <p data-reveal="" style="margin:0 0 56px;max-width:620px;font-size:24px;line-height:1.45;letter-spacing:-0.02em;font-weight:400;text-wrap:pretty">
+      Stack que uso a diario, en proyectos que están corriendo en producción.
+    </p>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;align-items:start">
+      <div data-reveal="" style="border:1px solid var(--border);border-radius:8px;background:var(--card);padding:24px;display:flex;flex-direction:column;gap:16px;transition:border-color .2s ease" style-hover="border-color:oklch(0.36 0.005 285)">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+          <h3 style="margin:0;font-size:17px;font-weight:500;letter-spacing:-0.01em">Frontend</h3>
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted)">09</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">React</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">TypeScript</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Next.js</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Astro</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Vite</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Redux Toolkit</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">TanStack Query</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Tailwind CSS</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">shadcn/ui</span>
+        </div>
+      </div>
+      <div data-reveal="" style="border:1px solid var(--border);border-radius:8px;background:var(--card);padding:24px;display:flex;flex-direction:column;gap:16px;transition:border-color .2s ease" style-hover="border-color:oklch(0.36 0.005 285)">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+          <h3 style="margin:0;font-size:17px;font-weight:500;letter-spacing:-0.01em">Backend</h3>
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted)">06</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Node.js</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Express</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Sequelize</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">JWT</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Passport</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Auth0</span>
+        </div>
+      </div>
+      <div data-reveal="" style="border:1px solid var(--border);border-radius:8px;background:var(--card);padding:24px;display:flex;flex-direction:column;gap:16px;transition:border-color .2s ease" style-hover="border-color:oklch(0.36 0.005 285)">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+          <h3 style="margin:0;font-size:17px;font-weight:500;letter-spacing:-0.01em">Datos &amp; Cloud</h3>
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted)">07</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">PostgreSQL</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">SQL Server</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Supabase</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Azure</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Vercel</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">GitHub Actions</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Docker</span>
+        </div>
+      </div>
+      <div data-reveal="" style="border:1px solid var(--border);border-radius:8px;background:var(--card);padding:24px;display:flex;flex-direction:column;gap:16px;transition:border-color .2s ease" style-hover="border-color:oklch(0.36 0.005 285)">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+          <h3 style="margin:0;font-size:17px;font-weight:500;letter-spacing:-0.01em">Testing &amp; otros</h3>
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted)">10</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Jest</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Supertest</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Vitest</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Socket.IO</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Mercado Pago</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Resend</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Swagger</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Jira</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Claude Code</span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--border);color:var(--muted)">Claude Design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proyectos" data-screen-label="Proyectos" style="--accent:var(--a1);border-top:1px solid var(--border);background:var(--bg)">
+  <div style="max-width:1360px;margin:0 auto;padding:120px 32px">
+    <div data-reveal="" style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:56px">
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)">03</span>
+          <h2 style="margin:0;font-size:14px;font-weight:500;letter-spacing:0.02em;color:var(--muted);text-transform:uppercase">Proyectos</h2>
+        </div>
+        <p style="margin:0;max-width:620px;font-size:24px;line-height:1.45;letter-spacing:-0.02em;text-wrap:pretty">
+          Trabajos seleccionados, del problema al deploy.
+        </p>
+      </div>
+      <a href="#" style="font-size:13.5px;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:6px" style-hover="color:var(--fg)">Ver todo en GitHub <span style="color:var(--accent)">↗</span></a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px">
+      <a data-reveal="" href="#" style="display:flex;flex-direction:column;border:1px solid var(--border);border-radius:8px;background:var(--card);overflow:hidden;transition:border-color .2s ease,transform .2s ease" style-hover="border-color:oklch(0.36 0.005 285);transform:translateY(-3px);color:var(--fg)">
+        <div style="aspect-ratio:16/10;border-bottom:1px solid var(--border);background-color:var(--bg-2);background-image:repeating-linear-gradient(135deg, oklch(1 0 0 / 0.03) 0 10px, transparent 10px 20px);display:flex;align-items:flex-end;padding:14px">
+          <span style="font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--muted)">captura del proyecto — 16:10</span>
+        </div>
+        <div style="padding:22px;display:flex;flex-direction:column;gap:12px;flex:1">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <h3 style="margin:0;font-size:16.5px;font-weight:500;letter-spacing:-0.01em">Proyecto de ejemplo 01</h3>
+            <span style="color:var(--muted);font-size:14px">↗</span>
+          </div>
+          <p style="margin:0;font-size:14px;line-height:1.62;color:var(--muted);font-weight:300;flex:1;text-wrap:pretty">
+            Descripción corta del problema y de la solución entregada, en dos líneas.
+          </p>
+          <sc-if value="{{ showProjectTech }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-wrap:wrap;gap:6px;padding-top:6px">
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;padding:3px 7px;border-radius:4px;background:oklch(1 0 0 / 0.05);color:var(--muted)">Next.js</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;padding:3px 7px;border-radius:4px;background:oklch(1 0 0 / 0.05);color:var(--muted)">TypeScript</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;padding:3px 7px;border-radius:4px;background:oklch(1 0 0 / 0.05);color:var(--muted)">Postgres</span>
+            </div>
+          </sc-if>
+        </div>
+      </a>
+      <a data-reveal="" href="#" style="display:flex;flex-direction:column;border:1px solid var(--border);border-radius:8px;background:var(--card);overflow:hidden;transition:border-color .2s ease,transform .2s ease" style-hover="border-color:oklch(0.36 0.005 285);transform:translateY(-3px);color:var(--fg)">
+        <div style="aspect-ratio:16/10;border-bottom:1px solid var(--border);background-color:var(--bg-2);background-image:repeating-linear-gradient(135deg, oklch(1 0 0 / 0.03) 0 10px, transparent 10px 20px);display:flex;align-items:flex-end;padding:14px">
+          <span style="font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--muted)">captura del proyecto — 16:10</span>
+        </div>
+        <div style="padding:22px;display:flex;flex-direction:column;gap:12px;flex:1">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <h3 style="margin:0;font-size:16.5px;font-weight:500;letter-spacing:-0.01em">Proyecto de ejemplo 02</h3>
+            <span style="color:var(--muted);font-size:14px">↗</span>
+          </div>
+          <p style="margin:0;font-size:14px;line-height:1.62;color:var(--muted);font-weight:300;flex:1;text-wrap:pretty">
+            Descripción corta del problema y de la solución entregada, en dos líneas.
+          </p>
+          <sc-if value="{{ showProjectTech }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-wrap:wrap;gap:6px;padding-top:6px">
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;padding:3px 7px;border-radius:4px;background:oklch(1 0 0 / 0.05);color:var(--muted)">React</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;padding:3px 7px;border-radius:4px;background:oklch(1 0 0 / 0.05);color:var(--muted)">Express</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;padding:3px 7px;border-radius:4px;background:oklch(1 0 0 / 0.05);color:var(--muted)">Auth0</span>
+            </div>
+          </sc-if>
+        </div>
+      </a>
+      <a data-reveal="" href="#" style="display:flex;flex-direction:column;border:1px solid var(--border);border-radius:8px;background:var(--card);overflow:hidden;transition:border-color .2s ease,transform .2s ease" style-hover="border-color:oklch(0.36 0.005 285);transform:translateY(-3px);color:var(--fg)">
+        <div style="aspect-ratio:16/10;border-bottom:1px solid var(--border);background-color:var(--bg-2);background-image:repeating-linear-gradient(135deg, oklch(1 0 0 / 0.03) 0 10px, transparent 10px 20px);display:flex;align-items:flex-end;padding:14px">
+          <span style="font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--muted)">captura del proyecto — 16:10</span>
+        </div>
+        <div style="padding:22px;display:flex;flex-direction:column;gap:12px;flex:1">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <h3 style="margin:0;font-size:16.5px;font-weight:500;letter-spacing:-0.01em">Proyecto de ejemplo 03</h3>
+            <span style="color:var(--muted);font-size:14px">↗</span>
+          </div>
+          <p style="margin:0;font-size:14px;line-height:1.62;color:var(--muted);font-weight:300;flex:1;text-wrap:pretty">
+            Descripción corta del problema y de la solución entregada, en dos líneas.
+          </p>
+          <sc-if value="{{ showProjectTech }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-wrap:wrap;gap:6px;padding-top:6px">
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;padding:3px 7px;border-radius:4px;background:oklch(1 0 0 / 0.05);color:var(--muted)">Node.js</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;padding:3px 7px;border-radius:4px;background:oklch(1 0 0 / 0.05);color:var(--muted)">Socket.IO</span>
+              <span style="font-family:'Geist Mono',monospace;font-size:11px;padding:3px 7px;border-radius:4px;background:oklch(1 0 0 / 0.05);color:var(--muted)">Supabase</span>
+            </div>
+          </sc-if>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" data-screen-label="Contacto" style="--accent:var(--a2);border-top:1px solid var(--border);background:var(--bg-2)">
+  <div style="max-width:1360px;margin:0 auto;padding:120px 32px">
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:80px;align-items:start">
+      <div data-reveal="" style="display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-family:'Geist Mono',monospace;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)">04</span>
+          <h2 style="margin:0;font-size:14px;font-weight:500;letter-spacing:0.02em;color:var(--muted);text-transform:uppercase">Contacto</h2>
+        </div>
+        <p style="margin:0;font-size:40px;line-height:1.14;letter-spacing:-0.03em;font-weight:500;text-wrap:balance">¿Tenés un proyecto en mente?</p>
+        <p style="margin:0;max-width:420px;font-size:16px;line-height:1.7;color:var(--muted);font-weight:300;text-wrap:pretty">
+          Contame qué necesitás y te respondo con una propuesta clara: alcance, tiempos y cómo lo llevo a producción.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:0;margin-top:16px;border-top:1px solid var(--border)">
+          <a href="mailto:gonzaloquiroga488@gmail.com" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)" style-hover="color:var(--accent)">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)">Email</span>
+            <span style="font-size:15px">gonzaloquiroga488@gmail.com</span>
+          </a>
+          <a href="https://wa.me/5493576476025" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)" style-hover="color:var(--accent)">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)">WhatsApp</span>
+            <span style="font-size:15px">+54 3576 476025</span>
+          </a>
+          <a href="#" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)" style-hover="color:var(--accent)">
+            <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)">CV</span>
+            <span style="font-size:15px">Descargar PDF ↓</span>
+          </a>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <a href="#" style="display:flex;align-items:center;justify-content:center;height:36px;padding:0 14px;border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--muted)" style-hover="color:var(--fg);border-color:oklch(0.4 0.005 285)">GitHub</a>
+          <a href="#" style="display:flex;align-items:center;justify-content:center;height:36px;padding:0 14px;border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--muted)" style-hover="color:var(--fg);border-color:oklch(0.4 0.005 285)">LinkedIn</a>
+          <a href="#" style="display:flex;align-items:center;justify-content:center;height:36px;padding:0 14px;border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--muted)" style-hover="color:var(--fg);border-color:oklch(0.4 0.005 285)">Instagram</a>
+          <a href="#" style="display:flex;align-items:center;justify-content:center;height:36px;padding:0 14px;border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--muted)" style-hover="color:var(--fg);border-color:oklch(0.4 0.005 285)">Facebook</a>
+        </div>
+      </div>
+      <form data-reveal="" onSubmit="{{ onSubmit }}" style="border:1px solid var(--border);border-radius:8px;background:var(--card);padding:28px;display:flex;flex-direction:column;gap:18px">
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px">
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-size:13px;font-weight:500">Nombre</span>
+            <input type="text" placeholder="Tu nombre" style="height:38px;padding:0 11px;border-radius:6px;border:1px solid var(--border);background:oklch(1 0 0 / 0.02);font-size:14px;outline:none" style-focus="border-color:var(--accent);background:oklch(1 0 0 / 0.04)" />
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-size:13px;font-weight:500">Email</span>
+            <input type="email" placeholder="tu@email.com" style="height:38px;padding:0 11px;border-radius:6px;border:1px solid var(--border);background:oklch(1 0 0 / 0.02);font-size:14px;outline:none" style-focus="border-color:var(--accent);background:oklch(1 0 0 / 0.04)" />
+          </label>
+        </div>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-size:13px;font-weight:500">Asunto</span>
+          <input type="text" placeholder="Sitio web, aplicación, consultoría…" style="height:38px;padding:0 11px;border-radius:6px;border:1px solid var(--border);background:oklch(1 0 0 / 0.02);font-size:14px;outline:none" style-focus="border-color:var(--accent);background:oklch(1 0 0 / 0.04)" />
+        </label>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-size:13px;font-weight:500">Mensaje</span>
+          <textarea rows="5" placeholder="Contame brevemente el proyecto y los plazos." style="padding:10px 11px;border-radius:6px;border:1px solid var(--border);background:oklch(1 0 0 / 0.02);font-size:14px;line-height:1.6;outline:none;resize:vertical;font-family:'Geist',sans-serif" style-focus="border-color:var(--accent);background:oklch(1 0 0 / 0.04)"></textarea>
+        </label>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:2px">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted)">{{ formNote }}</span>
+          <button type="submit" style="height:40px;padding:0 20px;border:none;border-radius:6px;background:var(--fg);color:var(--bg);font-size:14px;font-weight:500;cursor:pointer;transition:background .18s ease" style-hover="background:oklch(0.88 0 0)">Enviar mensaje</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer style="border-top:1px solid var(--border);background:var(--bg)">
+  <div style="max-width:1360px;margin:0 auto;padding:36px 32px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+    <span style="font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--muted)">© 2026 Gonzalo Quiroga</span>
+    <span style="font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--muted)">Next.js · TypeScript · Tailwind CSS · shadcn/ui</span>
+  </div>
+</footer>
+
+<section data-screen-label="Sistema visual" style="border-top:1px solid var(--border);background:var(--bg-2)">
+  <div style="max-width:1360px;margin:0 auto;padding:80px 32px 100px;display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent)">Anexo</span>
+      <h2 style="margin:0;font-size:28px;font-weight:500;letter-spacing:-0.02em">Sistema visual — referencia de implementación</h2>
+      <p style="margin:0;font-size:14.5px;color:var(--muted);font-weight:300">Tokens listos para <code style="font-family:'Geist Mono',monospace;font-size:13px">globals.css</code> en el formato de variables de shadcn/ui (modo oscuro).</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px">
+      <div style="border:1px solid var(--border);border-radius:8px;background:var(--card);padding:24px;display:flex;flex-direction:column;gap:16px">
+        <h3 style="margin:0;font-size:13px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase;color:var(--muted)">Paleta</h3>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:oklch(0.145 0 0)"></span><span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted)">background · 0.145 0 0</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:oklch(0.178 0.002 285)"></span><span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted)">muted · 0.178 0.002 285</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:oklch(0.193 0.003 285)"></span><span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted)">card · 0.193 0.003 285</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:oklch(0.27 0.004 285)"></span><span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted)">border · 0.27 0.004 285</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:oklch(0.708 0.006 285)"></span><span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted)">muted-fg · 0.708 0.006 285</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:oklch(0.985 0 0)"></span><span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted)">foreground · 0.985 0 0</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--a1)"></span><span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted)">accent 1 · #06fcee</span></div>
+          <div style="display:flex;align-items:center;gap:12px"><span style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--a2)"></span><span style="font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted)">accent 2 · #d1ff6f</span></div>
+        </div>
+      </div>
+      <div style="border:1px solid var(--border);border-radius:8px;background:var(--card);padding:24px;display:flex;flex-direction:column;gap:16px">
+        <h3 style="margin:0;font-size:13px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase;color:var(--muted)">Tipografía</h3>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:34px;letter-spacing:-0.035em;font-weight:500;line-height:1.05">Geist 500</span><span style="font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--muted)">display · 76/56/40 · -0.035em</span></div>
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:22px;letter-spacing:-0.02em;font-weight:400">Geist 400</span><span style="font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--muted)">lead · 26/24 · -0.02em</span></div>
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:300;color:var(--muted)">Geist 300</span><span style="font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--muted)">body · 19/16/14 · 1.6–1.72</span></div>
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-family:'Geist Mono',monospace;font-size:14px">Geist Mono</span><span style="font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--muted)">labels &amp; tags · 10.5–12 · 0.08em</span></div>
+        </div>
+      </div>
+      <div style="border:1px solid var(--border);border-radius:8px;background:var(--card);padding:24px;display:flex;flex-direction:column;gap:16px">
+        <h3 style="margin:0;font-size:13px;font-weight:500;letter-spacing:0.02em;text-transform:uppercase;color:var(--muted)">Reglas</h3>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:13.5px;line-height:1.6;color:var(--muted);font-weight:300">
+          <span><span style="color:var(--fg)">Radio:</span> rounded-md (6px) en controles y tags, 8px en cards.</span>
+          <span><span style="color:var(--fg)">Ritmo:</span> secciones 120px vertical, container 1360px, gap 20px en grillas.</span>
+          <span><span style="color:var(--fg)">Acento:</span> dos colores alternados por sección (#06fcee / #d1ff6f), solo en numeración, labels, flechas y focus. Sobre fondo de acento, el texto va oscuro.</span>
+          <span><span style="color:var(--fg)">Fondos:</span> alternancia background / muted, sin gradientes salvo el glow del hero al 7%.</span>
+          <span><span style="color:var(--fg)">Movimiento:</span> rise-in 14px / 700ms en entrada, hover -3px y cambio de borde. Nada de tipeo ni parallax.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent1&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#06fcee&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#06fcee&quot;,&quot;#d1ff6f&quot;,&quot;#a78bfa&quot;,&quot;#fb923c&quot;],&quot;section&quot;:&quot;Tema&quot;},&quot;accent2&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#d1ff6f&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#d1ff6f&quot;,&quot;#06fcee&quot;,&quot;#fca5a5&quot;,&quot;#fde047&quot;],&quot;section&quot;:&quot;Tema&quot;},&quot;showPhoto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sobre mí&quot;},&quot;showAvailability&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;showProjectTech&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Proyectos&quot;}}">
+class Component extends DCLogic {
+  state = { sent: false };
+
+  componentDidMount() {
+    this.applyAccent();
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    if (!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        io.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach((el, i) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.92) return;
+      el.style.transition = 'opacity .7s cubic-bezier(.16,1,.3,1) ' + ((i % 4) * 55) + 'ms, transform .7s cubic-bezier(.16,1,.3,1) ' + ((i % 4) * 55) + 'ms';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(14px)';
+      io.observe(el);
+    });
+    this._io = io;
+  }
+
+  componentDidUpdate(prev) {
+    if (prev.accent1 !== this.props.accent1 || prev.accent2 !== this.props.accent2) this.applyAccent();
+  }
+
+  componentWillUnmount() { if (this._io) this._io.disconnect(); }
+
+  applyAccent() {
+    const a1 = this.props.accent1, a2 = this.props.accent2;
+    if (a1) document.documentElement.style.setProperty('--a1', a1);
+    if (a2) document.documentElement.style.setProperty('--a2', a2);
+  }
+
+  renderVals() {
+    return {
+      showPhoto: this.props.showPhoto ?? true,
+      showAvailability: this.props.showAvailability ?? true,
+      showProjectTech: this.props.showProjectTech ?? true,
+      formNote: this.state.sent ? 'Mensaje enviado. Te respondo a la brevedad.' : 'Respondo en menos de 24 h.',
+      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
