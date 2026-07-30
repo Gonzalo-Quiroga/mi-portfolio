@@ -46,7 +46,6 @@ Bitácora privada (no pública en el sitio) del proceso de reconstrucción, como
 ## Pendiente / próximos pasos
 
 - Definir dónde vive la bitácora privada de proceso.
-- Decidir dominio propio vs subdominio de Vercel.
+- ~~Decidir dominio propio vs subdominio de Vercel.~~ Resuelto: `gonzaloquiroga.dev`, deployado en Vercel con `RESEND_API_KEY` y `NEXT_PUBLIC_SITE_URL` configuradas.
 - Confirmar que el handoff final de Claude Design alterna correctamente los dos colores de acento por sección.
 - Elegir contenido definitivo de la sección de Proyectos (queda para el final).
-- Configuración real de Resend (API key) y deploy/env vars en Vercel: decidido posponer para el final del proyecto, no bloquea el resto del desarrollo (`/api/contact` ya está implementada y falla de forma controlada sin la key).
