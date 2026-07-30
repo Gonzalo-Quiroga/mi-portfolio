@@ -97,6 +97,8 @@ export function ContactForm() {
       </label>
       <div className="mt-0.5 flex items-center justify-between gap-4">
         <span
+          role="status"
+          aria-live="polite"
           className={`font-mono text-[11px] ${status === "error" ? "text-destructive" : "text-muted-foreground"}`}
         >
           {note}
