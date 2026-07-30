@@ -65,7 +65,7 @@ export function Hero() {
               className="flex h-10 items-center gap-2 rounded-md bg-foreground px-4.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
             >
               Descargar CV
-              <span className="font-mono text-[11px] opacity-55">PDF</span>
+              <span className="font-mono text-[11px] opacity-80">PDF</span>
             </a>
             <Link
               href="#proyectos"

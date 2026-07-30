@@ -107,4 +107,11 @@
   html {
     @apply font-sans;
   }
+  /* Foco visible consistente en links y botones custom (respeta el acento activo por sección). */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 }
