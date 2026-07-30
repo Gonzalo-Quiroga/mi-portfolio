@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { Reveal } from "@/components/motion/reveal";
 import { projects } from "@/data/projects";
 import { socialLinks } from "@/data/social";
 
@@ -13,7 +14,7 @@ export function Projects() {
       style={{ "--accent": "var(--a1)" } as React.CSSProperties}
     >
       <div className="mx-auto max-w-340 px-6 py-20 sm:px-8 lg:py-30">
-        <div className="mb-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end lg:mb-14">
+        <Reveal className="mb-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end lg:mb-14">
           <div className="flex flex-col gap-5">
             <div className="flex items-center gap-3">
               <span className="font-mono text-[11.5px] tracking-[0.08em] text-accent uppercase">
@@ -35,14 +36,14 @@ export function Projects() {
           >
             Ver todo en GitHub <span className="text-accent">↗</span>
           </a>
-        </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
+          {projects.map((project, i) => (
+            <Reveal key={project.id} delay={(i % 4) * 0.055} className="h-full">
             <a
-              key={project.id}
               href={project.href}
-              className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card transition-[border-color,transform] hover:-translate-y-0.75 hover:border-muted-foreground/40"
+              className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-[border-color,transform] hover:-translate-y-0.75 hover:border-muted-foreground/40"
             >
               <div className="relative aspect-[16/10] border-b border-border bg-background-2">
                 {project.image ? (
@@ -90,6 +91,7 @@ export function Projects() {
                 )}
               </div>
             </a>
+            </Reveal>
           ))}
         </div>
       </div>
