@@ -37,6 +37,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# bitácora privada de proceso — repo es público, esto no se sube nunca
+bitacora-privada.md
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
