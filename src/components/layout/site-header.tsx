@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -13,10 +14,16 @@ export function SiteHeader() {
       <nav className="mx-auto flex h-16 max-w-340 items-center justify-between px-6 sm:px-8">
         <Link
           href="#home"
-          className="flex items-center gap-2 text-[15px] font-medium tracking-[-0.01em]"
+          className="flex items-center gap-2.5 text-[15px] font-medium tracking-[-0.01em]"
           onClick={() => setOpen(false)}
         >
-          <span className="block h-1.5 w-1.5 rounded-sm bg-accent" />
+          <Image
+            src="/brand/gq-mark.png"
+            alt=""
+            width={22}
+            height={22}
+            className="shrink-0"
+          />
           Gonzalo Quiroga
         </Link>
 
