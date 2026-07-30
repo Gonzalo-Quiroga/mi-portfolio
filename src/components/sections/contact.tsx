@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/motion/reveal";
 import {
   contactEmail,
   cvHref,
@@ -23,7 +24,7 @@ export function Contact() {
     >
       <div className="mx-auto max-w-340 px-6 py-20 sm:px-8 lg:py-30">
         <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2 lg:gap-20">
-          <div className="flex flex-col gap-5">
+          <Reveal className="flex flex-col gap-5">
             <div className="flex items-center gap-3">
               <span className="font-mono text-[11.5px] tracking-[0.08em] text-accent uppercase">
                 04
@@ -68,9 +69,11 @@ export function Contact() {
                 </a>
               ))}
             </div>
-          </div>
+          </Reveal>
 
-          <ContactForm />
+          <Reveal delay={0.06}>
+            <ContactForm />
+          </Reveal>
         </div>
       </div>
     </section>

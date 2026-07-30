@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { Reveal } from "@/components/motion/reveal";
+
 const stats = [
   {
     label: "Rol",
@@ -33,14 +35,14 @@ export function Hero() {
       />
       <div className="relative grid grid-cols-1 items-end gap-12 lg:grid-cols-[1.55fr_1fr] lg:gap-24">
         <div className="flex max-w-195 flex-col gap-8">
-          <div className="flex w-fit items-center gap-1.75 rounded-full bg-accent py-1.25 pr-3 pl-2.5">
+          <Reveal className="flex w-fit items-center gap-1.75 rounded-full bg-accent py-1.25 pr-3 pl-2.5">
             <span className="block h-1.25 w-1.25 rounded-full bg-background" />
             <span className="font-mono text-[11.5px] font-medium tracking-[0.04em] text-accent-foreground uppercase">
               Disponible para proyectos freelance
             </span>
-          </div>
+          </Reveal>
 
-          <div className="flex flex-col gap-5">
+          <Reveal delay={0.06} className="flex flex-col gap-5">
             <h1 className="text-5xl leading-[1.02] font-medium tracking-[-0.035em] text-balance sm:text-6xl lg:text-[76px]">
               Desarrollador
               <br />
@@ -54,9 +56,9 @@ export function Hero() {
               y desarrollo proyectos freelance de punta a punta, con React,
               Node.js y TypeScript en producción.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <Reveal delay={0.14} className="flex flex-wrap items-center gap-3">
             <a
               href="/cv/CV_Gonzalo_Quiroga.pdf"
               download
@@ -72,10 +74,10 @@ export function Hero() {
               Ver proyectos
               <span className="text-accent">→</span>
             </Link>
-          </div>
+          </Reveal>
         </div>
 
-        <div className="flex flex-col border-t border-border">
+        <Reveal delay={0.22} className="flex flex-col border-t border-border">
           {stats.map((stat) => (
             <div
               key={stat.label}
@@ -92,7 +94,7 @@ export function Hero() {
               </span>
             </div>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );
