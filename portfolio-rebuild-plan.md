@@ -49,3 +49,4 @@ Bitácora privada (no pública en el sitio) del proceso de reconstrucción, como
 - Decidir dominio propio vs subdominio de Vercel.
 - Confirmar que el handoff final de Claude Design alterna correctamente los dos colores de acento por sección.
 - Elegir contenido definitivo de la sección de Proyectos (queda para el final).
+- Configuración real de Resend (API key) y deploy/env vars en Vercel: decidido posponer para el final del proyecto, no bloquea el resto del desarrollo (`/api/contact` ya está implementada y falla de forma controlada sin la key).
