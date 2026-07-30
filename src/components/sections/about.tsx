@@ -35,8 +35,23 @@ export function About() {
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[1.5fr_1fr] lg:gap-30">
-          <Reveal className="flex max-w-170 flex-col gap-6">
+        <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[1fr_1.5fr] lg:gap-30">
+          <Reveal>
+            {/* Sin foto de perfil definida todavía: placeholder explícito, reemplazar por next/image cuando exista. */}
+            <div
+              className="flex aspect-4/5 items-end rounded-lg border border-border bg-background-2 p-4"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(135deg, oklch(1 0 0 / 0.025) 0 10px, transparent 10px 20px)",
+              }}
+            >
+              <span className="font-mono text-[11px] tracking-[0.03em] text-muted-foreground">
+                foto de perfil — 4:5
+              </span>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.06} className="flex max-w-170 flex-col gap-6">
             <p className="text-2xl leading-snug font-normal tracking-[-0.02em] text-balance sm:text-[26px]">
               Empecé estudiando Ing. Electrónica y en 2020 di el salto a la
               programación. Hoy soy Desarrollador Full Stack con foco en
@@ -70,39 +85,31 @@ export function About() {
               <span className="text-accent">→</span>
             </a>
           </Reveal>
-
-          <Reveal delay={0.06} className="flex flex-col gap-3">
-            {/* Sin foto de perfil definida todavía: placeholder explícito, reemplazar por next/image cuando exista. */}
-            <div
-              className="flex aspect-[4/5] items-end rounded-lg border border-border bg-background-2 p-4"
-              style={{
-                backgroundImage:
-                  "repeating-linear-gradient(135deg, oklch(1 0 0 / 0.025) 0 10px, transparent 10px 20px)",
-              }}
-            >
-              <span className="font-mono text-[11px] tracking-[0.03em] text-muted-foreground">
-                foto de perfil — 4:5
-              </span>
-            </div>
-
-            <div className="flex flex-col gap-4.5 rounded-lg border border-border bg-card p-5.5">
-              {facts.map((fact, i) => (
-                <div key={fact.label} className="contents">
-                  {i > 0 && <div className="h-px bg-border" />}
-                  <div className="flex flex-col gap-1">
-                    <span className="font-mono text-[10.5px] tracking-[0.08em] text-muted-foreground uppercase">
-                      {fact.label}
-                    </span>
-                    <span className="text-[15px]">{fact.value}</span>
-                    <span className="text-[13.5px] text-muted-foreground">
-                      {fact.detail}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
         </div>
+
+        <Reveal
+          delay={0.12}
+          className="mt-16 border-t border-border pt-12 lg:mt-24 lg:pt-14"
+        >
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-border">
+            {facts.map((fact) => (
+              <div
+                key={fact.label}
+                className="flex flex-col items-center gap-1.5 px-6 text-center"
+              >
+                <span className="font-mono text-[11px] tracking-[0.08em] text-accent uppercase">
+                  {fact.label}
+                </span>
+                <span className="text-lg font-medium tracking-[-0.02em] sm:text-xl">
+                  {fact.value}
+                </span>
+                <span className="font-mono text-[12px] text-muted-foreground">
+                  {fact.detail}
+                </span>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );
