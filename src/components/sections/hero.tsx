@@ -86,7 +86,7 @@ export function Hero() {
             </a>
             <Link
               href="#proyectos"
-              className="flex h-10 items-center gap-2 rounded-md border border-border bg-foreground/3 px-4.5 text-sm font-medium transition-colors hover:border-muted-foreground/40 hover:bg-foreground/7"
+              className="flex h-10 items-center gap-2 rounded-md border border-border bg-foreground/3 px-4.5 text-sm font-medium transition-[background-color,border-color,box-shadow] hover:glow-a1 hover:border-a1-line hover:bg-foreground/7"
             >
               Ver proyectos
               <span className="text-accent">→</span>

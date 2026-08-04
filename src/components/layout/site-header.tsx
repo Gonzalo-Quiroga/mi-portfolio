@@ -39,7 +39,7 @@ export function SiteHeader() {
           ))}
           <Link
             href="#contacto"
-            className="ml-3 rounded-md border border-border bg-foreground/3 px-3.5 py-2 font-mono text-[11px] tracking-[0.14em] uppercase transition-colors hover:border-muted-foreground/40 hover:bg-foreground/[0.07]"
+            className="ml-3 rounded-md border border-border bg-foreground/3 px-3.5 py-2 font-mono text-[11px] tracking-[0.14em] uppercase transition-[background-color,border-color,box-shadow] hover:glow-a1 hover:border-a1-line hover:bg-foreground/[0.07]"
           >
             Hablemos
           </Link>

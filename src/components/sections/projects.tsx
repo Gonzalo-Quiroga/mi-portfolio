@@ -47,7 +47,7 @@ export function Projects() {
             <Reveal key={project.id} delay={(i % 4) * 0.055}>
               <a
                 href={project.href}
-                className="group grid grid-cols-[7rem_minmax(0,1fr)] items-center gap-x-5 gap-y-4 border-b border-border px-2 py-5 transition-colors hover:bg-foreground/2 lg:grid-cols-[9rem_minmax(0,1.15fr)_minmax(0,1fr)_auto] lg:gap-x-8 lg:py-6"
+                className="group grid grid-cols-[7rem_minmax(0,1fr)] items-center gap-x-5 gap-y-4 border-b border-border px-2 py-5 transition-[background-color,box-shadow] hover:glow-a1 hover:bg-foreground/2 lg:grid-cols-[9rem_minmax(0,1.15fr)_minmax(0,1fr)_auto] lg:gap-x-8 lg:py-6"
               >
                 <div className="relative aspect-16/10 overflow-hidden rounded-[3px] border border-border bg-background-2 transition-colors group-hover:border-a1-line">
                   {project.image ? (

@@ -59,7 +59,7 @@ export function ContactForm() {
             placeholder="Tu nombre"
             value={form.name}
             onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-            className="h-9.5 rounded-md border border-border bg-foreground/2 px-2.75 text-sm outline-none focus:border-accent focus:bg-foreground/4"
+            className="h-9.5 rounded-md border border-border bg-foreground/2 px-2.75 text-sm outline-none transition-[background-color,border-color,box-shadow] focus:glow-a1 focus:border-accent focus:bg-foreground/4"
           />
         </label>
         <label className="flex flex-col gap-1.75">
@@ -70,7 +70,7 @@ export function ContactForm() {
             placeholder="tu@email.com"
             value={form.email}
             onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-            className="h-9.5 rounded-md border border-border bg-foreground/2 px-2.75 text-sm outline-none focus:border-accent focus:bg-foreground/4"
+            className="h-9.5 rounded-md border border-border bg-foreground/2 px-2.75 text-sm outline-none transition-[background-color,border-color,box-shadow] focus:glow-a1 focus:border-accent focus:bg-foreground/4"
           />
         </label>
       </div>
@@ -81,7 +81,7 @@ export function ContactForm() {
           placeholder="Sitio web, aplicación, consultoría…"
           value={form.subject}
           onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
-          className="h-9.5 rounded-md border border-border bg-foreground/2 px-2.75 text-sm outline-none focus:border-accent focus:bg-foreground/4"
+          className="h-9.5 rounded-md border border-border bg-foreground/2 px-2.75 text-sm outline-none transition-[background-color,border-color,box-shadow] focus:glow-a1 focus:border-accent focus:bg-foreground/4"
         />
       </label>
       <label className="flex flex-col gap-1.75">
@@ -92,7 +92,7 @@ export function ContactForm() {
           placeholder="Contame brevemente el proyecto y los plazos."
           value={form.message}
           onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-          className="resize-y rounded-md border border-border bg-foreground/2 px-2.75 py-2.5 font-sans text-sm leading-relaxed outline-none focus:border-accent focus:bg-foreground/4"
+          className="resize-y rounded-md border border-border bg-foreground/2 px-2.75 py-2.5 font-sans text-sm leading-relaxed outline-none transition-[background-color,border-color,box-shadow] focus:glow-a1 focus:border-accent focus:bg-foreground/4"
         />
       </label>
       <div className="mt-0.5 flex items-center justify-between gap-4">

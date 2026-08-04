@@ -83,7 +83,7 @@ export function About() {
             </p>
             <a
               href="#contacto"
-              className="mt-2 flex h-10 w-fit items-center gap-2 rounded-md border border-border bg-foreground/3 px-4.5 text-sm font-medium transition-colors hover:border-muted-foreground/40 hover:bg-foreground/7"
+              className="mt-2 flex h-10 w-fit items-center gap-2 rounded-md border border-border bg-foreground/3 px-4.5 text-sm font-medium transition-[background-color,border-color,box-shadow] hover:glow-a1 hover:border-a1-line hover:bg-foreground/7"
             >
               Si tenés un proyecto en mente, escribime
               <span className="text-accent">→</span>
