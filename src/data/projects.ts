@@ -13,6 +13,7 @@ export const projects: Project[] = [
     href: "#",
     image: null,
     tech: ["Next.js", "TypeScript", "Postgres"],
+    year: "2025",
   },
   {
     id: "proyecto-02",
@@ -22,6 +23,7 @@ export const projects: Project[] = [
     href: "#",
     image: null,
     tech: ["React", "Express", "Auth0"],
+    year: "2025",
   },
   {
     id: "proyecto-03",
@@ -31,5 +33,6 @@ export const projects: Project[] = [
     href: "#",
     image: null,
     tech: ["Node.js", "Socket.IO", "Supabase"],
+    year: "2024",
   },
 ];

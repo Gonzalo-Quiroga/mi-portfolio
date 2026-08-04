@@ -9,7 +9,10 @@
   --color-background-2: var(--background-2);
   --color-foreground: var(--foreground);
   --color-a1: var(--a1);
-  --color-a2: var(--a2);
+  --color-a1-ambient: var(--a1-ambient);
+  --color-a1-glow: var(--a1-glow);
+  --color-a1-line: var(--a1-line);
+  --color-a1-text: var(--a1-text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
@@ -71,15 +74,28 @@
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.178 0.002 285);
   --muted-foreground: oklch(0.708 0.006 285);
-  /* accent 1 (cian) — acento por defecto; las secciones alternan a1/a2 sobreescribiendo --accent localmente */
+  /*
+    Acento único (cian) tratado como luz, no como pintura — ver
+    design-referencia-estilo.md §9. Reemplaza al esquema anterior de dos
+    acentos (#06fcee / #d1ff6f) alternando por sección.
+
+    --a1 es la fuente de verdad y casi nunca se usa directo: sobre negro es
+    cian puro a saturación máxima y como fill de área satura el ojo. Las
+    capas derivadas lo bajan a atmósfera, línea y texto. Regla: el acento
+    emite, no pinta. Solo se usa crudo en glifos de menos de ~6px.
+  */
   --a1: #06fcee;
-  --a2: #d1ff6f;
-  --accent: var(--a1);
+  --a1-ambient: color-mix(in srgb, var(--a1) 6%, transparent);
+  --a1-glow: color-mix(in srgb, var(--a1) 28%, transparent);
+  --a1-line: color-mix(in srgb, var(--a1) 45%, transparent);
+  /* mezclado con el foreground baja croma: lee como blanco frío, no como celeste */
+  --a1-text: color-mix(in oklch, var(--a1) 62%, var(--foreground));
+  --accent: var(--a1-text);
   --accent-foreground: oklch(0.145 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(0.27 0.004 285);
   --input: oklch(0.27 0.004 285);
-  --ring: var(--a1);
+  --ring: var(--a1-text);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -94,7 +110,82 @@
   --sidebar-accent: oklch(0.193 0.003 285);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.27 0.004 285);
-  --sidebar-ring: var(--a1);
+  --sidebar-ring: var(--a1-text);
+}
+
+/*
+  Declaradas con @utility (no @layer utilities) para que acepten variantes:
+  el uso principal es `hover:glow-a1` y `focus:glow-a1`.
+*/
+
+/*
+  Halo del acento. Reemplaza al cambio de color de fondo en hover/focus: en
+  vez de pintarse, el elemento se enciende (design-referencia-estilo.md §9.4
+  punto 4). El spread negativo mantiene el halo pegado al borde, sin nube.
+*/
+@utility glow-a1 {
+  box-shadow: 0 0 24px -10px var(--a1-glow);
+}
+
+/*
+  Cinta de stack en loop: versión sobria del recurso de la referencia, sin
+  rotar (§8.2 punto 3). La pista contiene la lista dos veces y se desplaza
+  media pista, así el corte cae sobre contenido idéntico y el loop no se ve.
+*/
+@utility marquee-track {
+  animation: marquee-x 60s linear infinite;
+
+  /* Sin movimiento si el usuario lo pidió: queda una banda estática. */
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Los extremos se funden en vez de cortar en seco (§9.2 regla 2). */
+@utility marquee-mask {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 7%,
+    #000 93%,
+    transparent
+  );
+}
+
+/*
+  Separador de sección: 1px que nace y muere en transparente, en vez del
+  `border-t` de borde a borde. El fundido en los extremos es lo que lo separa
+  de una regla de tabla, y el pico de cian al medio es lo que lo hace leer
+  como tubo de neón visto de lejos (§5, §9.2 regla 2, §9.4 punto 2).
+  El cian queda acotado al centro para no sumar cinco líneas de color al
+  presupuesto de superficie del acento. Requiere `relative` en el elemento.
+*/
+@utility hairline-top {
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(1 0 0 / 0.08) 12%,
+      var(--a1-line) 50%,
+      oklch(1 0 0 / 0.08) 88%,
+      transparent
+    );
+  }
 }
 
 @layer base {

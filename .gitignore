@@ -43,3 +43,9 @@ bitacora-privada.md
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# md
+design-referencia-estilo.md
+portfolio-content-brief.md
+portfolio-rebuild-plan.md
+CLAUDE.md

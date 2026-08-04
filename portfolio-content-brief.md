@@ -23,6 +23,16 @@ Adaptado del "Acerca de" ya validado para LinkedIn (`linkedin-notas.md`), consis
 
 Nota: la anécdota original del sitio actual ("estudié Ing. Electrónica, en 2020 di el salto a programación") se puede mantener como frase de apertura si se quiere conservar el origen personal, antes del párrafo profesional de arriba.
 
+### Ajuste de reparto del copy (2026-08-04)
+
+El texto de arriba sigue siendo el aprobado, pero en el sitio dejó de estar todo dentro de "Sobre Mí". No se agregó ni se reescribió contenido; se repartió:
+
+- **La anécdota de apertura** es ahora el statement de la cabecera de sección, a dos tonos: el origen ("Empecé estudiando Ing. Electrónica y en 2020 di el salto a la programación") en gris, y el presente ("Hoy soy Desarrollador Full Stack con foco en React, Node.js y TypeScript") en blanco.
+- **La frase sobre diseño de interfaces** salió del segundo párrafo, donde estaba como cláusula subordinada, y pasó a ser el bloque de declaración a ancho completo entre Sobre Mí y Habilidades: *"Complemento mi perfil técnico con diseño de interfaces. Eso me da una mirada integral: funcionalidad, experiencia de usuario y resolución práctica de problemas."* Era la frase más fuerte del brief y estaba enterrada.
+- Ese segundo párrafo queda entonces reducido a la parte de freelance.
+
+Si se quiere volver atrás, el texto original completo está arriba sin tocar.
+
 ## Habilidades (reemplaza las 3 cajas genéricas actuales por 4 categorías reales)
 
 - **Frontend:** React, TypeScript, Next.js, Astro, Vite, Redux Toolkit, TanStack Query, Tailwind CSS, shadcn/ui
