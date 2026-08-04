@@ -34,7 +34,7 @@ export function Hero() {
         }}
       />
       <div className="relative mx-auto max-w-340 px-6 pt-28 pb-16 sm:px-8 lg:pt-45 lg:pb-37.5">
-        <div className="flex max-w-195 flex-col gap-8">
+        <div className="flex max-w-260 flex-col gap-8">
           {/*
             El badge era un pill de acento sólido: 240px de cian puro, la
             parte más "template" del diseño. Ahora el color queda solo en el
@@ -48,18 +48,29 @@ export function Hero() {
             </span>
           </Reveal>
 
-          <Reveal delay={0.06} className="flex flex-col gap-5">
-            <h1 className="text-5xl leading-[1.02] font-medium tracking-[-0.035em] text-balance sm:text-6xl lg:text-[76px]">
+          <Reveal delay={0.06} className="flex flex-col gap-7">
+            {/*
+              Display en mayúsculas con leading cerrado y un salto grande
+              respecto del párrafo de apoyo (§3.1). "Full Stack" cierra en
+              --a1-text: no es un degradado sino un cambio de temperatura,
+              porque esa capa está casi a la misma luminosidad que el blanco
+              y enfría la frase sin apagarla (§3.3 y §9.4 punto 6).
+            */}
+            <h1 className="text-[clamp(2.75rem,8.2vw,6.5rem)] leading-[0.94] font-medium tracking-[-0.03em] uppercase">
               Desarrollador
               <br />
-              Full Stack
+              <span className="text-accent">Full Stack</span>
             </h1>
-            <p className="max-w-160 text-base leading-relaxed font-light text-muted-foreground text-pretty lg:text-[19px]">
+            {/*
+              El párrafo baja a registro micro, como la copy de apoyo de la
+              referencia: se comporta como metadata y deja que el titular sea
+              lo único que se lee de lejos. Medida angosta a propósito — el
+              uppercase con tracking ancho necesita renglones cortos.
+            */}
+            <p className="max-w-115 font-mono text-[11px] leading-[1.75] tracking-[0.12em] text-muted-foreground uppercase">
               Lidero técnicamente el frontend en{" "}
-              <span className="font-normal text-foreground">
-                Cloudnet Solutions
-              </span>{" "}
-              y desarrollo proyectos freelance de punta a punta, con React,
+              <span className="text-foreground">Cloudnet Solutions</span> y
+              desarrollo proyectos freelance de punta a punta, con React,
               Node.js y TypeScript en producción.
             </p>
           </Reveal>

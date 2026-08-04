@@ -47,10 +47,19 @@ export function About() {
           </Reveal>
 
           <Reveal delay={0.06} className="flex max-w-170 flex-col gap-6">
-            <p className="text-2xl leading-snug font-normal tracking-[-0.02em] text-balance sm:text-[26px]">
+            {/*
+              Titular a dos tonos (§3.3): la frase arranca en blanco y se
+              enfría a --a1-text. Acá el corte cae en el punto y no a mitad de
+              oración como en la referencia — forzarlo en prosa en español se
+              leería como un error de maquetado, no como una decisión.
+            */}
+            <p className="text-[26px] leading-tight font-normal tracking-[-0.02em] text-balance sm:text-[30px]">
               Empecé estudiando Ing. Electrónica y en 2020 di el salto a la
-              programación. Hoy soy Desarrollador Full Stack con foco en
-              React, Node.js y TypeScript.
+              programación.{" "}
+              <span className="text-accent">
+                Hoy soy Desarrollador Full Stack con foco en React, Node.js y
+                TypeScript.
+              </span>
             </p>
             <p className="text-base leading-[1.72] font-light text-muted-foreground text-pretty">
               Lidero técnicamente al equipo frontend en Cloudnet Solutions,
