@@ -26,14 +26,19 @@ La sección de proyectos se mantiene simple: imagen, link y descripción corta p
 ## Decisión: orden de desarrollo
 
 1. Contenido decidido primero (copy de cada sección, ver `portfolio-content-brief.md`).
-2. Prototipo de diseño acotado con Claude Design — ya completado: tokens visuales (paleta, tipografía), layout de Home/hero y card de Proyecto, con dos colores de acento (#06fcee y #d1ff6f) alternando por sección sobre tema oscuro.
+2. Prototipo de diseño acotado con Claude Design — ya completado: tokens visuales (paleta, tipografía), layout de Home/hero y card de Proyecto, con dos colores de acento (#06fcee y #d1ff6f) alternando por sección sobre tema oscuro. **Superado en 2026-08-04 por la pasada de rediseño, ver más abajo: queda un solo acento y varias decisiones de layout cambiaron.**
 3. Scaffolding del proyecto Next.js y deploy a Vercel desde el primer día.
 4. Orden de construcción: layout/navegación → hero/about/skills (copy real) → formulario de contacto con Resend → sección de proyectos (imagen+link+descripción, contenido definitivo al final con placeholder explícito mientras tanto).
 5. Pulido opcional al final, recortable si el tiempo aprieta: animaciones, tests, PWA, accesibilidad/SEO.
 
 ## Decisión: foto personal
 
-Sin foto todavía (el diseño de "Sobre Mí" contempla el placeholder). Cuando el usuario se saque una foto nueva: luz pareja/natural (no dramática), pose profesional-casual (ni carnet rígido ni casual/selfie), fondo simple, conversión a blanco y negro para integrar con la paleta del sitio. Va únicamente en la sección Sobre Mí, no en el Hero (para no duplicar), aunque el pequeño rol/foto podría reconsiderarse en Claude Code si el diseño final lo amerita.
+Sin foto todavía (el diseño de "Sobre Mí" contempla el placeholder). Cuando el usuario se saque una foto nueva: luz pareja/natural (no dramática), pose profesional-casual (ni carnet rígido ni casual/selfie), fondo simple, conversión a blanco y negro para integrar con la paleta del sitio.
+
+**Actualizado 2026-08-04:** la reserva de "solo en Sobre Mí, no en el Hero" quedó sin efecto — el rediseño lo ameritó, que es la reconsideración que este mismo punto dejaba abierta. Ahora hay dos usos distintos:
+
+- **Hero:** PNG recortado (sujeto sin fondo), alineado a la derecha y sangrado hasta el borde inferior. El degradé de la sección concentra el gris justo ahí para que el sujeto emerja de la oscuridad. Va en `z-0` contra el `z-10` del contenido, de modo que el titular le pase por delante (profundidad por oclusión). Sin placeholder visible: por pedido del usuario se quitó, el degradé ya reserva la zona.
+- **Sobre Mí:** foto 4:5 convencional, con marcas de esquina. Placeholder explícito activo.
 
 ## Decisión: flujo de trabajo con Claude Code y Git
 
@@ -43,9 +48,25 @@ Claude Code debe avisar cuándo conviene hacer un commit y sugerir el mensaje, p
 
 Bitácora privada (no pública en el sitio) del proceso de reconstrucción, como material de respaldo para entrevistas de trabajo — evidencia concreta del eje "IA como multiplicador de calidad, no reemplazo de criterio propio". Entradas cortas al cierre de cada etapa: qué se construyó, qué alternativa se descartó y por qué, y problemas reales resueltos. Pendiente definir dónde vive (fuera del control de versiones si el repo es público, o en este proyecto de Claude).
 
+## Decisión: pasada de rediseño sobre referencia externa (2026-08-04)
+
+El sitio construido funcionaba pero se leía "correcto" antes que "diseñado". A partir de dos capturas de un portfolio de dirección creativa que el usuario marcó como referencia, se extrajo un sistema visual y se aplicó en siete pasos. El análisis completo, con qué se adoptó, qué se adaptó y qué se descartó a propósito, está en **`design-referencia-estilo.md`** — es el documento de diseño vigente y manda sobre el handoff original de Claude Design donde haya conflicto.
+
+Decisiones que reemplazan a las anteriores:
+
+- **Un solo acento.** Se elimina el lima `#d1ff6f` y la alternancia por sección. Queda el cian `#06fcee`, y deja de aplicarse como relleno: se derivan capas (`--a1-ambient`, `--a1-glow`, `--a1-line`, `--a1-text`) para que el acento se comporte como luz. Por pedido del usuario terminó aún más acotado que lo que planteaba el análisis: **el cian solo aparece en hover, foco y el centro de las hairlines**, en ningún elemento estático. El gris carga la jerarquía.
+- **Proyectos deja de ser grilla de cards** y pasa a índice tabular (miniatura, título, descripción, stack, año). Esto agrega el campo obligatorio `year` al tipo `Project`.
+- **Habilidades deja de usar cards.** Cuatro columnas separadas por línea, con las tecnologías apiladas como lista; sin chips ni recuadros con fondo.
+- **Cabeceras de sección asimétricas:** etiqueta y título grande en las columnas 1-4, statement en las 6-12, columna 5 vacía a propósito.
+- **Links secundarios en corchetes** (`[ VER PROYECTOS ]`). El único botón sólido que queda es "Descargar CV".
+- **Bloque de declaración** a ancho completo entre Sobre Mí y Habilidades, y **banda de stack en loop** entre Habilidades y Proyectos.
+- **Wordmark tipográfico gigante** sangrado en el footer, más columnas de links.
+- **Hero a viewport completo** con margen exterior más ancho que el resto de las secciones (1760px contra 1360px). Sin badge de estado: era un pill con punto que se leía como plantilla generada, ahora es una línea de metadata en registro micro.
+
 ## Pendiente / próximos pasos
 
 - Definir dónde vive la bitácora privada de proceso.
 - ~~Decidir dominio propio vs subdominio de Vercel.~~ Resuelto: `gonzaloquiroga.dev`, deployado en Vercel con `RESEND_API_KEY` y `NEXT_PUBLIC_SITE_URL` configuradas.
-- Confirmar que el handoff final de Claude Design alterna correctamente los dos colores de acento por sección.
-- Elegir contenido definitivo de la sección de Proyectos (queda para el final).
+- ~~Confirmar que el handoff final de Claude Design alterna correctamente los dos colores de acento por sección.~~ Sin efecto: ya no hay dos acentos ni alternancia.
+- Sacar la foto personal y cargar los dos usos (PNG recortado en el Hero, 4:5 en Sobre Mí). Es lo único que falta para cerrar el rediseño.
+- Elegir contenido definitivo de la sección de Proyectos (queda para el final). **Cada proyecto ahora requiere también `year`**, que es la columna que fecha el índice.

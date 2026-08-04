@@ -4,7 +4,14 @@
 Antes de cualquier tarea, si todavía no los leíste en esta sesión, leé:
 - `portfolio-rebuild-plan.md` — stack, orden de desarrollo y decisiones ya tomadas.
 - `portfolio-content-brief.md` — contenido real de texto para Hero, Sobre Mí, Habilidades y Contacto.
-- `design-handoff/` — export de Claude Design con paleta, tipografía y layout de referencia (Home y card de Proyecto).
+- `design-referencia-estilo.md` — **sistema visual vigente**: paleta, escala tipográfica, ornamento y reglas del acento. Manda sobre `design-handoff/` donde haya conflicto. No está versionado (está en `.gitignore`): si no existe en el working tree, regirse por las reglas de abajo, que son autosuficientes.
+- `design-handoff/` — export original de Claude Design. Sigue valiendo para tokens de base, pero varias decisiones (dos acentos alternando, cards de proyecto, chips de habilidades) fueron reemplazadas.
+
+## Reglas de diseño no negociables
+- **Un solo acento, el cian.** No reintroducir el lima `#d1ff6f` ni la alternancia por sección.
+- **El acento emite, no pinta.** Nunca `background` de acento sobre un área: solo hover, foco y el centro de las hairlines. Si un elemento estático necesita destacarse, se resuelve con tamaño, peso o gris — no con color.
+- **Sin cards nuevas.** La información se ordena con reglas de 1px y espacio, no con recuadros con fondo.
+- Antes de agregar un elemento decorativo, revisar si ya existe en el vocabulario: marcador `▪ ▪`, corchetes `[ ]`, hairline, marcas de esquina.
 
 ## Regla de Git — obligatoria, sin excepciones
 - Está bien, y se espera, que avises cuándo conviene hacer un commit y que sugieras el mensaje.
