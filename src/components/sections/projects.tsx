@@ -11,7 +11,6 @@ export function Projects() {
     <section
       id="proyectos"
       className="border-t border-border bg-background"
-      style={{ "--accent": "var(--a1)" } as React.CSSProperties}
     >
       <div className="mx-auto max-w-340 px-6 py-20 sm:px-8 lg:py-30">
         <Reveal className="mb-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end lg:mb-14">

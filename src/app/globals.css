@@ -9,7 +9,10 @@
   --color-background-2: var(--background-2);
   --color-foreground: var(--foreground);
   --color-a1: var(--a1);
-  --color-a2: var(--a2);
+  --color-a1-ambient: var(--a1-ambient);
+  --color-a1-glow: var(--a1-glow);
+  --color-a1-line: var(--a1-line);
+  --color-a1-text: var(--a1-text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
@@ -71,15 +74,28 @@
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.178 0.002 285);
   --muted-foreground: oklch(0.708 0.006 285);
-  /* accent 1 (cian) — acento por defecto; las secciones alternan a1/a2 sobreescribiendo --accent localmente */
+  /*
+    Acento único (cian) tratado como luz, no como pintura — ver
+    design-referencia-estilo.md §9. Reemplaza al esquema anterior de dos
+    acentos (#06fcee / #d1ff6f) alternando por sección.
+
+    --a1 es la fuente de verdad y casi nunca se usa directo: sobre negro es
+    cian puro a saturación máxima y como fill de área satura el ojo. Las
+    capas derivadas lo bajan a atmósfera, línea y texto. Regla: el acento
+    emite, no pinta. Solo se usa crudo en glifos de menos de ~6px.
+  */
   --a1: #06fcee;
-  --a2: #d1ff6f;
-  --accent: var(--a1);
+  --a1-ambient: color-mix(in srgb, var(--a1) 6%, transparent);
+  --a1-glow: color-mix(in srgb, var(--a1) 28%, transparent);
+  --a1-line: color-mix(in srgb, var(--a1) 45%, transparent);
+  /* mezclado con el foreground baja croma: lee como blanco frío, no como celeste */
+  --a1-text: color-mix(in oklch, var(--a1) 62%, var(--foreground));
+  --accent: var(--a1-text);
   --accent-foreground: oklch(0.145 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(0.27 0.004 285);
   --input: oklch(0.27 0.004 285);
-  --ring: var(--a1);
+  --ring: var(--a1-text);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -94,7 +110,22 @@
   --sidebar-accent: oklch(0.193 0.003 285);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.27 0.004 285);
-  --sidebar-ring: var(--a1);
+  --sidebar-ring: var(--a1-text);
+}
+
+@layer utilities {
+  /*
+    Halos del acento. Reemplazan al cambio de color de fondo: en vez de
+    pintarse, el elemento se enciende (design-referencia-estilo.md §9.4).
+    El spread negativo mantiene el halo pegado al borde, sin nube visible.
+  */
+  .glow-a1 {
+    box-shadow: 0 0 24px -10px var(--a1-glow);
+  }
+  /* Bloom de un punto/glifo chico, donde --a1 sí va crudo. */
+  .glow-a1-point {
+    box-shadow: 0 0 8px 0 var(--a1-glow);
+  }
 }
 
 @layer base {

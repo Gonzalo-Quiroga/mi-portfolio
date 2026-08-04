@@ -6,7 +6,6 @@ export function Skills() {
     <section
       id="habilidades"
       className="border-t border-border bg-background-2"
-      style={{ "--accent": "var(--a2)" } as React.CSSProperties}
     >
       <div className="mx-auto max-w-340 px-6 py-20 sm:px-8 lg:py-30">
         <Reveal className="mb-5 flex items-center gap-3">

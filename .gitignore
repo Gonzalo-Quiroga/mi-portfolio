@@ -43,3 +43,6 @@ bitacora-privada.md
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# md
+design-referencia-estilo.md

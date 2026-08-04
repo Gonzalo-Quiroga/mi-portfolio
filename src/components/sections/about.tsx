@@ -23,7 +23,6 @@ export function About() {
     <section
       id="sobre-mi"
       className="border-t border-border bg-background"
-      style={{ "--accent": "var(--a1)" } as React.CSSProperties}
     >
       <div className="mx-auto max-w-340 px-6 py-20 sm:px-8 lg:py-30">
         <Reveal className="mb-10 flex items-center gap-3 lg:mb-14">

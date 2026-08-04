@@ -20,7 +20,6 @@ export function Contact() {
     <section
       id="contacto"
       className="border-t border-border bg-background-2"
-      style={{ "--accent": "var(--a2)" } as React.CSSProperties}
     >
       <div className="mx-auto max-w-340 px-6 py-20 sm:px-8 lg:py-30">
         <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2 lg:gap-20">

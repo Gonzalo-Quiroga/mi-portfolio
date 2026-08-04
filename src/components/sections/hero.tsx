@@ -30,14 +30,20 @@ export function Hero() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(900px 420px at 15% -5%, color-mix(in srgb, var(--a1) 7%, transparent), transparent 70%)",
+            "radial-gradient(900px 420px at 15% -5%, var(--a1-ambient), transparent 70%)",
         }}
       />
       <div className="relative mx-auto max-w-340 px-6 pt-28 pb-16 sm:px-8 lg:pt-45 lg:pb-37.5">
         <div className="flex max-w-195 flex-col gap-8">
-          <Reveal className="flex w-fit items-center gap-1.75 rounded-full bg-accent py-1.25 pr-3 pl-2.5">
-            <span className="block h-1.25 w-1.25 rounded-full bg-background" />
-            <span className="font-mono text-[11.5px] font-medium tracking-[0.04em] text-accent-foreground uppercase">
+          {/*
+            El badge era un pill de acento sólido: 240px de cian puro, la
+            parte más "template" del diseño. Ahora el color queda solo en el
+            punto de 5px (único lugar donde --a1 crudo no molesta) y el resto
+            es borde tenue + halo. Ver design-referencia-estilo.md §9.5.
+          */}
+          <Reveal className="glow-a1 flex w-fit items-center gap-1.75 rounded-full border border-a1-line bg-a1-ambient py-1.25 pr-3 pl-2.5">
+            <span className="glow-a1-point block h-1.25 w-1.25 rounded-full bg-a1" />
+            <span className="font-mono text-[11.5px] font-medium tracking-[0.04em] text-foreground uppercase">
               Disponible para proyectos freelance
             </span>
           </Reveal>
