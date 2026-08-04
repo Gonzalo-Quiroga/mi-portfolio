@@ -52,7 +52,7 @@ export function ContactForm() {
     >
       <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
         <label className="flex flex-col gap-1.75">
-          <span className="text-[13px] font-medium">Nombre</span>
+          <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">Nombre</span>
           <input
             type="text"
             required
@@ -63,7 +63,7 @@ export function ContactForm() {
           />
         </label>
         <label className="flex flex-col gap-1.75">
-          <span className="text-[13px] font-medium">Email</span>
+          <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">Email</span>
           <input
             type="email"
             required
@@ -75,7 +75,7 @@ export function ContactForm() {
         </label>
       </div>
       <label className="flex flex-col gap-1.75">
-        <span className="text-[13px] font-medium">Asunto</span>
+        <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">Asunto</span>
         <input
           type="text"
           placeholder="Sitio web, aplicación, consultoría…"
@@ -85,7 +85,7 @@ export function ContactForm() {
         />
       </label>
       <label className="flex flex-col gap-1.75">
-        <span className="text-[13px] font-medium">Mensaje</span>
+        <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">Mensaje</span>
         <textarea
           rows={5}
           required
@@ -99,7 +99,7 @@ export function ContactForm() {
         <span
           role="status"
           aria-live="polite"
-          className={`font-mono text-[11px] ${status === "error" ? "text-destructive" : "text-muted-foreground"}`}
+          className={`font-mono text-[10.5px] tracking-[0.14em] uppercase ${status === "error" ? "text-destructive" : "text-muted-foreground"}`}
         >
           {note}
         </span>

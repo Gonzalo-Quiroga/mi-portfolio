@@ -32,14 +32,14 @@ export function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-md px-3 py-2 text-[13.5px] text-muted-foreground transition-colors hover:bg-foreground/4 hover:text-foreground"
+              className="rounded-md px-3 py-2 font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase transition-colors hover:bg-foreground/4 hover:text-foreground"
             >
               {link.label}
             </Link>
           ))}
           <Link
             href="#contacto"
-            className="ml-3 rounded-md border border-border bg-foreground/3 px-3.5 py-1.75 text-[13.5px] font-medium transition-colors hover:border-muted-foreground/40 hover:bg-foreground/[0.07]"
+            className="ml-3 rounded-md border border-border bg-foreground/3 px-3.5 py-2 font-mono text-[11px] tracking-[0.14em] uppercase transition-colors hover:border-muted-foreground/40 hover:bg-foreground/[0.07]"
           >
             Hablemos
           </Link>
@@ -77,7 +77,7 @@ export function SiteHeader() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="rounded-md px-3 py-2.5 text-[14px] text-muted-foreground transition-colors hover:bg-foreground/4 hover:text-foreground"
+              className="rounded-md px-3 py-2.5 font-mono text-[12px] tracking-[0.14em] text-muted-foreground uppercase transition-colors hover:bg-foreground/4 hover:text-foreground"
             >
               {link.label}
             </Link>
@@ -85,7 +85,7 @@ export function SiteHeader() {
           <Link
             href="#contacto"
             onClick={() => setOpen(false)}
-            className="mt-1 rounded-md border border-border bg-foreground/3 px-3.5 py-2.5 text-center text-[14px] font-medium"
+            className="mt-1 rounded-md border border-border bg-foreground/3 px-3.5 py-2.5 text-center font-mono text-[12px] tracking-[0.14em] uppercase"
           >
             Hablemos
           </Link>

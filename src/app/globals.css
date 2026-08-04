@@ -126,6 +126,28 @@
   .glow-a1-point {
     box-shadow: 0 0 8px 0 var(--a1-glow);
   }
+
+  /*
+    Separador de sección: 1px de blanco al 10% que nace y muere en
+    transparente, en vez del `border-t` de borde a borde. El fundido en los
+    extremos es lo que lo separa de una regla de tabla (§5, §9.2 regla 2).
+    Requiere `relative` en el elemento.
+  */
+  .hairline-top::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(1 0 0 / 0.1) 15%,
+      oklch(1 0 0 / 0.1) 85%,
+      transparent
+    );
+  }
 }
 
 @layer base {

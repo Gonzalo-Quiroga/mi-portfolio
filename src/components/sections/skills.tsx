@@ -1,20 +1,16 @@
 import { Reveal } from "@/components/motion/reveal";
+import { SectionEyebrow } from "@/components/ui/section-eyebrow";
 import { skillCategories } from "@/data/skills";
 
 export function Skills() {
   return (
     <section
       id="habilidades"
-      className="border-t border-border bg-background-2"
+      className="hairline-top relative bg-background-2"
     >
       <div className="mx-auto max-w-340 px-6 py-20 sm:px-8 lg:py-30">
-        <Reveal className="mb-5 flex items-center gap-3">
-          <span className="font-mono text-[11.5px] tracking-[0.08em] text-accent uppercase">
-            02
-          </span>
-          <h2 className="text-sm font-medium tracking-[0.02em] text-muted-foreground uppercase">
-            Habilidades
-          </h2>
+        <Reveal className="mb-5">
+          <SectionEyebrow index="02" title="Habilidades" />
         </Reveal>
         <Reveal
           delay={0.06}
@@ -37,7 +33,7 @@ export function Skills() {
                 <h3 className="text-[17px] font-medium tracking-[-0.01em]">
                   {category.title}
                 </h3>
-                <span className="font-mono text-[11px] text-muted-foreground">
+                <span className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground">
                   {String(category.skills.length).padStart(2, "0")}
                 </span>
               </div>

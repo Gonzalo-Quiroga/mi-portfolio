@@ -22,8 +22,8 @@ export function Hero() {
             "repeating-linear-gradient(135deg, oklch(1 0 0 / 0.025) 0 10px, transparent 10px 20px)",
         }}
       >
-        <span className="font-mono text-[11px] text-muted-foreground">
-          foto de fondo — sección completa
+        <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">
+          Foto de fondo — sección completa
         </span>
       </div>
       <div
@@ -43,7 +43,7 @@ export function Hero() {
           */}
           <Reveal className="glow-a1 flex w-fit items-center gap-1.75 rounded-full border border-a1-line bg-a1-ambient py-1.25 pr-3 pl-2.5">
             <span className="glow-a1-point block h-1.25 w-1.25 rounded-full bg-a1" />
-            <span className="font-mono text-[11.5px] font-medium tracking-[0.04em] text-foreground uppercase">
+            <span className="font-mono text-[10.5px] tracking-[0.14em] text-foreground uppercase">
               Disponible para proyectos freelance
             </span>
           </Reveal>

@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/motion/reveal";
+import { SectionEyebrow } from "@/components/ui/section-eyebrow";
 
 const facts = [
   {
@@ -22,16 +23,11 @@ export function About() {
   return (
     <section
       id="sobre-mi"
-      className="border-t border-border bg-background"
+      className="hairline-top relative bg-background"
     >
       <div className="mx-auto max-w-340 px-6 py-20 sm:px-8 lg:py-30">
-        <Reveal className="mb-10 flex items-center gap-3 lg:mb-14">
-          <span className="font-mono text-[11.5px] tracking-[0.08em] text-accent uppercase">
-            01
-          </span>
-          <h2 className="text-sm font-medium tracking-[0.02em] text-muted-foreground uppercase">
-            Sobre mí
-          </h2>
+        <Reveal className="mb-10 lg:mb-14">
+          <SectionEyebrow index="01" title="Sobre mí" />
         </Reveal>
 
         <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[1fr_1.5fr] lg:gap-30">
@@ -44,8 +40,8 @@ export function About() {
                   "repeating-linear-gradient(135deg, oklch(1 0 0 / 0.025) 0 10px, transparent 10px 20px)",
               }}
             >
-              <span className="font-mono text-[11px] tracking-[0.03em] text-muted-foreground">
-                foto de perfil — 4:5
+              <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">
+                Foto de perfil — 4:5
               </span>
             </div>
           </Reveal>
@@ -96,7 +92,7 @@ export function About() {
                 key={fact.label}
                 className="flex flex-col items-center gap-1.5 px-6 text-center"
               >
-                <span className="font-mono text-[11px] tracking-[0.08em] text-accent uppercase">
+                <span className="font-mono text-[10.5px] tracking-[0.14em] text-accent uppercase">
                   {fact.label}
                 </span>
                 <span className="text-lg font-medium tracking-[-0.02em] sm:text-xl">
