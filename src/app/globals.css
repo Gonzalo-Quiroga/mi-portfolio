@@ -133,6 +133,40 @@
 }
 
 /*
+  Cinta de stack en loop: versión sobria del recurso de la referencia, sin
+  rotar (§8.2 punto 3). La pista contiene la lista dos veces y se desplaza
+  media pista, así el corte cae sobre contenido idéntico y el loop no se ve.
+*/
+@utility marquee-track {
+  animation: marquee-x 60s linear infinite;
+
+  /* Sin movimiento si el usuario lo pidió: queda una banda estática. */
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Los extremos se funden en vez de cortar en seco (§9.2 regla 2). */
+@utility marquee-mask {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 7%,
+    #000 93%,
+    transparent
+  );
+}
+
+/*
   Separador de sección: 1px que nace y muere en transparente, en vez del
   `border-t` de borde a borde. El fundido en los extremos es lo que lo separa
   de una regla de tabla, y el pico de cian al medio es lo que lo hace leer
