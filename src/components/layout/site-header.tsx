@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { navLinks } from "@/data/nav";
+import { Bracketed } from "@/components/ui/section-header";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -27,21 +28,31 @@ export function SiteHeader() {
           Gonzalo Quiroga
         </Link>
 
-        <div className="hidden items-center gap-1 sm:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded-md px-3 py-2 font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase transition-colors hover:bg-foreground/4 hover:text-foreground"
-            >
-              {link.label}
-            </Link>
+        {/*
+          Nav en registro micro separado por el marcador `▪`, como la
+          referencia (§5). El CTA baja a corchetes: en una landing de una sola
+          página el link de contacto no necesita el peso de un botón, ya está
+          el formulario al final del scroll.
+        */}
+        <div className="hidden items-center gap-4 sm:flex">
+          {navLinks.map((link, i) => (
+            <div key={link.href} className="flex items-center gap-4">
+              {i > 0 && (
+                <span aria-hidden className="block size-1 bg-muted-foreground/40" />
+              )}
+              <Link
+                href={link.href}
+                className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            </div>
           ))}
           <Link
             href="#contacto"
-            className="ml-3 rounded-md border border-border bg-foreground/3 px-3.5 py-2 font-mono text-[11px] tracking-[0.14em] uppercase transition-[background-color,border-color,box-shadow] hover:glow-a1 hover:border-a1-line hover:bg-foreground/[0.07]"
+            className="ml-2 font-mono text-[11px] tracking-[0.14em] text-foreground uppercase transition-opacity hover:opacity-70"
           >
-            Hablemos
+            <Bracketed>Hablemos</Bracketed>
           </Link>
         </div>
 
@@ -85,9 +96,9 @@ export function SiteHeader() {
           <Link
             href="#contacto"
             onClick={() => setOpen(false)}
-            className="mt-1 rounded-md border border-border bg-foreground/3 px-3.5 py-2.5 text-center font-mono text-[12px] tracking-[0.14em] uppercase"
+            className="mt-1 px-3 py-2.5 font-mono text-[12px] tracking-[0.14em] text-foreground uppercase"
           >
-            Hablemos
+            <Bracketed>Hablemos</Bracketed>
           </Link>
         </div>
       )}

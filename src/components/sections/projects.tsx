@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { Reveal } from "@/components/motion/reveal";
-import { SectionEyebrow } from "@/components/ui/section-eyebrow";
+import { Bracketed, SectionHeader } from "@/components/ui/section-header";
 import { projects } from "@/data/projects";
 import { socialLinks } from "@/data/social";
 
@@ -14,21 +14,30 @@ export function Projects() {
       className="hairline-top relative bg-background"
     >
       <div className="mx-auto max-w-340 px-6 py-20 sm:px-8 lg:py-30">
-        <Reveal className="mb-10 flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end lg:mb-14">
-          <div className="flex flex-col gap-5">
-            <SectionEyebrow index="03" title="Proyectos" />
-            <p className="max-w-155 text-xl leading-snug tracking-[-0.02em] text-balance sm:text-2xl">
-              Trabajos seleccionados, del problema al deploy.
-            </p>
-          </div>
-          <a
-            href={githubHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.14em] whitespace-nowrap text-muted-foreground uppercase transition-colors hover:text-foreground"
-          >
-            Ver todo en GitHub <span className="text-accent">↗</span>
-          </a>
+        <Reveal className="mb-14 lg:mb-20">
+          <SectionHeader
+            index="03"
+            title="Proyectos"
+            statement={
+              <p className="text-[26px] leading-tight font-normal tracking-[-0.02em] text-balance sm:text-[32px]">
+                Trabajos seleccionados,{" "}
+                <span className="text-muted-foreground">
+                  del problema al deploy.
+                </span>
+              </p>
+            }
+            aside={
+              <a
+                href={githubHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-fit items-center gap-2 font-mono text-[11px] tracking-[0.14em] whitespace-nowrap text-muted-foreground uppercase transition-colors hover:text-foreground"
+              >
+                <Bracketed>Ver todo en GitHub</Bracketed>
+                <span aria-hidden>↗</span>
+              </a>
+            }
+          />
         </Reveal>
 
         {/*

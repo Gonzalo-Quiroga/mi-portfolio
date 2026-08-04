@@ -127,11 +127,6 @@
   box-shadow: 0 0 24px -10px var(--a1-glow);
 }
 
-/* Bloom de un punto/glifo chico, donde --a1 sí va crudo. */
-@utility glow-a1-point {
-  box-shadow: 0 0 8px 0 var(--a1-glow);
-}
-
 /*
   Cinta de stack en loop: versión sobria del recurso de la referencia, sin
   rotar (§8.2 punto 3). La pista contiene la lista dos veces y se desplaza
