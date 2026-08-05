@@ -1,0 +1,122 @@
+/*
+  Sistema visual compartido por los banners de LinkedIn.
+  Los valores salen de src/app/globals.css y design-referencia-estilo.md:
+  el acento emite (halos, centro de hairline), nunca pinta un área.
+  Lienzo fijo 1584x396 = medida de portada de perfil de LinkedIn.
+*/
+:root {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --muted-foreground: oklch(0.708 0.006 285);
+  --a1: #06fcee;
+  --a1-ambient: color-mix(in srgb, var(--a1) 6%, transparent);
+  --a1-glow: color-mix(in srgb, var(--a1) 28%, transparent);
+  --a1-line: color-mix(in srgb, var(--a1) 45%, transparent);
+  --a1-text: color-mix(in oklch, var(--a1) 62%, var(--foreground));
+
+  /*
+    Zonas muertas de LinkedIn: la foto de perfil tapa el ángulo inferior
+    izquierdo (~260px de ancho, ~150px de alto) y el recorte móvil come los
+    bordes laterales. Por eso el contenido arranca en x=300 y nada vive en
+    los últimos 96px de cada lado.
+  */
+  --safe-left: 300px;
+  --safe-right: 96px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 1584px;
+  height: 396px;
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Geist", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Registro micro: mono, mayúsculas, tracking ancho, gris — nunca blanco puro. */
+.micro {
+  color: var(--muted-foreground);
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.micro-dim {
+  color: color-mix(in oklch, var(--muted-foreground) 62%, transparent);
+}
+
+.on {
+  color: var(--foreground);
+}
+
+/* Display: salto tipográfico violento contra el registro micro. */
+.display {
+  font-size: 84px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+/* Marcador `▪ ▪`, ornamento base del vocabulario. */
+.marker {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.marker i {
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: var(--muted-foreground);
+}
+
+/* Corchetes en vez de botón: affordance de link del sistema. */
+.br {
+  color: color-mix(in oklch, var(--muted-foreground) 55%, transparent);
+}
+
+/*
+  Hairline: nace y muere en transparente, con el pico de cian acotado al
+  centro. Es el único lugar estático donde sobrevive el acento.
+*/
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    oklch(1 0 0 / 0.08) 12%,
+    var(--a1-line) 50%,
+    oklch(1 0 0 / 0.08) 88%,
+    transparent
+  );
+}
+
+/* Marcas de esquina tipo prueba de imprenta. */
+.corners {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.corners i {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: color-mix(in oklch, var(--muted-foreground) 45%, transparent);
+}
