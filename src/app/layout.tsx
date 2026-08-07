@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { skillCategories } from "@/data/skills";
 import { contactEmail, socialLinks } from "@/data/social";
 import { siteDescription, siteName, siteUrl } from "@/lib/site";
 
@@ -39,17 +40,39 @@ export const metadata: Metadata = {
   },
 };
 
+/*
+  Datos estructurados de Persona. Todo lo que va acá tiene que coincidir exacto
+  con lo que dice el sitio y el resto del perfil (`linkedin-notes.md`): un
+  jobTitle que no matchea la experiencia declarada es justamente el tipo de
+  inconsistencia que Google penaliza y que un reclutador detecta al cruzar.
+
+  `knowsAbout` es la lista curada de tecnologías con respaldo real en código
+  propio; se lee de `skillCategories` para que no pueda desincronizarse de lo
+  que muestra la sección de Habilidades.
+*/
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Gonzalo Quiroga",
   jobTitle: "Desarrollador Full Stack",
   description: siteDescription,
+  url: siteUrl,
   email: `mailto:${contactEmail}`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Arroyito",
+    addressRegion: "Córdoba",
+    addressCountry: "AR",
+  },
   worksFor: {
     "@type": "Organization",
     name: "Cloudnet Solutions",
   },
+  alumniOf: {
+    "@type": "EducationalOrganization",
+    name: "Instituto Superior Politécnico Córdoba (ISPC)",
+  },
+  knowsAbout: skillCategories.flatMap((category) => category.skills),
   sameAs: socialLinks.map((link) => link.href),
 };
 

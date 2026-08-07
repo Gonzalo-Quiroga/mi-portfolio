@@ -78,7 +78,7 @@ export function ContactForm() {
         <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">Asunto</span>
         <input
           type="text"
-          placeholder="Sitio web, aplicación, consultoría…"
+          placeholder="Sitio web, aplicación, propuesta laboral…"
           value={form.subject}
           onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
           className="h-9.5 rounded-md border border-border bg-foreground/2 px-2.75 text-sm outline-none transition-[background-color,border-color,box-shadow] focus:glow-a1 focus:border-accent focus:bg-foreground/4"
@@ -89,7 +89,7 @@ export function ContactForm() {
         <textarea
           rows={5}
           required
-          placeholder="Contame brevemente el proyecto y los plazos."
+          placeholder="Contame brevemente de qué se trata y los plazos."
           value={form.message}
           onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
           className="resize-y rounded-md border border-border bg-foreground/2 px-2.75 py-2.5 font-sans text-sm leading-relaxed outline-none transition-[background-color,border-color,box-shadow] focus:glow-a1 focus:border-accent focus:bg-foreground/4"

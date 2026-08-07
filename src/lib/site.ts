@@ -9,5 +9,11 @@ export const siteUrl = (
 
 export const siteName = "Gonzalo Quiroga — Desarrollador Full Stack";
 
+/**
+ * Habla a los dos públicos que entran al sitio en el mismo renglón: el stack
+ * para el reclutador que filtra por tecnología, "de punta a punta para
+ * emprendedores y pequeñas empresas" para el cliente que busca quién le haga el
+ * proyecto. Bajo 160 caracteres para que no la corte Google.
+ */
 export const siteDescription =
-  "Portfolio de Gonzalo Quiroga, Desarrollador Full Stack especializado en React, Node.js y TypeScript.";
+  "Desarrollador Full Stack con foco en React, Node.js y TypeScript. Aplicaciones en producción y proyectos freelance de punta a punta. Córdoba, Argentina · Remoto.";

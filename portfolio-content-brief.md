@@ -2,11 +2,13 @@
 
 Objetivo: este es el contenido real (no ficticio) para pasarle a Claude Design junto con la captura del portfolio actual, evitando armar el mockup con texto de relleno que después haya que reajustar en Claude Code. Ver `portfolio-rebuild-plan.md` para el resto de las decisiones (stack, orden de desarrollo, etc.).
 
+> **Aviso de vigencia (2026-08-07).** El copy de este documento quedó desactualizado respecto del perfil real. Ver **"Pasada de consistencia contra `linkedin-notes.md`"** al final: ahí está el texto vigente de Hero, Sobre Mí y Statement. Lo de abajo se conserva como registro histórico.
+
 ## Hero
 
 - Nombre: **Gonzalo Quiroga**
 - Rol: **Desarrollador Full Stack**
-- Tagline (primer borrador, ajustable): *"Lidero técnicamente el frontend en Cloudnet Solutions y desarrollo proyectos freelance de punta a punta, con React, Node.js y TypeScript en producción."*
+- Tagline (primer borrador, ajustable): *"Lidero técnicamente el frontend en Cloudnet Solutions y desarrollo proyectos freelance de punta a punta, con React, Node.js y TypeScript en producción."* — **reemplazado, ver la pasada del 2026-08-07.**
 - CTAs existentes a mantener: descargar CV (pdf), ir a la sección de proyectos.
 
 ## Sobre mí
@@ -51,3 +53,38 @@ Sin cambios respecto al sitio actual, ya coincide con lo confirmado en `cv-notas
 ## Proyectos
 
 **No usar contenido real todavía.** Por decisión ya tomada (ver `portfolio-rebuild-plan.md`), el contenido definitivo de esta sección se resuelve al final. Para el mockup de Claude Design alcanza con 2-3 cards placeholder genéricas (imagen + título + descripción corta ficticia tipo "Proyecto de ejemplo"), sin comprometer el diseño real de la sección todavía.
+
+**Actualización 2026-08-07:** ya existe la selección definitiva y aprobada — los 11 proyectos que el usuario cerró para LinkedIn el 2026-07-31 (`linkedin-notes.md`, sección Proyectos), con descripción redactada y link público. Lo único que falta para poder cargarlos es el `year` de cada uno y las capturas. Es el hueco de consistencia más grande que queda: LinkedIn muestra 11 proyectos reales y el sitio sigue mostrando "Proyecto de ejemplo 01".
+
+---
+
+# Pasada de consistencia contra `linkedin-notes.md` (2026-08-07)
+
+Origen: el perfil de LinkedIn y el CV pasaron por cuatro rondas de ajuste (última el 2026-08-07) que el portfolio nunca absorbió. El sitio seguía afirmando cosas que el resto del perfil ya había corregido por no ser defendibles en una entrevista. Criterio aplicado, heredado de esas sesiones: **preferir siempre lo verificable por sobre lo que suena mejor.**
+
+Segundo eje de esta pasada: el sitio hablaba casi solo en registro de reclutador técnico. Decisión del usuario — **no** agregar una sección de servicios, sino afinar el copy existente para que Hero, Sobre Mí, Contacto y metadata le hablen también al cliente que entra a ver qué hace.
+
+## Correcciones de consistencia (el sitio decía algo que el resto del perfil ya había corregido)
+
+| # | Dónde | Antes | Ahora | Por qué |
+|---|---|---|---|---|
+| 1 | Hero, Sobre Mí (párrafo) y ficha "Rol actual" | "Lidero técnicamente…" / "Tech Lead Frontend" | Actividades concretas: trato directo con clientes y stakeholders + revisión de código y acompañamiento a juniors del equipo frontend | El rol real fue informal y acotado, sin autoridad formal ni alcance de arquitectura. Ya se había sacado del CV, del Acerca de, del bullet de Experiencia y del banner. El sitio era el último lugar donde sobrevivía. |
+| 2 | Sobre Mí, párrafo de Cloudnet | "donde **desarrollo y mantengo**" | "donde **desarrollamos y mantenemos**" | Plural deliberado: Sequelize, PostgreSQL/SQL Server, JWT/Auth0 y Azure son del equipo en conjunto. Está marcado explícitamente en `linkedin-notes.md` como detalle a no perder al reescribir. |
+| 3 | Sobre Mí, statement a dos tonos | "en **2020** di el salto a la programación" | "en **2022**" | Contradecía toda la cronología verificada (Alura/ONE feb-2022, BA Multiplica may-2022, Argentina Programa oct-2022, freelance dic-2022). Confirmado por el usuario. |
+| 4 | Habilidades (`data/skills.ts`) | Incluía **Docker** | Sacado | Sin respaldo en ninguno de los 24 repos de Cloudnet ni en los proyectos personales: la infra real es Azure Static Web Apps/App Service, Vercel y Supabase, todo PaaS y serverless. Ya se había sacado del titular y de las aptitudes de LinkedIn. |
+| 5 | Bloque de declaración | "…con diseño de interfaces." | "…con diseño de interfaces **y reparación de equipos informáticos**." | La cláusula se perdió al mover la frase desde Sobre Mí. Es lo que sostiene "resolución práctica de problemas"; sin eso la segunda mitad de la oración no tiene de dónde agarrarse. |
+| 6 | Sobre Mí, párrafo de IA | "asistentes de IA" | "asistentes de IA **como Claude Code**" | El Acerca de aprobado lo nombra. Es además el eje de la bitácora privada. |
+| 7 | Hero (esquina) y ficha "Ubicación" | "Córdoba, Argentina" | "**Arroyito**, Córdoba, Argentina" | Coincide exacto con CV, LinkedIn y banner. |
+
+## Mejoras de doble público (cliente + reclutador)
+
+- **Hero, línea de estado:** "Disponible para proyectos freelance" → "…**y nuevas oportunidades**". El Acerca de de LinkedIn ya declara ambas cosas.
+- **Hero, tagline:** ahora abre por la capacidad ("Construyo aplicaciones web de punta a punta") y cierra nombrando al cliente objetivo ("emprendedores y pequeñas empresas"). El énfasis en blanco pasó del nombre del empleador al stack — es lo que no caduca y lo que ambos públicos escanean.
+- **Sobre Mí:** se suma el cierre del Acerca de ("Abierto a nuevas oportunidades como Full Stack, Frontend o Backend Developer") en registro micro con marcador, no como cuarto párrafo: es metadata de estado, no prosa. Le habla al reclutador; el link en corchetes de abajo le habla al cliente.
+- **Fichas de Sobre Mí:** de 3 a 4, sumando "Freelance · Desde 2022 · Proyectos de punta a punta" — el único dato de la ficha que le sirve a un cliente.
+- **Contacto:** el titular grande "¿Tenés un proyecto en mente?" (solo cliente) pasa a "**¿Trabajamos juntos?**", y el párrafo nombra los dos casos explícitamente. El asunto del formulario suma "propuesta laboral" a las opciones sugeridas.
+- **Metadata y JSON-LD:** `siteDescription` reescrita para cubrir stack + freelance + ubicación en menos de 160 caracteres. Al schema de Persona se le sumaron `url`, `address`, `alumniOf` y `knowsAbout` (leído de `skillCategories`, así no puede desincronizarse de la sección de Habilidades).
+
+## Agregados menores al stack
+
+`PWA` (Frontend) y `Git` (Datos & Cloud): ambos con respaldo directo en el análisis real de repos y ausentes por omisión. Se decidió **no** sumar Material-UI, Syncfusion, Bootstrap ni jQuery — son reales pero legacy, y diluirían una lista cuyo valor es estar curada.

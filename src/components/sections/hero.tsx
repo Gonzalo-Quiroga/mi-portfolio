@@ -54,8 +54,14 @@ export function Hero() {
           */}
           <Reveal className="flex w-fit items-center gap-3">
             <Marker className="bg-muted-foreground/60" />
+            {/*
+              Cubre los dos públicos que entran al sitio: el cliente que busca
+              a alguien que le haga el proyecto y el reclutador que busca
+              contratar. El "Acerca de" de LinkedIn ya declara ambas cosas
+              (`linkedin-notes.md`), así que decirlo acá no agrega nada nuevo.
+            */}
             <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">
-              Disponible para proyectos freelance
+              Disponible para proyectos freelance y nuevas oportunidades
             </span>
           </Reveal>
 
@@ -72,10 +78,12 @@ export function Hero() {
               uppercase con tracking ancho necesita renglones cortos.
             */}
             <p className="max-w-115 font-mono text-[11px] leading-[1.75] tracking-[0.12em] text-muted-foreground uppercase">
-              Lidero técnicamente el frontend en{" "}
-              <span className="text-foreground">Cloudnet Solutions</span> y
-              desarrollo proyectos freelance de punta a punta, con React,
-              Node.js y TypeScript en producción.
+              Construyo aplicaciones web de punta a punta con{" "}
+              <span className="text-foreground">
+                React, Node.js y TypeScript
+              </span>
+              . Trabajo en Cloudnet Solutions y tomo proyectos freelance para
+              emprendedores y pequeñas empresas.
             </p>
           </Reveal>
 
@@ -109,7 +117,7 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute bottom-6 left-6 z-10 hidden font-mono text-[10px] tracking-[0.14em] text-muted-foreground/60 uppercase sm:left-8 lg:block"
       >
-        Córdoba, Argentina · Remoto GMT-3
+        Arroyito, Córdoba, Argentina · Remoto GMT-3
       </span>
     </section>
   );
