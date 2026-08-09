@@ -54,3 +54,8 @@ CLAUDE.md
 # defendible en una entrevista, alcance real del rol, pendientes de certificados).
 # Repo público: esto no se sube nunca.
 linkedin-notes.md
+
+# capturas de proyectos sin procesar (12 MB de PNG/AVIF en distintos formatos).
+# Lo que sirve son los .webp normalizados de public/proyectos/; esto queda solo
+# como respaldo local por si hay que regenerarlos con otro encuadre.
+design-assets/proyectos-originales/

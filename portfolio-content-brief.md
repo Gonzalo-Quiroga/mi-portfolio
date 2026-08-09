@@ -54,7 +54,7 @@ Sin cambios respecto al sitio actual, ya coincide con lo confirmado en `cv-notas
 
 **No usar contenido real todavía.** Por decisión ya tomada (ver `portfolio-rebuild-plan.md`), el contenido definitivo de esta sección se resuelve al final. Para el mockup de Claude Design alcanza con 2-3 cards placeholder genéricas (imagen + título + descripción corta ficticia tipo "Proyecto de ejemplo"), sin comprometer el diseño real de la sección todavía.
 
-**Actualización 2026-08-07:** ya existe la selección definitiva y aprobada — los 11 proyectos que el usuario cerró para LinkedIn el 2026-07-31 (`linkedin-notes.md`, sección Proyectos), con descripción redactada y link público. Lo único que falta para poder cargarlos es el `year` de cada uno y las capturas. Es el hueco de consistencia más grande que queda: LinkedIn muestra 11 proyectos reales y el sitio sigue mostrando "Proyecto de ejemplo 01".
+**Resuelto el 2026-08-07.** Los 11 proyectos reales están cargados en `data/projects.ts`, con las descripciones del usuario tal cual las escribió para LinkedIn. Ver abajo, "Cómo se muestran proyectos con el código privado".
 
 ---
 
@@ -84,6 +84,46 @@ Segundo eje de esta pasada: el sitio hablaba casi solo en registro de reclutador
 - **Fichas de Sobre Mí:** de 3 a 4, sumando "Freelance · Desde 2022 · Proyectos de punta a punta" — el único dato de la ficha que le sirve a un cliente.
 - **Contacto:** el titular grande "¿Tenés un proyecto en mente?" (solo cliente) pasa a "**¿Trabajamos juntos?**", y el párrafo nombra los dos casos explícitamente. El asunto del formulario suma "propuesta laboral" a las opciones sugeridas.
 - **Metadata y JSON-LD:** `siteDescription` reescrita para cubrir stack + freelance + ubicación en menos de 160 caracteres. Al schema de Persona se le sumaron `url`, `address`, `alumniOf` y `knowsAbout` (leído de `skillCategories`, así no puede desincronizarse de la sección de Habilidades).
+
+## Cómo se muestran proyectos con el código privado (2026-08-07)
+
+Diez de los once proyectos son de Cloudnet o de clientes. Sus repos son privados **porque el código no es del usuario** — no es una preferencia de seguridad que haya que justificar, y publicarlos sería incumplir contrato. Ningún reclutador técnico espera ver el repo de un proyecto de agencia; un candidato que sí los expone es una señal de alarma, no lo contrario.
+
+Decisiones tomadas en consecuencia:
+
+- **El deploy es la prueba, no el repo.** El link va al producto en producción.
+- **La ausencia de código se declara una vez, en la cabecera de la sección**, no fila por fila: *"El código es propiedad de cada cliente y sus repositorios son privados. Los links llevan al producto en producción."* Etiquetar la razón convierte una ausencia en señal de que se trabaja bajo contrato.
+- **Se eliminó el link "[ Ver todo en GitHub ]"** de la cabecera. Mandaba a un perfil casi vacío, porque el grueso del trabajo del usuario está en repos privados: era un link que no cumplía lo que prometía.
+- **Una fila sin producto público no se renderiza como link.** `href: null` hace que la fila sea un `<div>` en vez de un `<a>`, sin hover ni flecha, y en su lugar muestra "Acceso privado" — la mayoría son sistemas de gestión detrás de login, no proyectos abandonados. No quedan links muertos.
+- **Se agrega el "Asociado con" de LinkedIn** como etiqueta micro sobre el título. Distingue el trabajo de agencia del freelance, que es información útil para los dos públicos.
+- **Las descripciones no se reescriben.** Mantienen la atribución honesta del original ("colaboré en", "junto al equipo", "uno de los principales desarrolladores"), mismo criterio que rige el resto del perfil.
+
+Dos decisiones más del mismo día:
+
+- **Sin columna de año.** La referencia fecha su índice (`NOMBRE | ROL | AÑO`), pero el usuario decidió no cargar años. Once guiones comunican menos que no tener la columna, así que el campo `year` se eliminó del tipo en vez de quedar vacío. El rol de columna de metadata lo cumple el "Asociado con", que además varía entre filas.
+- **Nota de cierre al pie de la sección:** *"Selección de once entre más de veinte proyectos entregados."* Sin esto un visitante asume que once es todo lo que hizo. Una línea convierte una lista en una decisión editorial, y es un dato fuerte que el sitio no estaba usando.
+
+**Orden: se mantiene el que eligió el usuario** (2026-08-07). Se evaluó reordenar para agrupar las filas con link arriba y se descartó: las cinco sin link son justamente los sistemas de gestión (Up Logix, DataCrops, Manisel, DaGuia, Cerco), que son el trabajo de ingeniería más fuerte — agruparlas al fondo dejaría arriba los sitios institucionales, que tienen las historias más finas. Además el orden original queda `L L L · — — — — — · L L L`: hay links al principio y al final, con el bloque sin link contenido en el medio, así que no se scrollea hacia una zona muerta sin final.
+
+**Tecnologías (2026-08-07):** cargadas las once, provistas por el usuario. Listan solo aquello con lo que interactuó de primera mano, no el stack completo de cada proyecto. Dos criterios:
+
+- **Se incluyen Vite y TanStack Query** aunque venían marcados como "no etiquetables". Esa era una restricción de LinkedIn, que solo deja etiquetar tecnologías presentes en tu lista de Aptitudes — en el sitio no existe, y además las dos ya están declaradas en `data/skills.ts`. Omitirlas subestimaba el trabajo.
+- **Material UI, Syncfusion, Bootstrap y jQuery sí aparecen acá y no en Habilidades.** No es una contradicción: `tech` es registro histórico de lo que ese proyecto usó, `skills` es lo que se ofrece hoy. Está documentado en `types/project.ts`.
+
+Resuelve de paso un pendiente de `linkedin-notes.md`: el uso de Supabase en la web de Cloudnet Solutions quedó confirmado por el usuario.
+
+**Capturas (2026-08-09):** las once cargadas y normalizadas a 1280×800 WebP, el 16:10 del thumbnail. El material de origen venía en dos familias, con ratios (2.02 y 1.33) y formatos (PNG, AVIF) distintos, y se trató distinto cada una:
+
+- **Los seis con link público son capturas de navegador a sangre.** Se recortan con `cover` anclado arriba, que conserva nav y hero y descarta el pie.
+- **Los cinco sin link son mockups de dispositivo** (laptop, tablet, dos celulares) sobre fondo transparente. Se recortan sus márgenes vacíos y se conservan con canal alfa, para que el `bg-background-2` del contenedor se vea por detrás: el dispositivo flota sobre la superficie del sitio en vez de traer su propio rectángulo de fondo.
+
+Peso total: 12 MB → 852 KB. Los originales sin procesar se movieron a `design-assets/proyectos-originales/` (gitignorado) para poder regenerarlos con otro encuadre si hace falta; estaban dentro de `public/`, donde se habrían deployado sin usarse.
+
+**Campo de fondo para los mockups (2026-08-09).** A pedido del usuario, las cinco miniaturas de mockup llevan por detrás un gradiente de negro con cian muy oscuro (`mockup-field` en `globals.css`), en vez del gris plano del contenedor. El campo se aplica según un campo propio del tipo, `imageKind`, y no derivándolo de `href === null` aunque hoy coincidan: que un sistema privado se publique mañana no debería cambiar cómo se enmarca su imagen. Ver `design-referencia-estilo.md` §9.4 punto 5 para por qué esto no rompe la regla de "el acento emite, no pinta".
+
+**Límite conocido:** esto empareja tamaño, ratio, formato y fondo, pero no el *estilo*. Un mockup de dispositivo y una captura a sangre se van a seguir leyendo distinto por más que compartan marco. La única forma de uniformarlos de verdad es recapturar: el usuario tiene acceso a los cinco sistemas privados y podría sacarles capturas planas como las de los otros seis (la de Up Logix ya usa datos demo, así que no habría exposición de datos de cliente).
+
+Pendiente: completar `tech` de Cerco Digital, el único sin verificar contra el repo.
 
 ## Agregados menores al stack
 

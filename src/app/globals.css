@@ -88,6 +88,16 @@
   --a1-ambient: color-mix(in srgb, var(--a1) 6%, transparent);
   --a1-glow: color-mix(in srgb, var(--a1) 28%, transparent);
   --a1-line: color-mix(in srgb, var(--a1) 45%, transparent);
+  /*
+    Bloom de las miniaturas de mockup. Único de la familia escrito como rgba
+    literal en vez de color-mix, a propósito: el compilador no puede resolver
+    color-mix(var(...)) estáticamente y emite `var(--a1)` crudo como fallback
+    para navegadores sin soporte. En --a1-glow o --a1-line eso degrada a un
+    halo o una línea de 1px y no se nota, pero acá pintaría medio rectángulo
+    de 144x90 de cian puro cinco veces. Si algún día cambia --a1, actualizar
+    también este valor.
+  */
+  --a1-bloom: rgb(6 252 238 / 0.14);
   /* mezclado con el foreground baja croma: lee como blanco frío, no como celeste */
   --a1-text: color-mix(in oklch, var(--a1) 62%, var(--foreground));
   --accent: var(--a1-text);
@@ -125,6 +135,41 @@
 */
 @utility glow-a1 {
   box-shadow: 0 0 24px -10px var(--a1-glow);
+}
+
+/*
+  Fondo para las miniaturas que son mockups de dispositivo (§9.4 punto 4, bloom
+  ambiental). Esos PNG vienen con fondo transparente: sin esto el dispositivo
+  queda flotando sobre el gris plano del contenedor, mientras que las capturas
+  de navegador llenan el cuadro a sangre. El campo empareja las dos familias.
+
+  Sigue sin haber cian saturado: la superficie más clara del campo está en
+  oklch(0.30), muy por debajo del texto, y el croma máximo (0.042) es una
+  cuarta parte del de --a1. El bloom de abajo lee como el reflejo de la propia
+  pantalla del dispositivo sobre la superficie donde se apoya.
+
+  El rango de luminosidad se mantiene dentro del de la página a propósito: la
+  base no baja de --background (#0a0a0a). Una primera versión llegaba a
+  oklch(0.088), que compila a #010203 — más oscuro que el fondo del sitio, con
+  lo que la miniatura se leía como un agujero negro recortado en la página. Si
+  se retoca, verificar los hex compilados, no el OKLCH a ojo.
+
+  Excepción consciente y acotada a la regla de "el acento emite, no pinta"
+  (§9.2): el bloom usa --a1-bloom (14%), más fuerte que --a1-ambient, porque
+  acá el cian tiene que verse y no solo sentirse — decisión del usuario. Es el
+  único lugar estático del sitio donde el acento es perceptible como color,
+  ocupa cinco rectángulos de 144x90 y no toca texto ni jerarquía. No
+  extenderlo a otras superficies.
+*/
+@utility mockup-field {
+  background:
+    radial-gradient(82% 72% at 50% 106%, var(--a1-bloom), transparent 72%),
+    linear-gradient(
+      158deg,
+      oklch(0.3 0.042 200) 0%,
+      oklch(0.232 0.032 200) 55%,
+      oklch(0.175 0.02 205) 100%
+    );
 }
 
 /*
