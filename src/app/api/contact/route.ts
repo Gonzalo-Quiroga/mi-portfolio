@@ -36,6 +36,13 @@ const LIMITS = { name: 100, email: 254, subject: 150, message: 5000 } as const;
 const RATE_LIMIT = { max: 3, windowMs: 10 * 60 * 1000 } as const;
 
 /**
+ * Remitente de prueba de Resend. Funciona sin verificar ningún dominio, pero
+ * solo entrega al email dueño de la cuenta y su reputación es compartida con
+ * todos los que prueban el servicio.
+ */
+const SANDBOX_FROM = "Portfolio Gonzalo Quiroga <onboarding@resend.dev>";
+
+/**
  * Registro en memoria de envíos por IP.
  *
  * Limitación conocida y aceptada: en serverless cada instancia tiene su propio
@@ -128,15 +135,27 @@ export async function POST(request: Request) {
 
   const resend = new Resend(apiKey);
 
+  /*
+    Se avisa en los logs cuando se cae al remitente de prueba.
+
+    Es la tercera vez en este proyecto que un fallback silencioso esconde una
+    configuración que no tomó efecto: `images.qualities` ignorando el
+    `quality={90}`, el nombre de archivo de la foto sirviendo la versión vieja
+    desde caché, y una CONTACT_FROM mal tipeada que el código nunca leyó. En
+    los tres casos todo "funcionaba" y no había forma de notarlo desde afuera.
+    Una línea en los logs de Vercel dice cuál remitente se está usando de
+    verdad.
+  */
+  const from = process.env.CONTACT_FROM ?? SANDBOX_FROM;
+  if (from === SANDBOX_FROM) {
+    console.warn(
+      "CONTACT_FROM no está configurada: se envía desde el remitente de prueba de Resend. " +
+        "Solo entrega al email dueño de la cuenta y su reputación es compartida.",
+    );
+  }
+
   const { error } = await resend.emails.send({
-    /*
-      `onboarding@resend.dev` es el remitente de prueba de Resend: cae en spam
-      seguido y solo permite enviar al dueño de la cuenta. Cuando el dominio
-      propio esté verificado en Resend, basta con setear CONTACT_FROM.
-    */
-    from:
-      process.env.CONTACT_FROM ??
-      "Portfolio Gonzalo Quiroga <onboarding@resend.dev>",
+    from,
     to: contactEmail,
     replyTo: email,
     subject: subject ? `Portfolio: ${subject}` : `Nuevo mensaje de ${name}`,

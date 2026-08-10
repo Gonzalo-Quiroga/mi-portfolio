@@ -39,10 +39,14 @@ async function loadRoute() {
 beforeEach(() => {
   send.mockReset().mockResolvedValue({ error: null });
   vi.stubEnv("RESEND_API_KEY", "test-key");
+  // Sin CONTACT_FROM el endpoint avisa por consola; se silencia salvo donde
+  // el aviso es justamente lo que se está probando.
+  vi.spyOn(console, "warn").mockImplementation(() => {});
 });
 
 afterEach(() => {
   vi.unstubAllEnvs();
+  vi.restoreAllMocks();
 });
 
 describe("POST /api/contact", () => {
@@ -102,6 +106,25 @@ describe("POST /api/contact", () => {
     const { subject } = send.mock.calls[0]![0];
     expect(subject).not.toMatch(/[\r\n]/);
     expect(subject).toBe("Portfolio: Hola Bcc: victima@example.com");
+  });
+
+  it("avisa en los logs cuando cae al remitente de prueba de Resend", async () => {
+    const POST = await loadRoute();
+    await POST(post(valido));
+
+    expect(console.warn).toHaveBeenCalledWith(
+      expect.stringContaining("CONTACT_FROM no está configurada"),
+    );
+    expect(send.mock.calls[0]![0].from).toContain("onboarding@resend.dev");
+  });
+
+  it("usa CONTACT_FROM cuando está definida, sin avisar", async () => {
+    vi.stubEnv("CONTACT_FROM", "Portfolio <hola@ejemplo.dev>");
+    const POST = await loadRoute();
+    await POST(post(valido));
+
+    expect(send.mock.calls[0]![0].from).toBe("Portfolio <hola@ejemplo.dev>");
+    expect(console.warn).not.toHaveBeenCalled();
   });
 
   it("rechaza email con formato inválido", async () => {
