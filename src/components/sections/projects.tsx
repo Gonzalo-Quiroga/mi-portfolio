@@ -52,7 +52,7 @@ function ProjectRow({ project }: { project: Project }) {
           El "Asociado con" de LinkedIn, en registro micro sobre el título:
           separa el trabajo de agencia del freelance sin gastar una columna.
         */}
-        <span className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground/70 uppercase">
+        <span className="font-mono text-[10px] tracking-[0.14em] text-muted-foreground/80 uppercase">
           {project.client}
         </span>
         <h3
@@ -86,7 +86,7 @@ function ProjectRow({ project }: { project: Project }) {
             Sin link no queda un hueco: se dice por qué. La mayoría de estos
             son sistemas de gestión detrás de login, no proyectos abandonados.
           */
-          <span className="font-mono text-[10px] tracking-[0.14em] whitespace-nowrap text-muted-foreground/60 uppercase">
+          <span className="font-mono text-[10px] tracking-[0.14em] whitespace-nowrap text-muted-foreground/80 uppercase">
             Acceso privado
           </span>
         )}
@@ -177,7 +177,7 @@ export function Projects() {
           registro micro que la nota de la cabecera — no necesita más.
         */}
         <Reveal delay={0.06}>
-          <p className="mt-8 flex items-start gap-3 font-mono text-[10.5px] leading-[1.7] tracking-[0.14em] text-muted-foreground/70 uppercase lg:mt-10">
+          <p className="mt-8 flex items-start gap-3 font-mono text-[10.5px] leading-[1.7] tracking-[0.14em] text-muted-foreground/80 uppercase lg:mt-10">
             <Marker className="mt-[0.42em] bg-muted-foreground/40" />
             <span>
               Selección de once entre más de veinte proyectos entregados.

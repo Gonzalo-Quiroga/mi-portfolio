@@ -234,7 +234,7 @@ export function About() {
                 <span className="text-[17px] font-medium tracking-[-0.02em] text-balance sm:text-lg">
                   {fact.value}
                 </span>
-                <span className="font-mono text-[11px] tracking-[0.08em] text-muted-foreground/70">
+                <span className="font-mono text-[11px] tracking-[0.08em] text-muted-foreground/80">
                   {fact.detail}
                 </span>
               </div>

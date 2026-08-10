@@ -4,7 +4,21 @@ import { useState, type FormEvent } from "react";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-const initialForm = { name: "", email: "", subject: "", message: "" };
+/**
+ * `website` es el honeypot: va oculto, así que una persona nunca lo completa y
+ * los bots que rellenan todos los inputs sí. El endpoint descarta el envío en
+ * silencio cuando llega con contenido.
+ */
+const initialForm = {
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
+  website: "",
+};
+
+/** Espejo de LIMITS en `api/contact/route.ts`. El servidor igual recorta. */
+const MAX = { name: 100, email: 254, subject: 150, message: 5000 } as const;
 
 export function ContactForm() {
   const [form, setForm] = useState(initialForm);
@@ -56,6 +70,8 @@ export function ContactForm() {
           <input
             type="text"
             required
+            maxLength={MAX.name}
+            autoComplete="name"
             placeholder="Tu nombre"
             value={form.name}
             onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
@@ -67,6 +83,8 @@ export function ContactForm() {
           <input
             type="email"
             required
+            maxLength={MAX.email}
+            autoComplete="email"
             placeholder="tu@email.com"
             value={form.email}
             onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
@@ -78,6 +96,7 @@ export function ContactForm() {
         <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">Asunto</span>
         <input
           type="text"
+          maxLength={MAX.subject}
           placeholder="Sitio web, aplicación, propuesta laboral…"
           value={form.subject}
           onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
@@ -89,12 +108,35 @@ export function ContactForm() {
         <textarea
           rows={5}
           required
+          maxLength={MAX.message}
           placeholder="Contame brevemente de qué se trata y los plazos."
           value={form.message}
           onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
           className="resize-y rounded-md border border-border bg-foreground/2 px-2.75 py-2.5 font-sans text-sm leading-relaxed outline-none transition-[background-color,border-color,box-shadow] focus:glow-a1 focus:border-accent focus:bg-foreground/4"
         />
       </label>
+      {/*
+        Honeypot. `hidden` lo saca de la vista pero el valor se sigue enviando,
+        que es justo lo que se busca. `aria-hidden` y `tabIndex={-1}` lo dejan
+        además fuera del lector de pantalla y del recorrido con Tab, así que
+        para una persona no existe por ningún camino.
+      */}
+      <div aria-hidden className="hidden">
+        <label>
+          No completar este campo
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            value={form.website}
+            onChange={(e) =>
+              setForm((f) => ({ ...f, website: e.target.value }))
+            }
+          />
+        </label>
+      </div>
+
       <div className="mt-0.5 flex items-center justify-between gap-4">
         <span
           role="status"

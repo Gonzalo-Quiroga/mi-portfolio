@@ -38,7 +38,7 @@ export function Skills() {
                 <h3 className="font-mono text-[11px] tracking-[0.14em] text-foreground uppercase">
                   {category.title}
                 </h3>
-                <span className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground/60">
+                <span className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground/80">
                   {String(category.skills.length).padStart(2, "0")}
                 </span>
               </div>

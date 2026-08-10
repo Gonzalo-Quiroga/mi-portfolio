@@ -150,7 +150,7 @@ export function Hero() {
       */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-8 z-10 hidden text-center font-mono text-[10px] tracking-[0.14em] text-muted-foreground/60 uppercase lg:block"
+        className="pointer-events-none absolute inset-x-0 bottom-8 z-10 hidden text-center font-mono text-[10px] tracking-[0.14em] text-muted-foreground/80 uppercase lg:block"
       >
         Arroyito, Córdoba, Argentina · Remoto GMT-3
       </span>
