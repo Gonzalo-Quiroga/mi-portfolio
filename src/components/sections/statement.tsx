@@ -12,6 +12,11 @@ import { Marker } from "@/components/ui/section-header";
  * La frase no es nueva: sale del párrafo de Sobre Mí, donde estaba enterrada
  * entre otras tres. Promoverla a su propio bloque no agrega contenido, le da
  * el peso que ya merecía.
+ *
+ * "Y reparación de equipos informáticos" se había perdido al mover la frase.
+ * Está en el "Acerca de" aprobado (`linkedin-notes.md`) y es lo que sostiene
+ * "resolución práctica de problemas": sin eso, la segunda mitad de la oración
+ * no tiene de dónde agarrarse.
  */
 export function Statement() {
   return (
@@ -20,7 +25,8 @@ export function Statement() {
         <Marker className="bg-muted-foreground/50" />
         <Reveal className="flex-1">
           <p className="mx-auto max-w-215 text-center text-[clamp(1.35rem,2.9vw,2.35rem)] leading-[1.22] font-normal tracking-[-0.025em] text-balance">
-            Complemento mi perfil técnico con diseño de interfaces.{" "}
+            Complemento mi perfil técnico con diseño de interfaces y reparación
+            de equipos informáticos.{" "}
             <span className="text-muted-foreground">
               Eso me da una mirada integral: funcionalidad, experiencia de
               usuario y resolución práctica de problemas.

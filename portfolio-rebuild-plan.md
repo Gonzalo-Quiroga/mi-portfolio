@@ -63,10 +63,24 @@ Decisiones que reemplazan a las anteriores:
 - **Wordmark tipográfico gigante** sangrado en el footer, más columnas de links.
 - **Hero a viewport completo** con margen exterior más ancho que el resto de las secciones (1760px contra 1360px). Sin badge de estado: era un pill con punto que se leía como plantilla generada, ahora es una línea de metadata en registro micro.
 
+## Decisión: el portfolio tiene dos públicos, no uno (2026-08-07)
+
+El sitio se venía escribiendo para un reclutador técnico (stack, producción, deploy). El usuario aclaró que también es su perfil público de cara a **clientes** que entran a ver qué hace. Se evaluó agregar una sección de servicios / "cómo trabajo" y **se descartó**: en vez de sumar estructura, se afinó el copy existente (Hero, Sobre Mí, Contacto, formulario y metadata) para que cada pieza le hable a los dos. El detalle está en `portfolio-content-brief.md`, sección "Pasada de consistencia".
+
+En la misma pasada se corrigió el desfasaje entre el sitio y `linkedin-notes.md` — el perfil real había pasado por cuatro rondas de ajuste que el portfolio nunca absorbió. La más importante: **el sitio era el último lugar donde sobrevivía "líder técnico"** después de haberse sacado del CV, del Acerca de, de la Experiencia y del banner.
+
+**`linkedin-notes.md` pasa a ser contexto obligatorio** junto con este documento: es la fuente de verdad de qué se afirma sobre el perfil profesional, y el criterio que la rige (preferir lo verificable y defendible en entrevista por sobre maximizar keywords) aplica igual al sitio.
+
 ## Pendiente / próximos pasos
 
 - Definir dónde vive la bitácora privada de proceso.
 - ~~Decidir dominio propio vs subdominio de Vercel.~~ Resuelto: `gonzaloquiroga.dev`, deployado en Vercel con `RESEND_API_KEY` y `NEXT_PUBLIC_SITE_URL` configuradas.
 - ~~Confirmar que el handoff final de Claude Design alterna correctamente los dos colores de acento por sección.~~ Sin efecto: ya no hay dos acentos ni alternancia.
 - Sacar la foto personal y cargar los dos usos (PNG recortado en el Hero, 4:5 en Sobre Mí). Es lo único que falta para cerrar el rediseño.
-- Elegir contenido definitivo de la sección de Proyectos (queda para el final). **Cada proyecto ahora requiere también `year`**, que es la columna que fecha el índice.
+- ~~Elegir contenido definitivo de la sección de Proyectos.~~ **Resuelto el 2026-08-07:** cargados los 11 proyectos reales. Queda solo completar datos (años, capturas, 3 links, tecnologías colapsadas) — ver `portfolio-content-brief.md`.
+- ~~Cargar capturas de proyectos.~~ Hechas el 2026-08-09: once WebP de 1280×800, normalizadas desde dos familias de origen distintas. Ver `portfolio-content-brief.md`.
+- Completar las tecnologías de Cerco Digital, el único proyecto sin verificar contra su repo.
+- Evaluar recapturar los cinco sistemas privados como capturas planas, para que las once compartan estilo y no solo marco (hoy cinco son mockups de dispositivo). No es bloqueante.
+- Activar en GitHub *Settings → Profile → Include private contributions on my profile*: muestra la actividad del trabajo privado sin exponer código. Hoy el perfil se ve vacío teniendo años de trabajo diario.
+- Terminar `gq-balu`, `gq-gastos` y `gq-labs` y sumarlos como los proyectos **con repo público** (el campo `repo` del tipo `Project` ya lo contempla). Son los que cargan la señal "sabe codear" que el trabajo de cliente no puede dar. Este mismo repo de portfolio ya cumple parte de ese rol.
+- Decidir si el sitio refleja los títulos intermedios de ISPC ("Programador" may-2026, "Desarrollador Full Stack Junior" jun-2026). El CV ya los incorporó; la ficha de Formación del sitio sigue diciendo solo "en curso".

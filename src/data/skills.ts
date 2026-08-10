@@ -1,5 +1,16 @@
 import type { SkillCategory } from "@/types/skill";
 
+/**
+ * Criterio de esta lista: solo lo que tiene respaldo directo en código propio y
+ * se puede defender con un caso concreto en una entrevista (el mismo que se
+ * aplicó al titular y a las aptitudes de LinkedIn, ver `linkedin-notes.md`).
+ *
+ * Docker se sacó por eso: no aparece en ninguno de los 24 repos de Cloudnet ni
+ * en los proyectos personales — la infraestructura real es Azure Static Web
+ * Apps / App Service, Vercel y Supabase, todo PaaS y serverless, sin
+ * contenedores. Ya se había sacado del titular y de las aptitudes de LinkedIn;
+ * el portfolio era el último lugar donde quedaba.
+ */
 export const skillCategories: SkillCategory[] = [
   {
     id: "frontend",
@@ -14,6 +25,7 @@ export const skillCategories: SkillCategory[] = [
       "TanStack Query",
       "Tailwind CSS",
       "shadcn/ui",
+      "PWA",
     ],
   },
   {
@@ -30,8 +42,8 @@ export const skillCategories: SkillCategory[] = [
       "Supabase",
       "Azure",
       "Vercel",
+      "Git",
       "GitHub Actions",
-      "Docker",
     ],
   },
   {

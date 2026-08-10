@@ -40,13 +40,20 @@ export function Contact() {
               que el hero, no el de un subtítulo (§3.1).
             */}
             <p className="text-[clamp(2rem,4.6vw,3.5rem)] leading-[0.98] font-medium tracking-[-0.03em] text-balance uppercase">
-              ¿Tenés un proyecto
+              ¿Trabajamos
               <br />
-              en mente?
+              juntos?
             </p>
+            {/*
+              Antes era "¿Tenés un proyecto en mente?", que solo le hablaba al
+              cliente: un reclutador no se sentía interpelado por el titular más
+              grande de la última sección. El cierre pasa a ser neutro y el
+              párrafo de abajo nombra los dos casos explícitamente.
+            */}
             <p className="max-w-105 text-base leading-relaxed font-light text-muted-foreground text-pretty">
-              Contame qué necesitás y te respondo con una propuesta clara:
-              alcance, tiempos y cómo lo llevo a producción.
+              Tomo proyectos freelance de punta a punta y escucho propuestas
+              laborales. Contame qué necesitás y te respondo con alcance,
+              tiempos y cómo lo llevo a producción.
             </p>
 
             <div className="mt-4 flex flex-col border-t border-border">

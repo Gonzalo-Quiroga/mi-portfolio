@@ -49,3 +49,13 @@ design-referencia-estilo.md
 portfolio-content-brief.md
 portfolio-rebuild-plan.md
 CLAUDE.md
+
+# notas del perfil profesional — contienen autoevaluaciones francas (qué no es
+# defendible en una entrevista, alcance real del rol, pendientes de certificados).
+# Repo público: esto no se sube nunca.
+linkedin-notes.md
+
+# imágenes sin procesar. Lo que sirve son los .webp de public/; estos quedan
+# como respaldo local por si hay que regenerarlos con otro encuadre o calidad.
+design-assets/proyectos-originales/
+design-assets/about-original/
