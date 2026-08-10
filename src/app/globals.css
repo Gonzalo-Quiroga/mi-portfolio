@@ -173,6 +173,122 @@
 }
 
 /*
+  ---------------------------------------------------------------------------
+  Atmósfera del hero (`components/sections/hero-backdrop.tsx`).
+
+  Inspirado en "Digital Serenity" de Le Thanh (21st.dev/@minhxthanh), que no
+  declara licencia: no se copió el componente, se reimplementaron desde cero
+  las técnicas —grilla SVG tenue, líneas que se dibujan con stroke-dashoffset,
+  puntos que laten, partículas a la deriva, halo que sigue al cursor— con los
+  tokens y los patrones de este proyecto.
+
+  Todo esto es decorativo y va detrás del contenido. Las animaciones usan solo
+  `opacity`, `transform` y `stroke-dashoffset` para que corran en compositor.
+  ---------------------------------------------------------------------------
+*/
+
+/* Las líneas de eje se dibujan solas al cargar. */
+@keyframes hero-line-draw {
+  from {
+    stroke-dashoffset: 1000;
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: var(--hero-line-opacity, 0.5);
+  }
+}
+
+/* Latido de los puntos en las intersecciones. */
+@keyframes hero-dot-pulse {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.35);
+  }
+}
+
+/* Deriva de las partículas. Recorridos cortos: sugiere polvo en suspensión. */
+@keyframes hero-particle-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.14;
+  }
+  25% {
+    transform: translate3d(5px, -11px, 0);
+    opacity: 0.42;
+  }
+  50% {
+    transform: translate3d(-4px, -6px, 0);
+    opacity: 0.26;
+  }
+  75% {
+    transform: translate3d(7px, -16px, 0);
+    opacity: 0.5;
+  }
+}
+
+/* Entrada de las marcas de esquina y de los guiones laterales. */
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Onda al hacer clic dentro del hero. */
+@keyframes hero-ripple {
+  from {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(11);
+  }
+}
+
+/*
+  Sin movimiento si el usuario lo pidió. El halo del cursor directamente no se
+  engancha (se resuelve en el componente, que ni registra los listeners).
+
+  Ojo con el detalle que hace falta acá: todos estos elementos arrancan en
+  `opacity: 0` y llegan a su estado visible *por* la animación. Matar las
+  animaciones a secas los deja invisibles y el fondo entero desaparece para
+  quien pidió menos movimiento — que es peor que el problema que se quería
+  evitar. Por eso además de frenar hay que fijar el estado final a mano.
+*/
+@media (prefers-reduced-motion: reduce) {
+  [data-hero-backdrop],
+  [data-hero-backdrop] * {
+    animation: none !important;
+    transition: none !important;
+  }
+  [data-hero-backdrop] [data-hero-line] {
+    opacity: var(--hero-line-opacity, 0.5) !important;
+    stroke-dashoffset: 0 !important;
+  }
+  [data-hero-backdrop] [data-hero-dot] {
+    opacity: 0.32 !important;
+  }
+  [data-hero-backdrop] [data-hero-corner] {
+    opacity: 1 !important;
+  }
+  [data-hero-backdrop] [data-hero-particle] {
+    opacity: 0.28 !important;
+  }
+}
+
+/*
   Cinta de stack en loop: versión sobria del recurso de la referencia, sin
   rotar (§8.2 punto 3). La pista contiene la lista dos veces y se desplaza
   media pista, así el corte cae sobre contenido idéntico y el loop no se ve.

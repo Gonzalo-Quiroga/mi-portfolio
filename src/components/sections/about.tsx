@@ -1,5 +1,60 @@
+import Image from "next/image";
+
 import { Reveal } from "@/components/motion/reveal";
 import { Bracketed, Marker, SectionHeader } from "@/components/ui/section-header";
+
+/**
+ * Foto de Sobre Mí, definitiva (2026-08-10). Segunda versión: recorte más
+ * cerrado y desenfoque aplicado sobre las pantallas, que en la anterior
+ * dejaban ver el contenido. Verificado al 100%: el texto es ilegible.
+ *
+ * Original PNG sin pérdida de 1540x2050. Ese ancho da 3.2x sobre los ~480px de
+ * la columna, así que cubre incluso pantallas 3x sin agrandar nada.
+ *
+ * Sustituye a una primera versión de 1086x1448 y, antes de esa, a ocho
+ * candidatas que venían recomprimidas por un mensajero — 960x1280 a 0.26-0.44
+ * bits por pixel y sin EXIF — que mostraban bloques de JPEG a tamaño de
+ * pantalla. Ambas anteriores quedan archivadas junto al original.
+ *
+ * Servida como WebP q95: 195 KB contra 3501 KB del PNG, PSNR 45.4 dB. El
+ * original queda en `design-assets/about-original/`, fuera de `public/` para
+ * no deployar 3.5 MB que nadie descarga.
+ *
+ * **El sufijo `-v2` del archivo no es decorativo: al reemplazar la foto hay
+ * que subir el número.** La primera vez se sobrescribió `about.webp` con la
+ * imagen nueva manteniendo el nombre, y como `/_next/image?url=...` queda
+ * idéntico, tanto el navegador como la caché de imágenes de Next siguieron
+ * sirviendo la vieja. Cambiar el nombre cambia la URL y es la única forma
+ * confiable de invalidar esa caché, también en el CDN después de deployar.
+ */
+const aboutPhoto = "/about/about-v2.webp";
+
+/**
+ * Tratamiento de color, para que la foto no sea el elemento más saturado de la
+ * página. Sin esto el azul de la luz de fondo la vuelve el único bloque de
+ * color fuerte del sitio y pelea con el acento.
+ *
+ * Medido sobre el archivo: tono dominante 215.5°, con el 66% del peso del
+ * color entre 210° y 220° — un azul muy concentrado. El cian del sitio
+ * (`--a1`, #06fcee) está en 176.6°.
+ *
+ * **Los grados no son una rotación de tono.** `hue-rotate()` de CSS no rota
+ * nada: aplica una matriz lineal fija del spec de Filter Effects que mueve
+ * cada tono una cantidad distinta y ni siquiera preserva la luminancia. Un
+ * `hue-rotate(-28deg)` sobre este azul lo movía apenas 8°. Los valores de acá
+ * salen de simular esas matrices sobre la imagen real y medir el resultado:
+ *
+ *   sin filtro   215.5°      -40deg  185.0°
+ *   -42deg       182.0°      -45deg  178.5°   <- el elegido
+ *   -70deg       149.0°  (verde, pasado de largo)
+ *
+ * Si se retoca, medir el resultado en vez de razonar en grados: la intuición
+ * de "rotar N grados mueve el tono N grados" es falsa acá.
+ *
+ * Se aplica por CSS y nunca horneado en el archivo, así el original queda
+ * intacto y esto sigue siendo una línea para ajustar.
+ */
+const aboutPhotoFilter = "hue-rotate(-45deg) saturate(0.6) brightness(0.78)";
 
 /*
   "Tech Lead Frontend" salió de acá por la misma razón por la que salió del CV,
@@ -63,21 +118,35 @@ export function About() {
         <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-[1fr_1.5fr] lg:gap-24">
           <Reveal>
             {/*
-              Sin foto de perfil definida todavía: placeholder explícito,
-              reemplazar por next/image cuando exista. Las marcas de esquina
-              son el encuadre tipo prueba de imprenta de la referencia (§5).
+              Las marcas de esquina son el encuadre tipo prueba de imprenta de
+              la referencia (§5).
+
+              Sin viñeta y sin blanco y negro. El plan preveía B/N para integrar
+              la foto con la paleta, pero acá el color *es* la foto: el encaje
+              se resuelve corrigiendo el tono hacia el cian del sitio en vez de
+              matarlo. Ver `aboutPhotoFilter` arriba.
+
+              `sizes` tiene que declarar el ancho real de esta columna, no uno
+              aproximado: con `max-w-340` (1360px), padding de 32px y la grilla
+              `1fr_1.5fr` con gap de 96px, la columna de la foto mide ~480px
+              (30rem). Declararla más chica hace que Next sirva una variante
+              menor y el navegador la agrande — que es exactamente por qué la
+              foto se veía de mala calidad, no por ningún filtro.
+
+              El origen es 3:4 y el marco 4:5, así que object-cover recorta un
+              poco arriba y abajo.
             */}
             <div className="relative">
-              <div
-                className="flex aspect-4/5 items-end bg-background-2 p-4"
-                style={{
-                  backgroundImage:
-                    "repeating-linear-gradient(135deg, oklch(1 0 0 / 0.025) 0 10px, transparent 10px 20px)",
-                }}
-              >
-                <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">
-                  Foto de perfil — 4:5
-                </span>
+              <div className="relative aspect-4/5 overflow-hidden bg-background-2">
+                <Image
+                  src={aboutPhoto}
+                  alt="Gonzalo Quiroga"
+                  fill
+                  sizes="(min-width: 1024px) 30rem, (min-width: 640px) 50vw, 100vw"
+                  quality={90}
+                  className="object-cover"
+                  style={{ filter: aboutPhotoFilter }}
+                />
               </div>
               <span
                 aria-hidden

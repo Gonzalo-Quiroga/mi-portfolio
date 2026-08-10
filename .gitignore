@@ -55,7 +55,7 @@ CLAUDE.md
 # Repo público: esto no se sube nunca.
 linkedin-notes.md
 
-# capturas de proyectos sin procesar (12 MB de PNG/AVIF en distintos formatos).
-# Lo que sirve son los .webp normalizados de public/proyectos/; esto queda solo
-# como respaldo local por si hay que regenerarlos con otro encuadre.
+# imágenes sin procesar. Lo que sirve son los .webp de public/; estos quedan
+# como respaldo local por si hay que regenerarlos con otro encuadre o calidad.
 design-assets/proyectos-originales/
+design-assets/about-original/
