@@ -38,11 +38,11 @@ import type { Project } from "@/types/project";
  *   globals.css) en vez del gris plano, así el dispositivo se apoya sobre una
  *   superficie propia y no queda flotando en un rectángulo vacío.
  *
- * ---
- * PENDIENTE: `tech` de Cerco Digital es el único sin verificar contra el repo.
- * Hoy lista lo que sí está fundado — React y Redux Toolkit vienen de las
- * aptitudes que el propio usuario etiquetó en LinkedIn, y PWA de su
- * descripción. Falta al menos una más.
+ * Todas las listas de `tech` están confirmadas por el usuario. La de Cerco
+ * Digital es la única que no se cruzó contra su repo: React y Redux Toolkit
+ * salen de las aptitudes que él mismo etiquetó en LinkedIn, PWA de su
+ * descripción, y Bootstrap lo confirmó aparte (2026-08-10). Si algún día se
+ * abre ese repo, vale completarla.
  */
 export const projects: Project[] = [
   {
@@ -175,7 +175,7 @@ export const projects: Project[] = [
     repo: null,
     image: "/proyectos/cerco-digital.webp",
     imageKind: "mockup",
-    tech: ["React", "Redux Toolkit", "PWA"],
+    tech: ["React", "Bootstrap", "Redux Toolkit", "PWA"],
   },
   {
     id: "alambres-tandil",

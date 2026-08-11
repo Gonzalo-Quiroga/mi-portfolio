@@ -37,23 +37,29 @@ yarn-error.log*
 # vercel
 .vercel
 
-# bitácora privada de proceso — repo es público, esto no se sube nunca
-bitacora-privada.md
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
-# md
+# ---------------------------------------------------------------------------
+# Material de proceso, no del producto.
+#
+# El repo es público a propósito: es la muestra de código. Pero estos
+# documentos son la cocina — decisiones descartadas, autoevaluaciones francas
+# sobre qué se puede y qué no se puede defender en una entrevista, y copy en
+# versiones viejas. Nada de eso aporta a quien viene a ver cómo está hecho el
+# sitio, y varios exponen cosas que no corresponde publicar.
+#
+# CLAUDE.md sí se versiona: es la única pieza de este grupo que muestra cómo se
+# trabaja, sin exponer qué se descartó. El detalle sensible que tenía se movió
+# a linkedin-notes.md, que no se sube.
+# ---------------------------------------------------------------------------
+bitacora-privada.md
+linkedin-notes.md
 design-referencia-estilo.md
 portfolio-content-brief.md
 portfolio-rebuild-plan.md
-CLAUDE.md
-
-# notas del perfil profesional — contienen autoevaluaciones francas (qué no es
-# defendible en una entrevista, alcance real del rol, pendientes de certificados).
-# Repo público: esto no se sube nunca.
-linkedin-notes.md
+design-handoff/
 
 # imágenes sin procesar. Lo que sirve son los .webp de public/; estos quedan
 # como respaldo local por si hay que regenerarlos con otro encuadre o calidad.
