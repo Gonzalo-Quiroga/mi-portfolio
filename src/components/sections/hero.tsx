@@ -132,10 +132,25 @@ export function Hero() {
         </Reveal>
       </div>
 
-      {/* Micro-copy de esquina, como los bloques sueltos de la referencia (§4). */}
+      {/*
+        Ubicación anclada al piso del hero, centrada sobre el mismo eje que el
+        resto del bloque.
+
+        Antes iba en la esquina inferior izquierda, como los bloques sueltos de
+        la referencia (§4). Dejó de funcionar por dos motivos: el backdrop puso
+        ahí una marca de esquina y las líneas la atravesaban, y con la
+        composición ya centrada era el único elemento que rompía el eje.
+
+        No se elimina porque el dato sirve arriba de todo: un reclutador de
+        búsquedas remotas ve país y huso horario sin scrollear.
+
+        `bottom-8` en vez del `bottom-6 sm:left-8` anterior, que corregía el eje
+        horizontal pero no el vertical y dejaba la línea a 24px del piso contra
+        los 32px de las marcas de esquina.
+      */}
       <span
         aria-hidden
-        className="pointer-events-none absolute bottom-6 left-6 z-10 hidden font-mono text-[10px] tracking-[0.14em] text-muted-foreground/60 uppercase sm:left-8 lg:block"
+        className="pointer-events-none absolute inset-x-0 bottom-8 z-10 hidden text-center font-mono text-[10px] tracking-[0.14em] text-muted-foreground/80 uppercase lg:block"
       >
         Arroyito, Córdoba, Argentina · Remoto GMT-3
       </span>

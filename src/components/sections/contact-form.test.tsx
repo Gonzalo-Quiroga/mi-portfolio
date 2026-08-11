@@ -31,11 +31,13 @@ describe("ContactForm", () => {
       "/api/contact",
       expect.objectContaining({
         method: "POST",
+        // `website` es el honeypot: una persona lo deja vacío siempre.
         body: JSON.stringify({
           name: "Ada Lovelace",
           email: "ada@example.com",
           subject: "",
           message: "Quiero charlar sobre un proyecto.",
+          website: "",
         }),
       }),
     );

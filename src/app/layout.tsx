@@ -34,7 +34,12 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: {
-    card: "summary",
+    /*
+      `summary` renderiza una miniatura cuadrada chica al costado del texto y
+      recorta la tarjeta de 1200x630 a un cuadrado ilegible. Con imagen propia
+      corresponde `summary_large_image`, que la muestra completa y a lo ancho.
+    */
+    card: "summary_large_image",
     title: siteName,
     description: siteDescription,
   },

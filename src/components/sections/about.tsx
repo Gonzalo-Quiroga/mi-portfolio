@@ -70,7 +70,8 @@ const facts = [
   {
     label: "Rol actual",
     value: "Desarrollador Full Stack",
-    detail: "Cloudnet Solutions · Remoto",
+    /* La antigüedad sale del CV (jun. 2023): sin fecha, el rol no dice cuánto. */
+    detail: "Cloudnet Solutions · desde 2023",
   },
   {
     label: "Freelance",
@@ -85,7 +86,12 @@ const facts = [
   {
     label: "Ubicación",
     value: "Arroyito, Córdoba",
-    detail: "Argentina · GMT-3",
+    /*
+      "Argentina" no es redundante: existe una Córdoba en España, y este dato lo
+      lee gente que filtra búsquedas por país. "Remoto" se movía acá desde el
+      dato de rol, donde competía con la antigüedad.
+    */
+    detail: "Argentina · Remoto · GMT-3",
   },
 ];
 
@@ -206,9 +212,15 @@ export function About() {
             */}
             <p className="mt-1 flex items-start gap-3 font-mono text-[10.5px] leading-[1.7] tracking-[0.14em] text-muted-foreground/80 uppercase">
               <Marker className="mt-[0.42em] bg-muted-foreground/50" />
+              {/*
+                El nivel de inglés estaba en el CV y en ningún lado del sitio.
+                Va acá y no en las fichas porque es metadata para el reclutador,
+                igual que la declaración de disponibilidad que lo precede — y en
+                búsquedas remotas suele ser un filtro duro.
+              */}
               <span>
                 Abierto a nuevas oportunidades como Full Stack, Frontend o
-                Backend Developer
+                Backend Developer · Inglés B1
               </span>
             </p>
             <a
@@ -234,7 +246,7 @@ export function About() {
                 <span className="text-[17px] font-medium tracking-[-0.02em] text-balance sm:text-lg">
                   {fact.value}
                 </span>
-                <span className="font-mono text-[11px] tracking-[0.08em] text-muted-foreground/70">
+                <span className="font-mono text-[11px] tracking-[0.08em] text-muted-foreground/80">
                   {fact.detail}
                 </span>
               </div>

@@ -60,6 +60,13 @@ export const skillCategories: SkillCategory[] = [
       "Jira",
       "Claude Code",
       "Claude Design",
+      /*
+        Confirmada por el usuario el 2026-08-10, para quedar en línea con el CV.
+        `linkedin-notes.md` la tenía marcada como pendiente de verificar ("que
+        sea uso real y regular, no algo probado una vez"): ese pendiente se
+        resuelve acá, no queda abierto.
+      */
+      "Claude Cowork",
     ],
   },
 ];

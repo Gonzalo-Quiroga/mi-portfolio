@@ -2,16 +2,18 @@
 
 ## Contexto obligatorio
 Antes de cualquier tarea, si todavía no los leíste en esta sesión, leé:
+**Ninguno de estos documentos está versionado** (ver `.gitignore`): son material de proceso, no del producto. Si alguno falta en el working tree, las reglas de más abajo son autosuficientes para no romper nada.
+
 - `portfolio-rebuild-plan.md` — stack, orden de desarrollo y decisiones ya tomadas.
 - `portfolio-content-brief.md` — contenido real de texto para Hero, Sobre Mí, Habilidades y Contacto.
-- `linkedin-notes.md` — **fuente de verdad del perfil profesional**: qué se afirma sobre experiencia, rol, stack, formación y proyectos. Manda sobre el brief de contenido donde haya conflicto (el brief tiene copy más viejo). No está versionado.
-- `design-referencia-estilo.md` — **sistema visual vigente**: paleta, escala tipográfica, ornamento y reglas del acento. Manda sobre `design-handoff/` donde haya conflicto. No está versionado (está en `.gitignore`): si no existe en el working tree, regirse por las reglas de abajo, que son autosuficientes.
+- `linkedin-notes.md` — **fuente de verdad del perfil profesional**: qué se afirma sobre experiencia, rol, stack, formación y proyectos. Manda sobre el brief de contenido donde haya conflicto (el brief tiene copy más viejo).
+- `design-referencia-estilo.md` — **sistema visual vigente**: paleta, escala tipográfica, ornamento y reglas del acento. Manda sobre `design-handoff/` donde haya conflicto.
 - `design-handoff/` — export original de Claude Design. Sigue valiendo para tokens de base, pero varias decisiones (dos acentos alternando, cards de proyecto, chips de habilidades) fueron reemplazadas.
 
 ## Reglas de contenido no negociables
 - **El sitio tiene dos públicos:** reclutadores técnicos y clientes potenciales. Cada pieza de copy tiene que funcionar para ambos, o dejar explícito a cuál le habla.
-- **Nada que no sea defendible en una entrevista.** Criterio heredado de las sesiones de CV y LinkedIn: preferir siempre lo verificable por sobre lo que suena mejor. En concreto, no reintroducir "líder técnico" / "Tech Lead" como cargo, ni Docker ni Principios SOLID en el stack.
-- Antes de escribir o cambiar copy sobre experiencia, rol o stack, cotejar contra `linkedin-notes.md`. Si el sitio y ese documento discrepan, gana ese documento.
+- **Nada que no sea defendible en una entrevista.** Criterio heredado de las sesiones de CV y LinkedIn: preferir siempre lo verificable por sobre lo que suena mejor. Ante la duda entre lo que suena mejor y lo que se puede respaldar con un caso concreto, gana lo segundo.
+- Antes de escribir o cambiar copy sobre experiencia, rol o stack, cotejar contra `linkedin-notes.md`, que no está versionado. Ahí está el detalle de qué cargos y tecnologías se afirman y cuáles quedaron descartados, con el motivo de cada uno. Si el sitio y ese documento discrepan, gana ese documento.
 
 ## Reglas de diseño no negociables
 - **Un solo acento, el cian.** No reintroducir el lima `#d1ff6f` ni la alternancia por sección.
