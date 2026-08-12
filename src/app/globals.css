@@ -358,6 +358,23 @@
   }
   html {
     @apply font-sans;
+
+    /*
+      Navegación por ancla: sin esto el salto es instantáneo y desorienta —
+      no queda claro si la página cambió o si se movió el scroll. El desplazamiento
+      suave mantiene la continuidad espacial entre secciones.
+
+      `scroll-padding-top` compensa el header sticky (h-16 = 4rem) más un respiro,
+      así el título de la sección de destino no queda pegado ni tapado por la barra.
+    */
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(4rem + 1.75rem);
+  }
+  /* Quien pidió menos movimiento vuelve al salto directo. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
   /* Foco visible consistente en links y botones custom (respeta el acento activo por sección). */
   a:focus-visible,

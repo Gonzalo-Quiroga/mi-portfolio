@@ -21,8 +21,15 @@ import { Marker } from "@/components/ui/section-header";
 export function Statement() {
   return (
     <section className="hairline-top relative bg-background">
-      <div className="mx-auto flex max-w-340 items-center gap-6 px-6 py-24 sm:px-8 lg:gap-12 lg:py-36">
-        <Marker className="bg-muted-foreground/50" />
+      {/*
+        Los rieles de marcador se esconden en teléfono: entre los dos y sus
+        gaps se llevaban 68px de los ~327 disponibles, más de un quinto de la
+        medida, para acotar un bloque que ahí ya está acotado por la pantalla.
+      */}
+      <div className="mx-auto flex max-w-340 items-center gap-0 px-6 py-24 sm:gap-6 sm:px-8 lg:gap-12 lg:py-36">
+        <span className="hidden sm:block">
+          <Marker className="bg-muted-foreground/50" />
+        </span>
         <Reveal className="flex-1">
           <p className="mx-auto max-w-215 text-center text-[clamp(1.35rem,2.9vw,2.35rem)] leading-[1.22] font-normal tracking-[-0.025em] text-balance">
             Complemento mi perfil técnico con diseño de interfaces y reparación
@@ -33,7 +40,9 @@ export function Statement() {
             </span>
           </p>
         </Reveal>
-        <Marker className="bg-muted-foreground/50" />
+        <span className="hidden sm:block">
+          <Marker className="bg-muted-foreground/50" />
+        </span>
       </div>
     </section>
   );

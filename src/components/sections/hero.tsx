@@ -1,4 +1,3 @@
-import Link from "next/link";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Bracketed, Marker } from "@/components/ui/section-header";
@@ -71,8 +70,14 @@ export function Hero() {
           deja de ser un componente y pasa a ser una línea de metadata más del
           sistema.
         */}
-        <Reveal className="flex items-center gap-3">
-          <Marker className="bg-muted-foreground/60" />
+        {/*
+          En teléfono la línea entra en dos renglones: con `items-center` el
+          marcador quedaba flotando en el medio del bloque en vez de alineado a
+          la primera línea, que es donde lo espera el ojo. Desde `sm` entra en
+          uno solo y vuelve a centrarse.
+        */}
+        <Reveal className="flex items-start gap-3 text-left sm:items-center sm:text-center">
+          <Marker className="mt-[0.42em] bg-muted-foreground/60 sm:mt-0" />
           {/*
             Cubre los dos públicos que entran al sitio: el cliente que busca a
             alguien que le haga el proyecto y el reclutador que busca contratar.
@@ -122,13 +127,13 @@ export function Hero() {
             que necesita una descarga de CV y el resto de la navegación baja a
             la jerarquía de link (§8.2 punto 1).
           */}
-          <Link
+          <a
             href="#proyectos"
             className="flex h-10 items-center gap-2 font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase transition-colors hover:text-foreground"
           >
             <Bracketed>Ver proyectos</Bracketed>
             <span aria-hidden>→</span>
-          </Link>
+          </a>
         </Reveal>
       </div>
 

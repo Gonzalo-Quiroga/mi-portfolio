@@ -10,10 +10,15 @@ import {
 
 import { ContactForm } from "./contact-form";
 
+/*
+  `download` no es opcional en el link del CV: sin el atributo, el navegador
+  abre el PDF en su visor integrado en vez de bajarlo, y la etiqueta dice
+  "Descargar".
+*/
 const contactLinks = [
   { label: "Email", value: contactEmail, href: `mailto:${contactEmail}` },
   { label: "WhatsApp", value: whatsappDisplay, href: whatsappHref },
-  { label: "CV", value: "Descargar PDF ↓", href: cvHref },
+  { label: "CV", value: "Descargar PDF ↓", href: cvHref, download: true },
 ];
 
 export function Contact() {
@@ -61,6 +66,7 @@ export function Contact() {
                 <a
                   key={link.label}
                   href={link.href}
+                  download={link.download}
                   className="flex items-center justify-between gap-4 border-b border-border py-4 transition-colors hover:text-accent"
                 >
                   <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">
