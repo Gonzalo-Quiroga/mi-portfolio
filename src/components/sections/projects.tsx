@@ -33,7 +33,7 @@ function ProjectRow({ project }: { project: Project }) {
             src={project.image}
             alt={project.title}
             fill
-            sizes="(min-width: 1024px) 9rem, 7rem"
+            sizes="(min-width: 1024px) 9rem, (min-width: 640px) 7rem, 5rem"
             className="object-cover"
           />
         ) : (
@@ -67,29 +67,37 @@ function ProjectRow({ project }: { project: Project }) {
         </p>
       </div>
 
-      {project.tech.length > 0 && (
-        <p className="col-span-2 font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase lg:col-span-1">
-          {project.tech.join(" · ")}
-        </p>
-      )}
-
-      <div className="col-span-2 flex items-center justify-end gap-4 lg:col-span-1 lg:gap-5">
-        {isLink ? (
-          <span
-            aria-hidden
-            className="text-sm text-muted-foreground transition-colors group-hover:text-accent"
-          >
-            ↗
-          </span>
-        ) : (
-          /*
-            Sin link no queda un hueco: se dice por qué. La mayoría de estos
-            son sistemas de gestión detrás de login, no proyectos abandonados.
-          */
-          <span className="font-mono text-[10px] tracking-[0.14em] whitespace-nowrap text-muted-foreground/80 uppercase">
-            Acceso privado
-          </span>
+      {/*
+        En pantallas chicas el stack y el estado comparten un renglón al pie de
+        la fila; antes ocupaban uno cada uno y la fila crecía a cuatro. En `lg`
+        el wrapper pasa a `display: contents` y sus dos hijos vuelven a ser
+        celdas de la grilla, como si este div no existiera.
+      */}
+      <div className="col-span-2 flex items-center justify-between gap-4 lg:contents">
+        {project.tech.length > 0 && (
+          <p className="min-w-0 font-mono text-[10.5px] leading-[1.6] tracking-[0.14em] text-muted-foreground uppercase">
+            {project.tech.join(" · ")}
+          </p>
         )}
+
+        <div className="ml-auto flex shrink-0 items-center justify-end gap-4 lg:gap-5">
+          {isLink ? (
+            <span
+              aria-hidden
+              className="text-sm text-muted-foreground transition-colors group-hover:text-accent"
+            >
+              ↗
+            </span>
+          ) : (
+            /*
+              Sin link no queda un hueco: se dice por qué. La mayoría de estos
+              son sistemas de gestión detrás de login, no proyectos abandonados.
+            */
+            <span className="font-mono text-[10px] tracking-[0.14em] whitespace-nowrap text-muted-foreground/80 uppercase">
+              Acceso privado
+            </span>
+          )}
+        </div>
       </div>
     </>
   );
@@ -145,8 +153,13 @@ export function Projects() {
         */}
         <div className="border-t border-border">
           {projects.map((project, i) => {
+            /*
+              La miniatura arranca en 5rem y no en 7rem: en un teléfono de
+              375px, con el padding de la sección, 7rem dejaba ~195px para
+              título y descripción y el texto se partía en escalera.
+            */
             const rowClass =
-              "grid grid-cols-[7rem_minmax(0,1fr)] items-center gap-x-5 gap-y-4 border-b border-border px-2 py-5 lg:grid-cols-[9rem_minmax(0,1.15fr)_minmax(0,1fr)_auto] lg:gap-x-8 lg:py-6";
+              "grid grid-cols-[5rem_minmax(0,1fr)] items-center gap-x-4 gap-y-3 border-b border-border px-1 py-4 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-x-5 sm:px-2 sm:py-5 lg:grid-cols-[9rem_minmax(0,1.15fr)_minmax(0,1fr)_auto] lg:gap-x-8 lg:py-6";
 
             return (
               <Reveal key={project.id} delay={(i % 4) * 0.055}>

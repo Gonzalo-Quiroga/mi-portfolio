@@ -27,12 +27,22 @@ export function Skills() {
           tiene un solo recuadro con fondo — la información se ordena con
           reglas y espacio, no con cajas (§4, §8.1 punto 3).
         */}
-        <div className="grid grid-cols-1 gap-y-10 border-t border-border pt-10 sm:grid-cols-2 sm:gap-x-0 sm:divide-x sm:divide-border lg:grid-cols-4">
+        {/*
+          Los divisores van por `nth-child` y no con `divide-x`: esa utilidad
+          pone borde izquierdo a todos los hijos menos el primero de la lista,
+          no el primero de cada fila. En las dos columnas de tablet, la tercera
+          categoría abría la fila 2 con una línea vertical suelta a su izquierda.
+
+          Con dos columnas la línea va en los pares; con cuatro, en todos menos
+          el primero — de ahí la regla extra para el tercero en `lg`. El padding
+          sigue al borde: sin línea a la izquierda, no hay nada de qué separarse.
+        */}
+        <div className="grid grid-cols-1 gap-y-10 border-t border-border pt-10 sm:grid-cols-2 sm:gap-x-0 sm:*:px-7 sm:[&>*:nth-child(2n)]:border-l sm:[&>*:nth-child(2n)]:border-border sm:[&>*:nth-child(2n)]:pr-0 sm:[&>*:nth-child(2n+1)]:pl-0 lg:grid-cols-4 lg:[&>*:nth-child(2)]:pr-7 lg:[&>*:nth-child(4n+3)]:border-l lg:[&>*:nth-child(4n+3)]:border-border lg:[&>*:nth-child(4n+3)]:pl-7">
           {skillCategories.map((category, i) => (
             <Reveal
               key={category.id}
               delay={(i % 4) * 0.055}
-              className="flex flex-col gap-5 sm:px-7 sm:first:pl-0 lg:last:pr-0"
+              className="flex flex-col gap-5"
             >
               <div className="flex items-baseline justify-between gap-3">
                 <h3 className="font-mono text-[11px] tracking-[0.14em] text-foreground uppercase">

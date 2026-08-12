@@ -20,9 +20,16 @@ import type { NextConfig } from "next";
  * `base-uri 'self'` evita el secuestro de URLs relativas y `form-action 'self'`
  * impide que un formulario inyectado postee a otro dominio.
  */
+/*
+ * React en modo desarrollo usa `eval()` para reconstruir stacks de error, y la
+ * CSP lo bloquea: la consola se llena de "eval() is not supported". Solo se
+ * agrega en dev — el bundle de producción nunca lo necesita.
+ */
+const isDev = process.env.NODE_ENV !== "production";
+
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",

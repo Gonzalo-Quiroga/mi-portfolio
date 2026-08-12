@@ -4,73 +4,45 @@ import { Reveal } from "@/components/motion/reveal";
 import { Bracketed, Marker, SectionHeader } from "@/components/ui/section-header";
 
 /**
- * Foto de Sobre Mí, definitiva (2026-08-10). Segunda versión: recorte más
- * cerrado y desenfoque aplicado sobre las pantallas, que en la anterior
- * dejaban ver el contenido. Verificado al 100%: el texto es ilegible.
+ * Foto de Sobre Mí. Fondo negro neutro y sin dominante de color, así que va sin
+ * ningún tratamiento: la versión anterior necesitaba un filtro para domar un
+ * azul que peleaba con el acento, esta no.
  *
- * Original PNG sin pérdida de 1540x2050. Ese ancho da 3.2x sobre los ~480px de
- * la columna, así que cubre incluso pantallas 3x sin agrandar nada.
+ * **Al reemplazarla hay que cambiar el nombre del archivo, no sobrescribirlo.**
+ * Con el mismo nombre la URL de `/_next/image?url=...` queda idéntica y tanto
+ * el navegador como la caché de imágenes de Next siguen sirviendo la vieja.
  *
- * Sustituye a una primera versión de 1086x1448 y, antes de esa, a ocho
- * candidatas que venían recomprimidas por un mensajero — 960x1280 a 0.26-0.44
- * bits por pixel y sin EXIF — que mostraban bloques de JPEG a tamaño de
- * pantalla. Ambas anteriores quedan archivadas junto al original.
- *
- * Servida como WebP q95: 195 KB contra 3501 KB del PNG, PSNR 45.4 dB. El
- * original queda en `design-assets/about-original/`, fuera de `public/` para
- * no deployar 3.5 MB que nadie descarga.
- *
- * **El sufijo `-v2` del archivo no es decorativo: al reemplazar la foto hay
- * que subir el número.** La primera vez se sobrescribió `about.webp` con la
- * imagen nueva manteniendo el nombre, y como `/_next/image?url=...` queda
- * idéntico, tanto el navegador como la caché de imágenes de Next siguieron
- * sirviendo la vieja. Cambiar el nombre cambia la URL y es la única forma
- * confiable de invalidar esa caché, también en el CDN después de deployar.
+ * Fuente en `design-assets/about-original/`, fuera de `public/` para no
+ * deployar megas que nadie descarga.
  */
-const aboutPhoto = "/about/about-v2.webp";
+const aboutPhoto = "/about/about-v3.webp";
 
-/**
- * Tratamiento de color, para que la foto no sea el elemento más saturado de la
- * página. Sin esto el azul de la luz de fondo la vuelve el único bloque de
- * color fuerte del sitio y pelea con el acento.
- *
- * Medido sobre el archivo: tono dominante 215.5°, con el 66% del peso del
- * color entre 210° y 220° — un azul muy concentrado. El cian del sitio
- * (`--a1`, #06fcee) está en 176.6°.
- *
- * **Los grados no son una rotación de tono.** `hue-rotate()` de CSS no rota
- * nada: aplica una matriz lineal fija del spec de Filter Effects que mueve
- * cada tono una cantidad distinta y ni siquiera preserva la luminancia. Un
- * `hue-rotate(-28deg)` sobre este azul lo movía apenas 8°. Los valores de acá
- * salen de simular esas matrices sobre la imagen real y medir el resultado:
- *
- *   sin filtro   215.5°      -40deg  185.0°
- *   -42deg       182.0°      -45deg  178.5°   <- el elegido
- *   -70deg       149.0°  (verde, pasado de largo)
- *
- * Si se retoca, medir el resultado en vez de razonar en grados: la intuición
- * de "rotar N grados mueve el tono N grados" es falsa acá.
- *
- * Se aplica por CSS y nunca horneado en el archivo, así el original queda
- * intacto y esto sigue siendo una línea para ajustar.
- */
-const aboutPhotoFilter = "hue-rotate(-45deg) saturate(0.6) brightness(0.78)";
+/* "Tech Lead Frontend" no está acá por lo mismo que no está en el CV ni en
+   LinkedIn (ver `linkedin-notes.md`): el rol es informal, sin autoridad ni
+   alcance de arquitectura, y no se sostiene como título en una entrevista.
 
-/*
-  "Tech Lead Frontend" salió de acá por la misma razón por la que salió del CV,
-  del Acerca de de LinkedIn y del banner (ver `linkedin-notes.md`): el rol real
-  fue informal y acotado a mentoría y revisión de código de un par de juniors,
-  sin autoridad formal ni alcance de arquitectura. No se sostiene como título en
-  una entrevista, y las actividades concretas ya están en los párrafos de abajo.
+   El foco actual en frontend tampoco se nombra acá: en una ficha que titula
+   "Desarrollador Full Stack", agregar "Frontend" al lado se lee como una
+   contradicción y no como un matiz. Eso se cuenta en los párrafos, que tienen
+   espacio para explicarlo.
 
-  El cuarto dato (freelance desde 2022) es el que le habla al cliente que entra
-  al sitio: los otros tres solo tienen sentido para un reclutador.
-*/
+   El dato de freelance es el único que le habla al cliente; los otros tres son
+   para el reclutador. */
 const facts = [
   {
     label: "Rol actual",
-    value: "Desarrollador Full Stack",
-    /* La antigüedad sale del CV (jun. 2023): sin fecha, el rol no dice cuánto. */
+    /*
+      Corte forzado: la ficha de formación ocupa dos renglones y esta uno solo,
+      lo que dejaba la fila desalineada. El salto es de composición, no de
+      contenido — por eso va acá y no depende de cuánto mida la columna.
+    */
+    value: (
+      <>
+        Desarrollador
+        <br />
+        Full Stack
+      </>
+    ),
     detail: "Cloudnet Solutions · desde 2023",
   },
   {
@@ -79,18 +51,20 @@ const facts = [
     detail: "Proyectos de punta a punta",
   },
   {
+    /*
+      El nombre completo es "Tecnicatura Superior en Desarrollo Web y
+      Aplicaciones Digitales". Entero en `value` ocupa cinco líneas y rompe la
+      grilla de cuatro columnas, así que se parte: la carrera arriba y el grado
+      con la institución abajo. No se abrevia — es el título formal.
+    */
     label: "Formación",
-    value: "Tec. Sup. en Desarrollo Web",
-    detail: "ISPC · en curso",
+    value: "Desarrollo Web y Aplicaciones Digitales",
+    detail: "Tecnicatura Superior · ISPC · en curso",
   },
   {
     label: "Ubicación",
     value: "Arroyito, Córdoba",
-    /*
-      "Argentina" no es redundante: existe una Córdoba en España, y este dato lo
-      lee gente que filtra búsquedas por país. "Remoto" se movía acá desde el
-      dato de rol, donde competía con la antigüedad.
-    */
+    /* "Argentina" no sobra: existe una Córdoba en España y hay quien filtra por país. */
     detail: "Argentina · Remoto · GMT-3",
   },
 ];
@@ -104,11 +78,7 @@ export function About() {
             index="01"
             title="Sobre mí"
             statement={
-              /*
-                Titular a dos tonos (§3.3). El apagado cae sobre el origen y
-                el blanco sobre el presente: el recurso de la referencia, pero
-                usado donde el contraste dice algo y no solo decora.
-              */
+              /* Dos tonos: el apagado sobre el origen, el blanco sobre el presente. */
               <p className="text-[26px] leading-tight font-normal tracking-[-0.02em] text-balance sm:text-[32px]">
                 <span className="text-muted-foreground">
                   Empecé estudiando Ing. Electrónica y en 2022 di el salto a la
@@ -124,34 +94,33 @@ export function About() {
         <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-[1fr_1.5fr] lg:gap-24">
           <Reveal>
             {/*
-              Las marcas de esquina son el encuadre tipo prueba de imprenta de
-              la referencia (§5).
+              `sizes` declara el ancho real de esta columna, no uno aproximado:
+              con `max-w-340` (1360px), padding de 32px y la grilla `1fr_1.5fr`
+              con gap de 96px, la columna mide ~480px (30rem). Declararla más
+              chica hace que Next sirva una variante menor y el navegador la
+              agrande — era eso, y no ningún filtro, lo que hacía ver la foto de
+              mala calidad. Debajo de `lg` el ancho lo fija el `max-w-96` del
+              contenedor, así que son 24rem exactos y no un porcentaje del
+              viewport.
 
-              Sin viñeta y sin blanco y negro. El plan preveía B/N para integrar
-              la foto con la paleta, pero acá el color *es* la foto: el encaje
-              se resuelve corrigiendo el tono hacia el cian del sitio en vez de
-              matarlo. Ver `aboutPhotoFilter` arriba.
-
-              `sizes` tiene que declarar el ancho real de esta columna, no uno
-              aproximado: con `max-w-340` (1360px), padding de 32px y la grilla
-              `1fr_1.5fr` con gap de 96px, la columna de la foto mide ~480px
-              (30rem). Declararla más chica hace que Next sirva una variante
-              menor y el navegador la agrande — que es exactamente por qué la
-              foto se veía de mala calidad, no por ningún filtro.
-
-              El origen es 3:4 y el marco 4:5, así que object-cover recorta un
-              poco arriba y abajo.
+              El origen es 1:1 y el marco 4:5, así que object-cover recorta a
+              los lados.
             */}
-            <div className="relative">
+            {/*
+              El ancho se topea hasta `lg`: en tablet la grilla colapsa a una
+              columna y la foto pasaba a ocupar los 704px de ancho útil, que con
+              `aspect-4/5` son 880px de alto — una pantalla entera de retrato
+              antes de llegar al texto. Desde `lg` manda la columna de la grilla.
+            */}
+            <div className="relative mx-auto w-full max-w-96 lg:max-w-none">
               <div className="relative aspect-4/5 overflow-hidden bg-background-2">
                 <Image
                   src={aboutPhoto}
                   alt="Gonzalo Quiroga"
                   fill
-                  sizes="(min-width: 1024px) 30rem, (min-width: 640px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 30rem, 24rem"
                   quality={90}
                   className="object-cover"
-                  style={{ filter: aboutPhotoFilter }}
                 />
               </div>
               <span
@@ -176,11 +145,8 @@ export function About() {
           <Reveal delay={0.06} className="flex max-w-170 flex-col gap-6">
             {/*
               Plural deliberado en "desarrollamos y mantenemos": varias de estas
-              tecnologías (Sequelize, PostgreSQL/SQL Server, JWT/Auth0, Azure)
-              son del equipo en conjunto, no aporte 100% individual. Es una
-              decisión ya tomada y marcada como "no perder al reescribir" en
-              `linkedin-notes.md` — el párrafo siguiente, que sí es aporte
-              individual y verificable, vuelve a primera persona del singular.
+              tecnologías son aporte del equipo, no 100% individual. El párrafo
+              siguiente, que sí es propio y verificable, vuelve al singular.
             */}
             <p className="text-base leading-[1.72] font-light text-muted-foreground text-pretty">
               Trabajo en Cloudnet Solutions, donde desarrollamos y mantenemos
@@ -189,10 +155,19 @@ export function About() {
               Auth0, testing con Jest y despliegue continuo en Microsoft Azure
               con GitHub Actions.
             </p>
+            {/*
+              "Doy la aprobación final" es la formulación ya validada en
+              `linkedin-notes.md`: dice lo mismo que "lidero el equipo" pero
+              nombra la responsabilidad concreta en vez de un cargo que no
+              existe en el organigrama, y se defiende con ejemplos en una
+              entrevista.
+            */}
             <p className="text-base leading-[1.72] font-light text-muted-foreground text-pretty">
               Tengo trato directo con clientes y stakeholders para traducir
-              necesidades de negocio en soluciones técnicas, reviso código y
-              acompaño a los desarrolladores junior del equipo frontend.
+              necesidades de negocio en soluciones técnicas. Hoy mi trabajo está
+              enfocado en el frontend: reviso el código del equipo, doy la
+              aprobación final de los cambios que entran y acompaño a los
+              desarrolladores junior.
             </p>
             <p className="text-base leading-[1.72] font-light text-muted-foreground text-pretty">
               También desarrollo proyectos freelance de punta a punta para
@@ -205,19 +180,13 @@ export function About() {
               Aplicaciones Digitales del ISPC.
             </p>
             {/*
-              El párrafo de cierre del "Acerca de" de LinkedIn, bajado a
-              registro micro con marcador en vez de un cuarto párrafo: es
-              metadata de estado, no prosa. Le habla al reclutador, mientras que
-              el link de abajo le habla al cliente.
+              Registro micro y no un cuarto párrafo: esto es metadata de estado
+              para el reclutador, mientras que el link de abajo le habla al
+              cliente. El inglés va acá porque en búsquedas remotas suele ser un
+              filtro duro.
             */}
             <p className="mt-1 flex items-start gap-3 font-mono text-[10.5px] leading-[1.7] tracking-[0.14em] text-muted-foreground/80 uppercase">
               <Marker className="mt-[0.42em] bg-muted-foreground/50" />
-              {/*
-                El nivel de inglés estaba en el CV y en ningún lado del sitio.
-                Va acá y no en las fichas porque es metadata para el reclutador,
-                igual que la declaración de disponibilidad que lo precede — y en
-                búsquedas remotas suele ser un filtro duro.
-              */}
               <span>
                 Abierto a nuevas oportunidades como Full Stack, Frontend o
                 Backend Developer · Inglés B1

@@ -1,13 +1,13 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { navLinks } from "@/data/nav";
 import { contactEmail, cvHref, socialLinks } from "@/data/social";
 import { Bracketed } from "@/components/ui/section-header";
 
+/* Sin `download`, el navegador abre el PDF en su visor en vez de bajarlo. */
 const directLinks = [
   { label: "Email", href: `mailto:${contactEmail}` },
-  { label: "Descargar CV", href: cvHref },
+  { label: "Descargar CV", href: cvHref, download: true },
 ];
 
 export function SiteFooter() {
@@ -22,14 +22,15 @@ export function SiteFooter() {
       */}
       <div className="mx-auto grid max-w-340 grid-cols-2 gap-x-8 gap-y-10 px-6 pt-16 pb-12 sm:grid-cols-3 sm:px-8 lg:pt-20">
         <nav className="flex flex-col gap-3" aria-label="Secciones">
+          {/* Anclas nativas, no `next/link`: su salto propio ignora el scroll suave. */}
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.href}
               href={link.href}
               className="w-fit font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase transition-colors hover:text-foreground"
             >
               <Bracketed>{link.label}</Bracketed>
-            </Link>
+            </a>
           ))}
         </nav>
 
@@ -55,6 +56,7 @@ export function SiteFooter() {
             <a
               key={link.href}
               href={link.href}
+              download={link.download}
               className="w-fit font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase transition-colors hover:text-foreground"
             >
               <Bracketed>{link.label}</Bracketed>
