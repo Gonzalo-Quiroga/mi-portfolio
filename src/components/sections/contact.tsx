@@ -17,7 +17,18 @@ import { ContactForm } from "./contact-form";
 */
 const contactLinks = [
   { label: "Email", value: contactEmail, href: `mailto:${contactEmail}` },
-  { label: "WhatsApp", value: whatsappDisplay, href: whatsappHref },
+  /*
+    WhatsApp abre en pestaña nueva: `wa.me` navega fuera del sitio, y quien
+    tocaba el número perdía el portfolio de vista en medio de la decisión de
+    escribir. El email no lo necesita — un `mailto:` abre el cliente de correo
+    sin mover la pestaña.
+  */
+  {
+    label: "WhatsApp",
+    value: whatsappDisplay,
+    href: whatsappHref,
+    external: true,
+  },
   { label: "CV", value: "Descargar PDF ↓", href: cvHref, download: true },
 ];
 
@@ -55,7 +66,8 @@ export function Contact() {
               grande de la última sección. El cierre pasa a ser neutro y el
               párrafo de abajo nombra los dos casos explícitamente.
             */}
-            <p className="max-w-105 text-base leading-relaxed font-light text-muted-foreground text-pretty">
+            {/* Mismo escalón de cuerpo que Sobre Mí y el hero: peso normal y `foreground/80`. */}
+            <p className="max-w-105 text-base leading-relaxed text-foreground/80 text-pretty">
               Tomo proyectos freelance de punta a punta y escucho propuestas
               laborales. Contame qué necesitás y te respondo con alcance,
               tiempos y cómo lo llevo a producción.
@@ -67,6 +79,13 @@ export function Contact() {
                   key={link.label}
                   href={link.href}
                   download={link.download}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noopener noreferrer" : undefined}
+                  aria-label={
+                    link.external
+                      ? `${link.label} — abrir en una pestaña nueva`
+                      : undefined
+                  }
                   className="flex items-center justify-between gap-4 border-b border-border py-4 transition-colors hover:text-accent"
                 >
                   <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">

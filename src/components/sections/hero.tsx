@@ -79,13 +79,19 @@ export function Hero() {
         <Reveal className="flex items-start gap-3 text-left sm:items-center sm:text-center">
           <Marker className="mt-[0.42em] bg-muted-foreground/60 sm:mt-0" />
           {/*
-            Cubre los dos públicos que entran al sitio: el cliente que busca a
-            alguien que le haga el proyecto y el reclutador que busca contratar.
-            El "Acerca de" de LinkedIn ya declara ambas cosas
-            (`linkedin-notes.md`), así que decirlo acá no agrega nada nuevo.
+            Antes decía "Disponible para proyectos freelance y nuevas
+            oportunidades". Se cambió por dos motivos: el párrafo de abajo ya
+            dice que toma freelance, y la disponibilidad vuelve a declararse al
+            cierre de Sobre Mí y en toda la sección de Contacto — era la tercera
+            vez. En su lugar va un dato que no está en ningún otro lado visible
+            desde el teléfono, y que en búsquedas remotas es filtro de descarte:
+            país y huso horario.
+
+            La ciudad es Arroyito, pero acá va Córdoba, que es la que un
+            reclutador ubica en el mapa. El detalle exacto está en Sobre Mí.
           */}
           <span className="font-mono text-[10.5px] tracking-[0.14em] text-muted-foreground uppercase">
-            Disponible para proyectos freelance y nuevas oportunidades
+            Córdoba, Argentina · Remoto · GMT-3
           </span>
         </Reveal>
 
@@ -96,13 +102,28 @@ export function Hero() {
             Full Stack
           </h1>
           {/*
-            El párrafo baja a registro micro, como la copy de apoyo de la
-            referencia: se comporta como metadata y deja que el titular sea lo
-            único que se lee de lejos. Medida angosta a propósito — el uppercase
-            con tracking ancho necesita renglones cortos, y centrado necesita
-            `text-balance` para que no queden renglones desparejos.
+            Este párrafo estuvo en registro micro (mono 11px, uppercase,
+            tracking 0.12em) para que el titular fuera lo único que se leyera de
+            lejos. El costo era demasiado alto: es la única frase del sitio que
+            dice qué hace y qué vende, y la mayúscula elimina la forma de
+            palabra — la lectura más lenta posible para el texto que más rápido
+            tiene que entrar. Un reclutador que escanea el hero tres segundos no
+            lo leía.
+
+            Vuelve a sans en caja baja a 15px. La jerarquía contra el titular la
+            sigue dando el tamaño (15px contra hasta 104px), que es de sobra: no
+            hacía falta además degradarlo a metadata.
+
+            El tono sube de `muted-foreground` a `foreground/80`: el sitio tenía
+            titulares en blanco y absolutamente todo lo demás en el mismo gris,
+            sin tono intermedio. Este es el escalón del medio, y el stack en
+            blanco pleno sigue destacando dentro de la frase.
+
+            La medida crece de 460 a 500px porque la caja baja es más densa que
+            la mayúscula con tracking: con el ancho viejo quedaban renglones muy
+            cortos. `text-balance` sigue haciendo falta por el centrado.
           */}
-          <p className="max-w-115 font-mono text-[11px] leading-[1.75] tracking-[0.12em] text-balance text-muted-foreground uppercase">
+          <p className="max-w-125 text-[15px] leading-[1.6] text-balance text-foreground/80">
             Construyo aplicaciones web de punta a punta con{" "}
             <span className="text-foreground">React, Node.js y TypeScript</span>
             . Trabajo en Cloudnet Solutions y tomo proyectos freelance para
@@ -137,28 +158,6 @@ export function Hero() {
         </Reveal>
       </div>
 
-      {/*
-        Ubicación anclada al piso del hero, centrada sobre el mismo eje que el
-        resto del bloque.
-
-        Antes iba en la esquina inferior izquierda, como los bloques sueltos de
-        la referencia (§4). Dejó de funcionar por dos motivos: el backdrop puso
-        ahí una marca de esquina y las líneas la atravesaban, y con la
-        composición ya centrada era el único elemento que rompía el eje.
-
-        No se elimina porque el dato sirve arriba de todo: un reclutador de
-        búsquedas remotas ve país y huso horario sin scrollear.
-
-        `bottom-8` en vez del `bottom-6 sm:left-8` anterior, que corregía el eje
-        horizontal pero no el vertical y dejaba la línea a 24px del piso contra
-        los 32px de las marcas de esquina.
-      */}
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-8 z-10 hidden text-center font-mono text-[10px] tracking-[0.14em] text-muted-foreground/80 uppercase lg:block"
-      >
-        Arroyito, Córdoba, Argentina · Remoto GMT-3
-      </span>
     </section>
   );
 }

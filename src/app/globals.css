@@ -89,13 +89,16 @@
   --a1-glow: color-mix(in srgb, var(--a1) 28%, transparent);
   --a1-line: color-mix(in srgb, var(--a1) 45%, transparent);
   /*
-    Bloom de las miniaturas de mockup. Único de la familia escrito como rgba
-    literal en vez de color-mix, a propósito: el compilador no puede resolver
-    color-mix(var(...)) estáticamente y emite `var(--a1)` crudo como fallback
-    para navegadores sin soporte. En --a1-glow o --a1-line eso degrada a un
-    halo o una línea de 1px y no se nota, pero acá pintaría medio rectángulo
-    de 144x90 de cian puro cinco veces. Si algún día cambia --a1, actualizar
-    también este valor.
+    Halo del cursor en el hero. Nació para el bloom de las miniaturas de mockup,
+    que ya no lo usan (ver `mockup-field` más abajo), y quedó como el color de
+    esa única capa.
+
+    Único de la familia escrito como rgba literal en vez de color-mix, a
+    propósito: el compilador no puede resolver color-mix(var(...))
+    estáticamente y emite `var(--a1)` crudo como fallback para navegadores sin
+    soporte. En --a1-glow o --a1-line eso degrada a un halo o una línea de 1px
+    y no se nota, pero acá llenaría de cian puro un círculo de 384px pegado al
+    cursor. Si algún día cambia --a1, actualizar también este valor.
   */
   --a1-bloom: rgb(6 252 238 / 0.14);
   /* mezclado con el foreground baja croma: lee como blanco frío, no como celeste */
@@ -138,38 +141,36 @@
 }
 
 /*
-  Fondo para las miniaturas que son mockups de dispositivo (§9.4 punto 4, bloom
-  ambiental). Esos PNG vienen con fondo transparente: sin esto el dispositivo
-  queda flotando sobre el gris plano del contenedor, mientras que las capturas
-  de navegador llenan el cuadro a sangre. El campo empareja las dos familias.
+  Fondo para las miniaturas que son mockups de dispositivo. Esos PNG vienen con
+  fondo transparente: sin esto el dispositivo queda flotando sobre el gris plano
+  del contenedor, mientras que las capturas de navegador llenan el cuadro a
+  sangre. El campo empareja las dos familias.
 
-  Sigue sin haber cian saturado: la superficie más clara del campo está en
-  oklch(0.30), muy por debajo del texto, y el croma máximo (0.042) es una
-  cuarta parte del de --a1. El bloom de abajo lee como el reflejo de la propia
-  pantalla del dispositivo sobre la superficie donde se apoya.
+  Degradado gris neutro, sin nada de acento. Hubo una versión con el hue
+  inclinado hacia el cian y un bloom de --a1-bloom desde abajo, documentada
+  entonces como "excepción consciente y acotada" a la regla de que el acento
+  emite y no pinta. Se cayó: primero en teléfono, donde la miniatura pasó a
+  ocupar el ancho de la fila y el área con acento se volvía imposible de
+  justificar, y después en todos lados, porque una vez visto el campo neutro al
+  lado del otro quedó claro que el color no estaba aportando nada que el
+  degradado no resolviera solo.
+
+  Con esto el sitio vuelve a no tener una sola superficie estática pintada con
+  el acento, que es lo que la regla decía desde el principio.
 
   El rango de luminosidad se mantiene dentro del de la página a propósito: la
-  base no baja de --background (#0a0a0a). Una primera versión llegaba a
-  oklch(0.088), que compila a #010203 — más oscuro que el fondo del sitio, con
-  lo que la miniatura se leía como un agujero negro recortado en la página. Si
-  se retoca, verificar los hex compilados, no el OKLCH a ojo.
-
-  Excepción consciente y acotada a la regla de "el acento emite, no pinta"
-  (§9.2): el bloom usa --a1-bloom (14%), más fuerte que --a1-ambient, porque
-  acá el cian tiene que verse y no solo sentirse — decisión del usuario. Es el
-  único lugar estático del sitio donde el acento es perceptible como color,
-  ocupa cinco rectángulos de 144x90 y no toca texto ni jerarquía. No
-  extenderlo a otras superficies.
+  base no baja de --background (#0a0a0a) — compila a #101011. Una primera
+  versión llegaba a oklch(0.088), que da #010203, más oscuro que el fondo del
+  sitio, con lo que la miniatura se leía como un agujero negro recortado en la
+  página. Si se retoca, verificar los hex compilados, no el OKLCH a ojo.
 */
 @utility mockup-field {
-  background:
-    radial-gradient(82% 72% at 50% 106%, var(--a1-bloom), transparent 72%),
-    linear-gradient(
-      158deg,
-      oklch(0.3 0.042 200) 0%,
-      oklch(0.232 0.032 200) 55%,
-      oklch(0.175 0.02 205) 100%
-    );
+  background: linear-gradient(
+    158deg,
+    oklch(0.3 0.004 285) 0%,
+    oklch(0.232 0.003 285) 55%,
+    oklch(0.175 0.002 285) 100%
+  );
 }
 
 /*
@@ -179,8 +180,8 @@
   Inspirado en "Digital Serenity" de Le Thanh (21st.dev/@minhxthanh), que no
   declara licencia: no se copió el componente, se reimplementaron desde cero
   las técnicas —grilla SVG tenue, líneas que se dibujan con stroke-dashoffset,
-  puntos que laten, partículas a la deriva, halo que sigue al cursor— con los
-  tokens y los patrones de este proyecto.
+  puntos que laten, halo que sigue al cursor— con los tokens y los patrones de
+  este proyecto.
 
   Todo esto es decorativo y va detrás del contenido. Las animaciones usan solo
   `opacity`, `transform` y `stroke-dashoffset` para que corran en compositor.
@@ -209,27 +210,6 @@
   50% {
     opacity: 0.55;
     transform: scale(1.35);
-  }
-}
-
-/* Deriva de las partículas. Recorridos cortos: sugiere polvo en suspensión. */
-@keyframes hero-particle-drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0.14;
-  }
-  25% {
-    transform: translate3d(5px, -11px, 0);
-    opacity: 0.42;
-  }
-  50% {
-    transform: translate3d(-4px, -6px, 0);
-    opacity: 0.26;
-  }
-  75% {
-    transform: translate3d(7px, -16px, 0);
-    opacity: 0.5;
   }
 }
 
@@ -282,9 +262,6 @@
   }
   [data-hero-backdrop] [data-hero-corner] {
     opacity: 1 !important;
-  }
-  [data-hero-backdrop] [data-hero-particle] {
-    opacity: 0.28 !important;
   }
 }
 

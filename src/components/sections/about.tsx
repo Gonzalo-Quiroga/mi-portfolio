@@ -31,19 +31,19 @@ const aboutPhoto = "/about/about-v3.webp";
 const facts = [
   {
     label: "Rol actual",
+    value: "Desarrollador Full Stack",
     /*
-      Corte forzado: la ficha de formación ocupa dos renglones y esta uno solo,
-      lo que dejaba la fila desalineada. El salto es de composición, no de
-      contenido — por eso va acá y no depende de cuánto mida la columna.
+      Empresa y antigüedad en renglones separados, no unidas por el `·`: son
+      dos datos de distinto orden y el punto medio los leía como uno solo. De
+      paso la ficha llega a tres líneas, como la de formación.
     */
-    value: (
+    detail: (
       <>
-        Desarrollador
+        Cloudnet Solutions
         <br />
-        Full Stack
+        Desde 2023
       </>
     ),
-    detail: "Cloudnet Solutions · desde 2023",
   },
   {
     label: "Freelance",
@@ -144,11 +144,26 @@ export function About() {
 
           <Reveal delay={0.06} className="flex max-w-170 flex-col gap-6">
             {/*
+              Los cuatro párrafos iban en `font-light text-muted-foreground`.
+              Los dos ajustes van juntos porque el problema era uno solo: sobre
+              #0a0a0a un peso light se afina y el trazo se deshilacha, y encima
+              el gris apagado lo alejaba todavía más del fondo mínimo de lectura
+              cómoda. Este es el cuerpo de texto más largo del sitio — el único
+              lugar donde alguien lee de corrido en vez de escanear — y era el
+              peor tratado.
+
+              Pasan a peso normal y a `foreground/80`, el mismo escalón medio
+              que el párrafo del hero. `muted-foreground` queda reservado para
+              lo que sí es metadata: labels, índices, contadores y la línea de
+              estado de más abajo, que por contraste ahora se lee como otro
+              nivel y no como más de lo mismo.
+            */}
+            {/*
               Plural deliberado en "desarrollamos y mantenemos": varias de estas
               tecnologías son aporte del equipo, no 100% individual. El párrafo
               siguiente, que sí es propio y verificable, vuelve al singular.
             */}
-            <p className="text-base leading-[1.72] font-light text-muted-foreground text-pretty">
+            <p className="text-base leading-[1.72] text-foreground/80 text-pretty">
               Trabajo en Cloudnet Solutions, donde desarrollamos y mantenemos
               aplicaciones para múltiples clientes: APIs REST con Express y
               Sequelize sobre PostgreSQL y SQL Server, autenticación con JWT y
@@ -162,18 +177,18 @@ export function About() {
               existe en el organigrama, y se defiende con ejemplos en una
               entrevista.
             */}
-            <p className="text-base leading-[1.72] font-light text-muted-foreground text-pretty">
+            <p className="text-base leading-[1.72] text-foreground/80 text-pretty">
               Tengo trato directo con clientes y stakeholders para traducir
               necesidades de negocio en soluciones técnicas. Hoy mi trabajo está
               enfocado en el frontend: reviso el código del equipo, doy la
               aprobación final de los cambios que entran y acompaño a los
               desarrolladores junior.
             </p>
-            <p className="text-base leading-[1.72] font-light text-muted-foreground text-pretty">
+            <p className="text-base leading-[1.72] text-foreground/80 text-pretty">
               También desarrollo proyectos freelance de punta a punta para
               emprendedores y pequeñas empresas.
             </p>
-            <p className="text-base leading-[1.72] font-light text-muted-foreground text-pretty">
+            <p className="text-base leading-[1.72] text-foreground/80 text-pretty">
               Incorporo asistentes de IA como Claude Code en mi flujo de trabajo
               para acelerar el desarrollo sin resignar calidad, y sigo
               formándome en la Tecnicatura Superior en Desarrollo Web y
@@ -181,9 +196,8 @@ export function About() {
             </p>
             {/*
               Registro micro y no un cuarto párrafo: esto es metadata de estado
-              para el reclutador, mientras que el link de abajo le habla al
-              cliente. El inglés va acá porque en búsquedas remotas suele ser un
-              filtro duro.
+              para el reclutador. El inglés va acá porque en búsquedas remotas
+              suele ser un filtro duro.
             */}
             <p className="mt-1 flex items-start gap-3 font-mono text-[10.5px] leading-[1.7] tracking-[0.14em] text-muted-foreground/80 uppercase">
               <Marker className="mt-[0.42em] bg-muted-foreground/50" />
@@ -196,7 +210,9 @@ export function About() {
               href="#contacto"
               className="flex w-fit items-center gap-2 font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase transition-colors hover:text-foreground"
             >
-              <Bracketed>Si tenés un proyecto en mente, escribime</Bracketed>
+              <Bracketed>
+                Si tenés un proyecto o una propuesta en mente, escribime
+              </Bracketed>
               <span aria-hidden>→</span>
             </a>
           </Reveal>

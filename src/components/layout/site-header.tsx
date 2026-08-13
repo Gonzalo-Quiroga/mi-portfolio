@@ -2,14 +2,113 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { navLinks } from "@/data/nav";
 import { Bracketed } from "@/components/ui/section-header";
 
+/**
+ * Sección visible, para marcar el ítem de nav correspondiente.
+ *
+ * Un nav de anclas sin indicador obliga al visitante a acordarse de dónde
+ * quedó: es la diferencia entre un menú decorativo y uno que orienta.
+ *
+ * Se resuelve con IntersectionObserver y no escuchando `scroll`: el observer
+ * solo despierta cuando una sección cruza la banda, mientras que un listener de
+ * scroll corre en cada frame de la rueda midiendo secciones que no se movieron.
+ *
+ * `rootMargin: "-22% 0px -70% 0px"` recorta el viewport a una franja fina cerca
+ * del borde superior, justo debajo del header sticky. Sin esa franja, con
+ * secciones de alto muy distinto, hay varias intersecando a la vez casi siempre
+ * y el criterio de desempate manda más que la medición.
+ *
+ * Cuando dos secciones cruzan la franja al mismo tiempo (el límite entre ambas
+ * está ahí adentro) gana la última en orden del documento: es la que está
+ * entrando, que es la que el ojo ya está leyendo.
+ *
+ * El hero queda afuera a propósito: no tiene ítem en el nav, así que arriba de
+ * todo no hay nada marcado y eso es correcto.
+ */
+function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState<string | null>(null);
+
+  useEffect(() => {
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (sections.length === 0) return;
+
+    const crossing = new Set<string>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) crossing.add(entry.target.id);
+          else crossing.delete(entry.target.id);
+        }
+        /*
+          Sin nadie en la franja no se apaga el indicador: pasa al scrollear
+          entre dos secciones largas o al llegar al footer, y apagarlo ahí
+          parpadea. Se mantiene el último válido.
+        */
+        const last = [...ids].reverse().find((id) => crossing.has(id));
+        if (last) setActive(last);
+      },
+      { rootMargin: "-22% 0px -70% 0px" },
+    );
+
+    for (const section of sections) observer.observe(section);
+    return () => observer.disconnect();
+  }, [ids]);
+
+  return active;
+}
+
+/* Fuera del componente: array estable, así el efecto de arriba no se re-suscribe en cada render. */
+const sectionIds = navLinks.map((link) => link.href.replace("#", ""));
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const reduceMotion = useReducedMotion();
+  const active = useActiveSection(sectionIds);
+  const headerRef = useRef<HTMLElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  /*
+    Cerrar el panel con Escape y tocando fuera. Un menú que solo cierra con su
+    propio botón deja al visitante atrapado si lo abrió sin querer, que en
+    teléfono pasa seguido.
+
+    El foco vuelve al botón solo en el caso de Escape: ahí el usuario está en el
+    teclado y perder el foco lo manda al principio del documento. Al tocar
+    afuera, en cambio, ya eligió otro punto de la página y devolvérselo al botón
+    sería arrebatárselo.
+
+    `pointerdown` y no `click`: dispara antes, así el panel no queda un
+    instante abierto tapando lo que la persona quiso tocar.
+  */
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      toggleRef.current?.focus();
+    };
+
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node | null;
+      if (target && headerRef.current?.contains(target)) return;
+      setOpen(false);
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [open]);
 
   return (
     /*
@@ -18,7 +117,10 @@ export function SiteHeader() {
       salto propio que ignora el `scroll-behavior: smooth` del documento. Con el
       ancla nativa el desplazamiento suave lo hace el navegador.
     */
-    <header className="sticky top-0 z-50 border-b border-border bg-background/72 backdrop-blur-md">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-50 border-b border-border bg-background/72 backdrop-blur-md"
+    >
       <nav className="mx-auto flex h-16 max-w-340 items-center justify-between px-6 sm:px-8">
         <a
           href="#home"
@@ -50,26 +152,46 @@ export function SiteHeader() {
           48px — a 640px eso no entra, y el nav terminaba pegado al nombre.
         */}
         <div className="hidden items-center gap-4 md:flex">
-          {navLinks.map((link, i) => (
-            <div key={link.href} className="flex items-center gap-4">
-              {i > 0 && (
-                <span aria-hidden className="block size-1 bg-muted-foreground/40" />
-              )}
-              <a
-                href={link.href}
-                className={`font-mono text-[11px] tracking-[0.14em] uppercase transition-[color,opacity] ${
-                  link.emphasis
-                    ? "text-foreground hover:opacity-70"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {link.emphasis ? <Bracketed>{link.label}</Bracketed> : link.label}
-              </a>
-            </div>
-          ))}
+          {navLinks.map((link, i) => {
+            const isActive = active === sectionIds[i];
+
+            return (
+              <div key={link.href} className="flex items-center gap-4">
+                {i > 0 && (
+                  <span aria-hidden className="block size-1 bg-muted-foreground/40" />
+                )}
+                {/*
+                  La marca de sección activa es una hairline de 1px en
+                  `--a1-line`, no un cambio de color: el ítem de Contacto ya va
+                  en blanco pleno por ser el destacado, así que subirle el tono
+                  no lo distinguiría de su estado normal. La línea funciona
+                  igual en los cuatro y es el uso del acento que el sistema ya
+                  tiene (emite, no pinta).
+
+                  Va con `after:` y opacidad y no montando el elemento: así la
+                  aparición se puede transicionar y el ancho de la línea no
+                  depende de que el nodo exista.
+                */}
+                <a
+                  href={link.href}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`relative font-mono text-[11px] tracking-[0.14em] uppercase transition-[color,opacity] after:absolute after:inset-x-0 after:-bottom-2 after:h-px after:bg-a1-line after:opacity-0 after:transition-opacity after:duration-300 ${
+                    isActive ? "after:opacity-100" : ""
+                  } ${
+                    link.emphasis || isActive
+                      ? "text-foreground hover:opacity-70"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {link.emphasis ? <Bracketed>{link.label}</Bracketed> : link.label}
+                </a>
+              </div>
+            );
+          })}
         </div>
 
         <button
+          ref={toggleRef}
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
@@ -132,20 +254,25 @@ export function SiteHeader() {
             className="absolute inset-x-0 top-full overflow-hidden bg-background/92 backdrop-blur-md md:hidden"
           >
             <div className="flex flex-col gap-1 px-6 py-3">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className={`rounded-md px-3 py-2.5 font-mono text-[12px] tracking-[0.14em] uppercase transition-colors hover:bg-foreground/4 ${
-                    link.emphasis
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {link.emphasis ? <Bracketed>{link.label}</Bracketed> : link.label}
-                </a>
-              ))}
+              {navLinks.map((link, i) => {
+                const isActive = active === sectionIds[i];
+
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    aria-current={isActive ? "true" : undefined}
+                    onClick={() => setOpen(false)}
+                    className={`rounded-md px-3 py-2.5 font-mono text-[12px] tracking-[0.14em] uppercase transition-colors hover:bg-foreground/4 ${
+                      link.emphasis || isActive
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {link.emphasis ? <Bracketed>{link.label}</Bracketed> : link.label}
+                  </a>
+                );
+              })}
             </div>
           </motion.div>
         )}
