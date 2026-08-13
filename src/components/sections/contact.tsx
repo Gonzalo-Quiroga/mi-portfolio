@@ -66,7 +66,8 @@ export function Contact() {
               grande de la última sección. El cierre pasa a ser neutro y el
               párrafo de abajo nombra los dos casos explícitamente.
             */}
-            <p className="max-w-105 text-base leading-relaxed font-light text-muted-foreground text-pretty">
+            {/* Mismo escalón de cuerpo que Sobre Mí y el hero: peso normal y `foreground/80`. */}
+            <p className="max-w-105 text-base leading-relaxed text-foreground/80 text-pretty">
               Tomo proyectos freelance de punta a punta y escucho propuestas
               laborales. Contame qué necesitás y te respondo con alcance,
               tiempos y cómo lo llevo a producción.

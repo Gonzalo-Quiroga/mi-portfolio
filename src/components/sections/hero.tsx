@@ -102,13 +102,28 @@ export function Hero() {
             Full Stack
           </h1>
           {/*
-            El párrafo baja a registro micro, como la copy de apoyo de la
-            referencia: se comporta como metadata y deja que el titular sea lo
-            único que se lee de lejos. Medida angosta a propósito — el uppercase
-            con tracking ancho necesita renglones cortos, y centrado necesita
-            `text-balance` para que no queden renglones desparejos.
+            Este párrafo estuvo en registro micro (mono 11px, uppercase,
+            tracking 0.12em) para que el titular fuera lo único que se leyera de
+            lejos. El costo era demasiado alto: es la única frase del sitio que
+            dice qué hace y qué vende, y la mayúscula elimina la forma de
+            palabra — la lectura más lenta posible para el texto que más rápido
+            tiene que entrar. Un reclutador que escanea el hero tres segundos no
+            lo leía.
+
+            Vuelve a sans en caja baja a 15px. La jerarquía contra el titular la
+            sigue dando el tamaño (15px contra hasta 104px), que es de sobra: no
+            hacía falta además degradarlo a metadata.
+
+            El tono sube de `muted-foreground` a `foreground/80`: el sitio tenía
+            titulares en blanco y absolutamente todo lo demás en el mismo gris,
+            sin tono intermedio. Este es el escalón del medio, y el stack en
+            blanco pleno sigue destacando dentro de la frase.
+
+            La medida crece de 460 a 500px porque la caja baja es más densa que
+            la mayúscula con tracking: con el ancho viejo quedaban renglones muy
+            cortos. `text-balance` sigue haciendo falta por el centrado.
           */}
-          <p className="max-w-115 font-mono text-[11px] leading-[1.75] tracking-[0.12em] text-balance text-muted-foreground uppercase">
+          <p className="max-w-125 text-[15px] leading-[1.6] text-balance text-foreground/80">
             Construyo aplicaciones web de punta a punta con{" "}
             <span className="text-foreground">React, Node.js y TypeScript</span>
             . Trabajo en Cloudnet Solutions y tomo proyectos freelance para

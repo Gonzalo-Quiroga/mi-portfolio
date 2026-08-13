@@ -52,11 +52,18 @@ export function Skills() {
                   {String(category.skills.length).padStart(2, "0")}
                 </span>
               </div>
+              {/*
+                Peso normal y no light: son 32 nombres cortos de una lista
+                apilada, el caso donde un trazo fino sobre negro más se
+                deshilacha. El tono queda un escalón por debajo del cuerpo
+                (`/70` contra `/80`) porque acá el título de categoría en
+                blanco es el que ordena la columna.
+              */}
               <ul className="flex flex-col gap-2.5">
                 {category.skills.map((skill) => (
                   <li
                     key={skill}
-                    className="text-[15px] font-light tracking-[-0.01em] text-muted-foreground"
+                    className="text-[15px] tracking-[-0.01em] text-foreground/70"
                   >
                     {skill}
                   </li>

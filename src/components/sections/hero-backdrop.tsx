@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 /**
  * Atmósfera del hero: grilla, líneas de eje que se dibujan, puntos que laten,
- * partículas a la deriva, halo que sigue al cursor y onda al hacer clic.
+ * halo que sigue al cursor y onda al hacer clic.
  *
  * Inspirado en "Digital Serenity" de Le Thanh (21st.dev/@minhxthanh). No es una
  * copia: ese componente resuelve todo mutando el DOM a mano con
@@ -40,14 +40,20 @@ const DOTS = [
   { cx: "50%", cy: "50%", r: 1.5, delay: "2.6s" },
 ];
 
-/** Partículas sueltas. Se mantienen lejos del centro para no ensuciar el título. */
-const PARTICLES = [
-  { top: "24%", left: "13%", delay: "0s", duration: "7s" },
-  { top: "62%", left: "86%", delay: "1.1s", duration: "8.5s" },
-  { top: "41%", left: "8%", delay: "2.2s", duration: "6.5s" },
-  { top: "76%", left: "91%", delay: "0.6s", duration: "9s" },
-  { top: "17%", left: "78%", delay: "3s", duration: "7.5s" },
-];
+/*
+  Acá vivían cinco partículas a la deriva. Se quitaron: eran la segunda
+  animación infinita del hero, junto con el latido de los puntos, y dos ciclos
+  perpetuos superpuestos en la primera pantalla son lo contrario de lo que el
+  resto del sitio declara.
+
+  Entre las dos se eligió cortar esta. El latido está anclado a las
+  intersecciones de las líneas de eje, o sea que pertenece a la grilla y refuerza
+  la estructura; las partículas eran polvo genérico, el recurso más visto y el
+  único elemento del fondo que no se apoyaba en el vocabulario del sistema.
+
+  Queda entonces: grilla, líneas que se dibujan una vez, puntos que laten,
+  marcas de esquina y el halo del cursor.
+*/
 
 const CORNERS = [
   "top-6 left-6 border-t border-l sm:top-8 sm:left-8",
@@ -103,6 +109,16 @@ export function HeroBackdrop() {
     const onLeave = () => root.style.setProperty("--hero-glow-opacity", "0");
 
     const onClick = (event: MouseEvent) => {
+      /*
+        Nada de ondas cuando se toca algo que hace algo. El clic sobre los CTA
+        del hero disparaba una onda que competía con la respuesta real del
+        botón, y con la página scrolleada el header sticky queda por encima del
+        rectángulo del hero: tocar el nav prendía una onda debajo del header,
+        que se leía como un glitch.
+      */
+      const target = event.target as Element | null;
+      if (target?.closest("a, button, input, textarea, label, header")) return;
+
       const rect = root.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
@@ -115,15 +131,49 @@ export function HeroBackdrop() {
       );
     };
 
-    window.addEventListener("pointermove", onMove, { passive: true });
-    document.addEventListener("pointerleave", onLeave);
-    window.addEventListener("click", onClick);
+    /*
+      Los listeners viven en `window`, así que sin este control seguían activos
+      con el hero fuera de pantalla: mover el mouse leyendo Proyectos disparaba
+      un `getBoundingClientRect` por frame para posicionar un halo que nadie
+      podía ver. El observer los engancha y desengancha según la sección esté o
+      no en el viewport.
 
-    return () => {
-      if (frame) cancelAnimationFrame(frame);
+      El halo se apaga al desenganchar: si no, al volver a subir se lo encuentra
+      encendido en la última posición conocida, que ya no tiene nada que ver con
+      dónde está el cursor.
+    */
+    let attached = false;
+
+    const attach = () => {
+      if (attached) return;
+      attached = true;
+      window.addEventListener("pointermove", onMove, { passive: true });
+      document.addEventListener("pointerleave", onLeave);
+      window.addEventListener("click", onClick);
+    };
+
+    const detach = () => {
+      if (!attached) return;
+      attached = false;
+      if (frame) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+      }
       window.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerleave", onLeave);
       window.removeEventListener("click", onClick);
+      root.style.setProperty("--hero-glow-opacity", "0");
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) attach();
+      else detach();
+    });
+    observer.observe(root);
+
+    return () => {
+      observer.disconnect();
+      detach();
     };
   }, []);
 
@@ -237,35 +287,33 @@ export function HeroBackdrop() {
         />
       ))}
 
-      {PARTICLES.map((particle) => (
-        <span
-          key={`${particle.top}-${particle.left}`}
-          data-hero-particle
-          className="absolute size-px rounded-full bg-muted-foreground opacity-0"
-          style={{
-            top: particle.top,
-            left: particle.left,
-            animation: `hero-particle-drift ${particle.duration} ease-in-out ${particle.delay} infinite`,
-          }}
-        />
-      ))}
-
       {/*
         Halo del cursor. Es el uso canónico del acento —emite, no pinta— y el
         único elemento del fondo que lleva cian. Arranca invisible: sin puntero
         (mobile, o antes del primer movimiento) no se ve nada.
+
+        Se mueve con `transform` y no con `left`/`top`. La diferencia no es de
+        estilo: `left` y `top` son propiedades de layout, así que cada frame de
+        puntero forzaba al navegador a recalcular posición y volver a pintar un
+        gaussiano de 384px — el trabajo más caro del hero, repetido a la
+        frecuencia del mouse. `transform` lo resuelve el compositor, sin tocar
+        layout ni pintura. El `willChange` viejo (`left, top`) además no servía
+        para nada: esas propiedades no se pueden promover a capa.
+
+        El `translate3d` posiciona y el `translate(-50%, -50%)` que le sigue
+        centra el círculo sobre ese punto — los porcentajes de `translate` son
+        del propio elemento, por eso el orden importa.
       */}
       <div
-        className="absolute size-96 rounded-full blur-3xl"
+        className="absolute top-0 left-0 size-96 rounded-full blur-3xl"
         style={{
-          left: "var(--hero-glow-x, 50%)",
-          top: "var(--hero-glow-y, 50%)",
           opacity: "var(--hero-glow-opacity, 0)",
-          transform: "translate(-50%, -50%)",
+          transform:
+            "translate3d(var(--hero-glow-x, 0px), var(--hero-glow-y, 0px), 0) translate(-50%, -50%)",
           background:
             "radial-gradient(circle, var(--a1-bloom), transparent 70%)",
           transition: "opacity 400ms ease-out",
-          willChange: "left, top",
+          willChange: "transform",
         }}
       />
 

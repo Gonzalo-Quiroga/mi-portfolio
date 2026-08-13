@@ -16,13 +16,21 @@ export function Marker({ className = "bg-muted-foreground" }: { className?: stri
  * barato resulta portar.
  */
 export function Bracketed({ children }: { children: ReactNode }) {
+  /*
+    Sube de 55% a 70%. Al 55% los corchetes daban ~2.8:1 contra el fondo, por
+    debajo del mínimo de texto. Son `aria-hidden`, así que formalmente están
+    exentos, pero no son adorno: en el footer y en los CTA secundarios son la
+    única señal visual de que eso es un link — y esa señal no puede estar en el
+    límite de lo perceptible. Al 70% quedan sobre 4:1 y siguen un escalón por
+    debajo de la etiqueta, que es lo que se buscaba.
+  */
   return (
     <>
-      <span aria-hidden className="text-muted-foreground/55">
+      <span aria-hidden className="text-muted-foreground/70">
         [
       </span>
       {children}
-      <span aria-hidden className="text-muted-foreground/55">
+      <span aria-hidden className="text-muted-foreground/70">
         ]
       </span>
     </>
