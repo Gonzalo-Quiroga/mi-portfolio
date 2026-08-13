@@ -31,19 +31,19 @@ const aboutPhoto = "/about/about-v3.webp";
 const facts = [
   {
     label: "Rol actual",
+    value: "Desarrollador Full Stack",
     /*
-      Corte forzado: la ficha de formación ocupa dos renglones y esta uno solo,
-      lo que dejaba la fila desalineada. El salto es de composición, no de
-      contenido — por eso va acá y no depende de cuánto mida la columna.
+      Empresa y antigüedad en renglones separados, no unidas por el `·`: son
+      dos datos de distinto orden y el punto medio los leía como uno solo. De
+      paso la ficha llega a tres líneas, como la de formación.
     */
-    value: (
+    detail: (
       <>
-        Desarrollador
+        Cloudnet Solutions
         <br />
-        Full Stack
+        Desde 2023
       </>
     ),
-    detail: "Cloudnet Solutions · desde 2023",
   },
   {
     label: "Freelance",
@@ -181,9 +181,8 @@ export function About() {
             </p>
             {/*
               Registro micro y no un cuarto párrafo: esto es metadata de estado
-              para el reclutador, mientras que el link de abajo le habla al
-              cliente. El inglés va acá porque en búsquedas remotas suele ser un
-              filtro duro.
+              para el reclutador. El inglés va acá porque en búsquedas remotas
+              suele ser un filtro duro.
             */}
             <p className="mt-1 flex items-start gap-3 font-mono text-[10.5px] leading-[1.7] tracking-[0.14em] text-muted-foreground/80 uppercase">
               <Marker className="mt-[0.42em] bg-muted-foreground/50" />
@@ -196,7 +195,9 @@ export function About() {
               href="#contacto"
               className="flex w-fit items-center gap-2 font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase transition-colors hover:text-foreground"
             >
-              <Bracketed>Si tenés un proyecto en mente, escribime</Bracketed>
+              <Bracketed>
+                Si tenés un proyecto o una propuesta en mente, escribime
+              </Bracketed>
               <span aria-hidden>→</span>
             </a>
           </Reveal>

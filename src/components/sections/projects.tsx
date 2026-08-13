@@ -121,18 +121,27 @@ export function Projects() {
             }
             aside={
               /*
-                Reemplaza al link "[ Ver todo en GitHub ]" que había acá.
-                Ese link mandaba a un perfil casi vacío: el código de todos
-                estos proyectos es del cliente o de Cloudnet y sus repos son
-                privados, así que GitHub no muestra el grueso del trabajo.
-                Declararlo una vez, acá, es más honesto que un link que no
-                cumple lo que promete — y que repetir "privado" en once filas.
+                La escala va antes de la lista y no después: sin este dato, once
+                filas se leen como "todo lo que hizo", y el visitante ya se formó
+                esa idea para cuando llega al pie. Puesto acá, convierte la lista
+                en una decisión editorial desde la primera fila.
+
+                Los dos tipos de producto y los cuatro rubros no son adorno: son
+                lo que un cliente usa para saber si su caso se parece a alguno, y
+                cada uno se verifica en las filas de abajo — gestión inmobiliaria,
+                logística, agro, fábrica, pesquera y reservas por un lado; sitios
+                corporativos y de marca por el otro.
+
+                No se dice "e-commerce": ninguna de las once descripciones declara
+                tienda ni pagos. Mercado Pago está en el stack, pero no en estos
+                proyectos.
               */
               <p className="flex items-start gap-3 font-mono text-[10.5px] leading-[1.7] tracking-[0.14em] text-muted-foreground/80 uppercase">
                 <Marker className="mt-[0.42em] bg-muted-foreground/50" />
                 <span>
-                  El código es propiedad de cada cliente y sus repositorios son
-                  privados. Los links llevan al producto en producción.
+                  Selección de once entre más de veinte proyectos entregados:
+                  sistemas de gestión y sitios corporativos, en industria, agro,
+                  logística y turismo.
                 </span>
               </p>
             }
@@ -158,8 +167,15 @@ export function Projects() {
               375px, con el padding de la sección, 7rem dejaba ~195px para
               título y descripción y el texto se partía en escalera.
             */
+            /*
+              El hover vive acá y no en el `<a>`: las filas sin producto
+              público lo comparten, porque una lista donde solo la mitad de las
+              filas reacciona al mouse se lee como un error de estilo, no como
+              una distinción. Lo que no se comparte es el cursor — el `<div>` no
+              lo cambia — ni el acento sobre el título, que sí es señal de link.
+            */
             const rowClass =
-              "grid grid-cols-[5rem_minmax(0,1fr)] items-center gap-x-4 gap-y-3 border-b border-border px-1 py-4 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-x-5 sm:px-2 sm:py-5 lg:grid-cols-[9rem_minmax(0,1.15fr)_minmax(0,1fr)_auto] lg:gap-x-8 lg:py-6";
+              "group grid grid-cols-[5rem_minmax(0,1fr)] items-center gap-x-4 gap-y-3 border-b border-border px-1 py-4 transition-[background-color,box-shadow] hover:glow-a1 hover:bg-foreground/2 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-x-5 sm:px-2 sm:py-5 lg:grid-cols-[9rem_minmax(0,1.15fr)_minmax(0,1fr)_auto] lg:gap-x-8 lg:py-6";
 
             return (
               <Reveal key={project.id} delay={(i % 4) * 0.055}>
@@ -169,7 +185,7 @@ export function Projects() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${project.title} — abrir en una pestaña nueva`}
-                    className={`group transition-[background-color,box-shadow] hover:glow-a1 hover:bg-foreground/2 ${rowClass}`}
+                    className={rowClass}
                   >
                     <ProjectRow project={project} />
                   </a>
@@ -184,16 +200,21 @@ export function Projects() {
         </div>
 
         {/*
-          Cierre de sección. Convierte once filas en una decisión editorial:
-          sin esto, un visitante no sabe si son todos los proyectos que hizo o
-          una selección, y por defecto asume lo primero. Una línea, en el mismo
-          registro micro que la nota de la cabecera — no necesita más.
+          Cierre de sección, y reemplazo del link "[ Ver todo en GitHub ]" que
+          había acá: ese link mandaba a un perfil casi vacío, porque el código
+          de estos proyectos es del cliente o de Cloudnet y sus repos son
+          privados. Va al pie y no en la cabecera porque responde una pregunta
+          que recién aparece después de recorrer la lista y ver que varias filas
+          no llevan a ningún lado. Declararlo una vez acá es más honesto que un
+          link que no cumple lo que promete, y más limpio que repetir "privado"
+          en once filas.
         */}
         <Reveal delay={0.06}>
           <p className="mt-8 flex items-start gap-3 font-mono text-[10.5px] leading-[1.7] tracking-[0.14em] text-muted-foreground/80 uppercase lg:mt-10">
             <Marker className="mt-[0.42em] bg-muted-foreground/40" />
             <span>
-              Selección de once entre más de veinte proyectos entregados.
+              El código es propiedad de cada cliente y sus repositorios son
+              privados. Los links llevan al producto en producción.
             </span>
           </p>
         </Reveal>

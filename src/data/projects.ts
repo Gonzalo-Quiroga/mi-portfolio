@@ -216,6 +216,6 @@ export const projects: Project[] = [
     repo: null,
     image: "/proyectos/jaspe.webp",
     imageKind: "screenshot",
-    tech: ["HTML5", "CSS", "JavaScript"],
+    tech: ["HTML5", "CSS", "Bootstrap", "JavaScript"],
   },
 ];

@@ -10,6 +10,13 @@ import type { SkillCategory } from "@/types/skill";
  * Apps / App Service, Vercel y Supabase, todo PaaS y serverless, sin
  * contenedores. Ya se había sacado del titular y de las aptitudes de LinkedIn;
  * el portfolio era el último lugar donde quedaba.
+ *
+ * "Claude Cowork" se sacó por decisión del usuario el 2026-08-13. Estaba acá
+ * desde el 2026-08-10 para quedar en línea con el CV, pero `linkedin-notes.md`
+ * la traía marcada como la única de la lista sin verificar con la misma
+ * profundidad que el resto ("que sea uso real y regular, no algo probado una
+ * vez"). Si vuelve a agregarse, revisar antes ese pendiente. Claude Code y
+ * Claude Design se quedan: los dos tienen uso documentado.
  */
 export const skillCategories: SkillCategory[] = [
   {
@@ -60,13 +67,6 @@ export const skillCategories: SkillCategory[] = [
       "Jira",
       "Claude Code",
       "Claude Design",
-      /*
-        Confirmada por el usuario el 2026-08-10, para quedar en línea con el CV.
-        `linkedin-notes.md` la tenía marcada como pendiente de verificar ("que
-        sea uso real y regular, no algo probado una vez"): ese pendiente se
-        resuelve acá, no queda abierto.
-      */
-      "Claude Cowork",
     ],
   },
 ];

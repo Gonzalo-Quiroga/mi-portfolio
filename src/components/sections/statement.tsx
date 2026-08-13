@@ -9,14 +9,32 @@ import { Marker } from "@/components/ui/section-header";
  * márgenes que acotan el ancho del bloque. Le da al scroll un momento de
  * respiro entre dos secciones densas.
  *
- * La frase no es nueva: sale del párrafo de Sobre Mí, donde estaba enterrada
- * entre otras tres. Promoverla a su propio bloque no agrega contenido, le da
- * el peso que ya merecía.
+ * La frase sale del "Acerca de" aprobado (`linkedin-notes.md`), donde va como
+ * párrafo de fondo, y conserva su estructura y su voz. Tres retoques, todos
+ * del 2026-08-13 y todos por lo mismo — que acá el texto va a 2.35rem y cada
+ * palabra se lee sola, mientras que en LinkedIn se diluye en el párrafo:
  *
- * "Y reparación de equipos informáticos" se había perdido al mover la frase.
- * Está en el "Acerca de" aprobado (`linkedin-notes.md`) y es lo que sostiene
- * "resolución práctica de problemas": sin eso, la segunda mitad de la oración
- * no tiene de dónde agarrarse.
+ * 1. Se cae "y reparación de equipos informáticos". No por falsa — es
+ *    experiencia real y sigue en el CV y en LinkedIn — sino porque a tamaño de
+ *    titular compite con el rol en vez de sumarle, y ningún proyecto ni
+ *    habilidad del sitio la sostiene.
+ * 2. "Complemento mi perfil técnico con" pasa a "Al desarrollo le sumo": el
+ *    original es lenguaje de formulario y gastaba cuatro palabras de trámite
+ *    antes de llegar al contenido.
+ * 3. "Resolución práctica de problemas" pasa a "un resultado que llega a
+ *    producción". Esa tercera pata la sostenía la reparación de equipos; al
+ *    sacarla quedaba sin respaldo en ningún lado del sitio. El reemplazo sí lo
+ *    tiene: el despliegue continuo en Azure que detalla Sobre Mí.
+ *
+ * El diseño de interfaces, en cambio, sí tiene respaldo a la vista: en seis de
+ * los once proyectos de `data/projects.ts` el aporte declarado lo incluye.
+ *
+ * Se probaron cuatro reescrituras completas y se volvió a esta, que es la que
+ * el usuario reconoce como propia. Quedan anotadas para no repetirlas:
+ * "diseño la interfaz y después la construyo", "un proyecto de punta a punta
+ * con un solo interlocutor", "llevo cada proyecto de punta a punta" y
+ * "construyo productos digitales completos". El reparo sobre las tres últimas
+ * era el mismo: sonaban a agencia, no a él.
  */
 export function Statement() {
   return (
@@ -32,11 +50,10 @@ export function Statement() {
         </span>
         <Reveal className="flex-1">
           <p className="mx-auto max-w-215 text-center text-[clamp(1.35rem,2.9vw,2.35rem)] leading-[1.22] font-normal tracking-[-0.025em] text-balance">
-            Complemento mi perfil técnico con diseño de interfaces y reparación
-            de equipos informáticos.{" "}
+            Al desarrollo le sumo el diseño de interfaces.{" "}
             <span className="text-muted-foreground">
               Eso me da una mirada integral: funcionalidad, experiencia de
-              usuario y resolución práctica de problemas.
+              usuario y un resultado que llega a producción.
             </span>
           </p>
         </Reveal>
