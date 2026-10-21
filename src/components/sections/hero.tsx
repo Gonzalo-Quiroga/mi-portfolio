@@ -124,10 +124,10 @@ export function Hero() {
             cortos. `text-balance` sigue haciendo falta por el centrado.
           */}
           <p className="max-w-125 text-[15px] leading-[1.6] text-balance text-foreground/80">
-            Construyo aplicaciones web de punta a punta con{" "}
-            <span className="text-foreground">React, Node.js y TypeScript</span>
-            . Trabajo en Cloudnet Solutions y tomo proyectos freelance para
-            emprendedores y pequeñas empresas.
+            Construyo aplicaciones web con{" "}
+            <span className="text-foreground">React, Next.js y TypeScript</span>
+            , especializado en frontend. Trabajo en Cloudnet Solutions y tomo
+            proyectos freelance para emprendedores y pequeñas empresas.
           </p>
         </Reveal>
 

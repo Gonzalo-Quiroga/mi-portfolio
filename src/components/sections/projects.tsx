@@ -175,9 +175,9 @@ export function Projects() {
               <p className="flex items-start gap-3 font-mono text-[10.5px] leading-[1.7] tracking-[0.14em] text-muted-foreground/80 uppercase">
                 <Marker className="mt-[0.42em] bg-muted-foreground/50" />
                 <span>
-                  Selección de once entre más de veinte proyectos entregados:
-                  sistemas de gestión y sitios corporativos, en industria, agro,
-                  logística y turismo.
+                  Selección de trece entre más de veinte proyectos entregados:
+                  sistemas de gestión, sitios corporativos, productos propios y
+                  un sistema con IA, en industria, agro, logística y turismo.
                 </span>
               </p>
             }
@@ -260,8 +260,9 @@ export function Projects() {
           <p className="mt-8 flex items-start gap-3 font-mono text-[10.5px] leading-[1.7] tracking-[0.14em] text-muted-foreground/80 uppercase lg:mt-10">
             <Marker className="mt-[0.42em] bg-muted-foreground/40" />
             <span>
-              El código es propiedad de cada cliente y sus repositorios son
-              privados. Los links llevan al producto en producción.
+              El código de los proyectos de clientes es propiedad de cada uno y
+              sus repositorios son privados. Los links llevan al producto en
+              producción.
             </span>
           </p>
         </Reveal>

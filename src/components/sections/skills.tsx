@@ -12,7 +12,7 @@ export function Skills() {
             title="Habilidades"
             statement={
               <p className="text-[26px] leading-tight font-normal tracking-[-0.02em] text-balance sm:text-[32px]">
-                Stack que uso a diario,{" "}
+                Con lo que construyo,{" "}
                 <span className="text-muted-foreground">
                   en proyectos que están corriendo en producción.
                 </span>

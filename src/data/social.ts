@@ -6,14 +6,6 @@ export const socialLinks: SocialLink[] = [
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/gonzalo-quiroga-83165913a/",
   },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/gonzaloquiroga7/",
-  },
-  {
-    label: "Facebook",
-    href: "https://www.facebook.com/gonzalo.quiroga.7127/",
-  },
 ];
 
 export const contactEmail = "gonzaloquiroga488@gmail.com";
