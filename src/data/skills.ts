@@ -5,18 +5,22 @@ import type { SkillCategory } from "@/types/skill";
  * se puede defender con un caso concreto en una entrevista (el mismo que se
  * aplicó al titular y a las aptitudes de LinkedIn, ver `linkedin-notes.md`).
  *
- * Docker se sacó por eso: no aparece en ninguno de los 24 repos de Cloudnet ni
- * en los proyectos personales — la infraestructura real es Azure Static Web
- * Apps / App Service, Vercel y Supabase, todo PaaS y serverless, sin
- * contenedores. Ya se había sacado del titular y de las aptitudes de LinkedIn;
- * el portfolio era el último lugar donde quedaba.
+ * Lo que el equipo usa pero escribe otra persona no entra, aunque lo integre a
+ * diario. Por eso la sección muestra el backend que escribe él, no el de cada
+ * proyecto de cliente:
+ * - Node.js: el runtime de su código de servidor. La API de contacto de este
+ *   sitio y las rutas de Gastly (cron de notificaciones, push, auth) corren en
+ *   Node.js, el runtime por defecto de Next.js.
+ * - Supabase con Row Level Security, Edge Functions en Deno y API routes de
+ *   Next.js (sistema de leads, Gastly, este portfolio).
+ * - La integración de LLM del sistema de leads.
  *
- * "Claude Cowork" se sacó por decisión del usuario el 2026-08-13. Estaba acá
- * desde el 2026-08-10 para quedar en línea con el CV, pero `linkedin-notes.md`
- * la traía marcada como la única de la lista sin verificar con la misma
- * profundidad que el resto ("que sea uso real y regular, no algo probado una
- * vez"). Si vuelve a agregarse, revisar antes ese pendiente. Claude Code y
- * Claude Design se quedan: los dos tienen uso documentado.
+ * Syncfusion entra porque la eligió e introdujo él como librería de
+ * componentes de la empresa, y hoy está en 15 proyectos de clientes.
+ *
+ * Docker no figura: no aparece en ninguno de sus proyectos. "Claude Cowork"
+ * tampoco, por decisión del usuario (2026-08-13), hasta tener un uso tan
+ * documentado como el del resto.
  */
 export const skillCategories: SkillCategory[] = [
   {
@@ -32,41 +36,37 @@ export const skillCategories: SkillCategory[] = [
       "TanStack Query",
       "Tailwind CSS",
       "shadcn/ui",
+      "Syncfusion",
       "PWA",
     ],
   },
   {
     id: "backend",
-    title: "Backend",
-    skills: ["Node.js", "Express", "Sequelize", "JWT", "Passport", "Auth0"],
-  },
-  {
-    id: "datos-cloud",
-    title: "Datos & Cloud",
+    title: "Backend & datos",
     skills: [
-      "PostgreSQL",
-      "SQL Server",
+      "Node.js",
       "Supabase",
-      "Azure",
-      "Vercel",
-      "Git",
-      "GitHub Actions",
+      "PostgreSQL",
+      "Row Level Security",
+      "Edge Functions (Deno)",
+      "Next.js API Routes",
+      "Resend",
     ],
   },
   {
-    id: "testing-otros",
-    title: "Testing & otros",
+    id: "ia",
+    title: "IA",
     skills: [
-      "Jest",
-      "Supertest",
-      "Vitest",
-      "Socket.IO",
-      "Mercado Pago",
-      "Resend",
-      "Swagger",
-      "Jira",
+      "OpenAI API",
+      "Prompt engineering",
       "Claude Code",
       "Claude Design",
+      "GitHub Copilot",
     ],
+  },
+  {
+    id: "herramientas",
+    title: "Testing & herramientas",
+    skills: ["Vitest", "Git", "GitHub Actions", "Vercel", "Figma", "Jira"],
   },
 ];

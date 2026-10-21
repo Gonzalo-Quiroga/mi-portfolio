@@ -84,8 +84,8 @@ export function About() {
                   Empecé estudiando Ing. Electrónica y en 2022 di el salto a la
                   programación.
                 </span>{" "}
-                Hoy soy Desarrollador Full Stack con foco en React, Node.js y
-                TypeScript.
+                Hoy soy Desarrollador Full Stack con foco en frontend: React,
+                Next.js y TypeScript.
               </p>
             }
           />
@@ -159,40 +159,39 @@ export function About() {
               nivel y no como más de lo mismo.
             */}
             {/*
-              Plural deliberado en "desarrollamos y mantenemos": varias de estas
-              tecnologías son aporte del equipo, no 100% individual. El párrafo
-              siguiente, que sí es propio y verificable, vuelve al singular.
+              Cada dato de estos cuatro párrafos está verificado en el historial
+              de git o en la carta de recomendación del director. Todo está en
+              primera persona porque todo es trabajo propio: lo del equipo no se
+              cuenta acá.
             */}
             <p className="text-base leading-[1.72] text-foreground/80 text-pretty">
-              Trabajo en Cloudnet Solutions, donde desarrollamos y mantenemos
-              aplicaciones para múltiples clientes: APIs REST con Express y
-              Sequelize sobre PostgreSQL y SQL Server, autenticación con JWT y
-              Auth0, testing con Jest y despliegue continuo en Microsoft Azure
-              con GitHub Actions.
+              Trabajo en Cloudnet Solutions, una software factory con clientes
+              de Argentina, Chile y Uruguay. Soy el único desarrollador frontend
+              de la empresa, con cuatro proyectos de clientes en paralelo, y
+              tengo trato directo con cada cliente.
             </p>
             {/*
-              "Doy la aprobación final" es la formulación ya validada en
-              `linkedin-notes.md`: dice lo mismo que "lidero el equipo" pero
-              nombra la responsabilidad concreta en vez de un cargo que no
-              existe en el organigrama, y se defiende con ejemplos en una
-              entrevista.
+              La mentoría va en pasado y con fechas: fueron dos juniors, uno
+              después del otro, en 2025 y comienzos de 2026.
             */}
             <p className="text-base leading-[1.72] text-foreground/80 text-pretty">
-              Tengo trato directo con clientes y stakeholders para traducir
-              necesidades de negocio en soluciones técnicas. Hoy mi trabajo está
-              enfocado en el frontend: reviso el código del equipo, doy la
-              aprobación final de los cambios que entran y acompaño a los
-              desarrolladores junior.
+              Me gusta mejorar cómo trabaja el equipo: propuse e introduje
+              Syncfusion como librería de componentes, que ya usan 15 proyectos,
+              y armé la plantilla de frontend desde la que arrancan la mayoría
+              de los proyectos nuevos. Entre 2025 y 2026 también revisé y aprobé
+              el código de los desarrolladores junior del equipo.
             </p>
             <p className="text-base leading-[1.72] text-foreground/80 text-pretty">
-              También desarrollo proyectos freelance de punta a punta para
-              emprendedores y pequeñas empresas.
+              Por iniciativa propia diseñé un sistema que capta y analiza
+              clientes potenciales con IA, que la empresa adoptó para sus
+              campañas. Del lado del servidor construyo con Supabase y funciones
+              serverless.
             </p>
             <p className="text-base leading-[1.72] text-foreground/80 text-pretty">
-              Incorporo asistentes de IA como Claude Code en mi flujo de trabajo
-              para acelerar el desarrollo sin resignar calidad, y sigo
-              formándome en la Tecnicatura Superior en Desarrollo Web y
-              Aplicaciones Digitales del ISPC.
+              También desarrollo proyectos freelance para emprendedores y
+              pequeñas empresas. Uso Claude Code todos los días y sigo
+              formándome en IA aplicada y en la Tecnicatura Superior en
+              Desarrollo Web y Aplicaciones Digitales del ISPC.
             </p>
             {/*
               Registro micro y no un cuarto párrafo: esto es metadata de estado
@@ -202,8 +201,8 @@ export function About() {
             <p className="mt-1 flex items-start gap-3 font-mono text-[10.5px] leading-[1.7] tracking-[0.14em] text-muted-foreground/80 uppercase">
               <Marker className="mt-[0.42em] bg-muted-foreground/50" />
               <span>
-                Abierto a nuevas oportunidades como Full Stack, Frontend o
-                Backend Developer · Inglés B1
+                Abierto a oportunidades como Full Stack o Frontend, sobre todo en
+                equipos que construyen con IA · Inglés B1
               </span>
             </p>
             <a

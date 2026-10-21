@@ -27,7 +27,7 @@ import { siteDomain } from "@/lib/site";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt =
-  "Gonzalo Quiroga — Desarrollador Full Stack. React, Node.js y TypeScript.";
+  "Gonzalo Quiroga — Desarrollador Full Stack. React, Next.js y TypeScript.";
 export const dynamic = "force-static";
 
 const BG = "#0a0a0a"; // --background
@@ -158,7 +158,7 @@ export default async function Image() {
             textTransform: "uppercase",
           }}
         >
-          React · Node.js · TypeScript · Next.js
+          React · Next.js · TypeScript · Supabase
         </div>
 
         {/* El dominio es lo que vuelve la tarjeta accionable. */}

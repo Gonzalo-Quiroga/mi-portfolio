@@ -23,4 +23,4 @@ export const siteName = "Gonzalo Quiroga — Desarrollador Full Stack";
  * proyecto. Bajo 160 caracteres para que no la corte Google.
  */
 export const siteDescription =
-  "Desarrollador Full Stack con foco en React, Node.js y TypeScript. Aplicaciones en producción y proyectos freelance de punta a punta. Córdoba, Argentina · Remoto.";
+  "Desarrollador Full Stack con foco en frontend: React, Next.js y TypeScript. Sistemas con IA y proyectos freelance de punta a punta. Córdoba, Argentina · Remoto.";

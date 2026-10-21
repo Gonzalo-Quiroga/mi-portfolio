@@ -24,7 +24,8 @@ import { Marker } from "@/components/ui/section-header";
  * 3. "Resolución práctica de problemas" pasa a "un resultado que llega a
  *    producción". Esa tercera pata la sostenía la reparación de equipos; al
  *    sacarla quedaba sin respaldo en ningún lado del sitio. El reemplazo sí lo
- *    tiene: el despliegue continuo en Azure que detalla Sobre Mí.
+ *    tiene: los proyectos con link público de `data/projects.ts`, todos en
+ *    producción.
  *
  * El diseño de interfaces, en cambio, sí tiene respaldo a la vista: en seis de
  * los once proyectos de `data/projects.ts` el aporte declarado lo incluye.
@@ -50,7 +51,7 @@ export function Statement() {
         </span>
         <Reveal className="flex-1">
           <p className="mx-auto max-w-215 text-center text-[clamp(1.35rem,2.9vw,2.35rem)] leading-[1.22] font-normal tracking-[-0.025em] text-balance">
-            Al desarrollo le sumo el diseño de interfaces.{" "}
+            Al desarrollo le sumo el diseño de interfaces e identidad visual.{" "}
             <span className="text-muted-foreground">
               Eso me da una mirada integral: funcionalidad, experiencia de
               usuario y un resultado que llega a producción.
