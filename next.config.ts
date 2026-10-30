@@ -33,7 +33,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",
-  "connect-src 'self'",
+  "connect-src 'self' https://vercel.live https://*.vercel-insights.com",
   "form-action 'self'",
   "frame-ancestors 'none'",
   "base-uri 'self'",
